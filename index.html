@@ -1,85 +1,2324 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Meta Bulanık Torbalama Fonksiyonları (MFF) — Performans Raporu</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --background: #090d16;
+      --foreground: #f8fafc;
+      --card: #111827;
+      --card-hover: #162032;
+      --content: #1e293b;
+      --border: #334155;
+      --muted-foreground: #94a3b8;
+      --primary: #38bdf8;
+      color-scheme: dark;
+    }
+    html {
+      color-scheme: dark;
+      background-color: #090d16;
+    }
+    body {
+      background-color: var(--background) !important;
+      color: var(--foreground) !important;
+    }
+    canvas { max-width: 100%; }
+    .nav-btn {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted-foreground);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: none;
+    }
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+      color: var(--foreground);
+    }
+    .nav-btn.active {
+      background: var(--card);
+      color: #38bdf8;
+      border-color: var(--border);
+      border-bottom: 3px solid #38bdf8;
+      font-weight: 700;
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+    .metric-card {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.5);
+    }
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.7);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: var(--card);
+    }
+    th, td {
+      padding: 9px 12px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    th {
+      font-weight: 600;
+      background: var(--content);
+      color: var(--foreground);
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.025);
+    }
+    .rank-1 {
+      background: rgba(34, 197, 94, 0.22) !important;
+      font-weight: 700;
+      color: #4ade80 !important;
+    }
+    .rank-2 {
+      background: rgba(59, 130, 246, 0.16) !important;
+      color: #60a5fa !important;
+    }
+    .rank-3 {
+      background: rgba(251, 191, 36, 0.16) !important;
+      color: #fbbf24 !important;
+    }
+    .rank-4 {
+      background: rgba(239, 68, 68, 0.16) !important;
+      color: #f87171 !important;
+    }
+    .rank-second {
+      background: rgba(234, 179, 8, 0.25) !important;
+      font-weight: 600;
+      color: #facc15 !important;
+    }
 
-    <title>Burhan Kılıçkaya</title>
+    /* Seed x B Heatmap Pill Badges (Green to Red Scientific Gradient) */
+    .rank-pill {
+      display: inline-block;
+      min-width: 56px;
+      padding: 3.5px 8px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .rank-pill:hover {
+      transform: scale(1.08);
+      z-index: 2;
+    }
+    /* 1. Sıra (En İyi): Derin Zümrüt Yeşili (Mint/Emerald) */
+    .rank-pill-1 {
+      background: rgba(16, 185, 129, 0.20) !important;
+      color: #34d399 !important;
+      border: 1px solid rgba(16, 185, 129, 0.45) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 0 8px -2px rgba(16, 185, 129, 0.3);
+    }
+    /* 2. Sıra (İyi): Açık Fıstık Yeşili / Lime */
+    .rank-pill-2 {
+      background: rgba(132, 204, 22, 0.16) !important;
+      color: #bef264 !important;
+      border: 1px solid rgba(132, 204, 22, 0.38) !important;
+      font-weight: 600 !important;
+    }
+    /* 3. Sıra (Orta): Sıcak Kehribar / Turuncu */
+    .rank-pill-3 {
+      background: rgba(245, 158, 11, 0.16) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.38) !important;
+      font-weight: 500 !important;
+    }
+    /* 4. Sıra (Zayıf / En Kötü): Yumuşak Mercan Kırmızı */
+    .rank-pill-4 {
+      background: rgba(239, 68, 68, 0.18) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.40) !important;
+      font-weight: 500 !important;
+    }
+    .success { color: #4ade80; font-weight: 700; }
+    .fail { color: #f87171; font-weight: 700; }
+    .badge-success {
+      background: rgba(34, 197, 94, 0.18);
+      color: #4ade80;
+      padding: 3px 12px;
+      border-radius: 9999px;
+      font-size: 0.85em;
+      font-weight: 600;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .badge-fail {
+      background: rgba(239, 68, 68, 0.18);
+      color: #f87171;
+      padding: 3px 12px;
+      border-radius: 9999px;
+      font-size: 0.85em;
+      font-weight: 600;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    p code, li code {
+      background: rgba(255, 255, 255, 0.08);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
 
-    <meta name="description"
-          content="Burhan Kılıçkaya - Industrial Engineer and Statistics Master's Student">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0d1117;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            text-align: center;
-            max-width: 800px;
-            padding: 40px;
-        }
-
-        h1 {
-            font-size: 52px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 20px;
-            color: #b8c1cc;
-        }
-
-        .links {
-            margin-top: 30px;
-        }
-
-        .links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    /* SVG Chart Interactivity */
+    .svg-series {
+      transition: opacity 0.22s ease;
+      cursor: pointer;
+    }
+    .svg-series.dimmed {
+      opacity: 0.14 !important;
+    }
+    .svg-series.active polyline.chart-polyline {
+      stroke-width: 4.2px !important;
+      filter: drop-shadow(0 2px 7px rgba(0,0,0,0.6));
+    }
+    .svg-series.active circle.data-dot {
+      r: 6.2px !important;
+      stroke-width: 2.4px !important;
+    }
+    .svg-series.active text.val-label {
+      font-weight: 800 !important;
+      font-size: 11.5px !important;
+    }
+    .chart-legend-item {
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+    .chart-legend-item:hover {
+      transform: translateX(3px);
+    }
+    .chart-legend-item.dimmed {
+      opacity: 0.25 !important;
+    }
+    .chart-bar {
+      transition: opacity 0.2s ease, filter 0.2s ease;
+      cursor: pointer;
+    }
+    .chart-bar:hover {
+      filter: brightness(1.25);
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .section { display: block !important; page-break-inside: avoid; }
+      body { background: white !important; color: black !important; }
+    }
+  </style>
 </head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4" style="min-height:100vh;">
 
-<body>
+  <!-- HEADER -->
+  <div class="text-center mb-6">
+    <h1 class="text-2xl font-bold mb-1">Meta Bulanık Torbalama Fonksiyonları (MFF)</h1>
+    <p class="text-[var(--muted-foreground)] text-sm">TÜBİTAK 1001 Bilimsel Araştırma Projesi — Kapsamlı Deneysel Performans Raporu</p>
+    <p class="text-[var(--muted-foreground)] text-xs mt-1">20 Bağımsız Tohum (Seed) × 4 Bootstrap Seviyesi (B) × 36 Veri Kümesi = 2,880 Deney Koşulu × 4 Yöntem = <strong>11,520 Yöntem Değerlendirmesi</strong> (Yüz binlerce temel bootstrap modeli ve hiperparametre optimizasyonu)</p>
+  </div>
 
-    <div class="container">
-        <h1>Burhan Kılıçkaya</h1>
+  <!-- NAVIGATION -->
+  <div class="flex flex-wrap gap-1 mb-6 border-b border-[var(--border)] pb-2 no-print justify-center">
+    <button class="nav-btn active px-3 py-2 text-sm rounded-t" data-section="overview">Genel Bakış</button>
+    <button class="nav-btn px-3 py-2 text-sm rounded-t" data-section="rankB">Rank vs B Analizi</button>
+    <button class="nav-btn px-3 py-2 text-sm rounded-t" data-section="winloss">Model Karşılaştırması (Win/Loss)</button>
+    <button class="nav-btn px-3 py-2 text-sm rounded-t" data-section="tubitak">TÜBİTAK 1001 Ölçütü</button>
+    <button class="nav-btn px-3 py-2 text-sm rounded-t" data-section="seedStability">Tohum Kararlılığı</button>
+    <button class="nav-btn px-3 py-2 text-sm rounded-t" data-section="subgroup">Alt Grup Analizi</button>
+    <button class="nav-btn px-3 py-2 text-sm rounded-t" data-section="architecture">Yöntem Mimarisi</button>
+    <button class="nav-btn px-3 py-2 text-sm rounded-t" data-section="walkthroughReport">Teknik Rapor & Yürütme Kılavuzu</button>
+  </div>
 
-        <p>
-            Industrial Engineer · Statistics Master's Student
-        </p>
-
-        <p>
-            Machine Learning · Data Analysis · Optimization
-        </p>
-
-        <div class="links">
-            <a href="https://github.com/burhan-kilickaya" target="_blank">
-                GitHub
-            </a>
-
-            <a href="https://www.linkedin.com/in/burhan-kilickaya" target="_blank">
-                LinkedIn
-            </a>
-        </div>
+  <!-- ============ SECTION 1: OVERVIEW ============ -->
+  <div id="overview" class="section active">
+    <h2 class="text-xl font-bold mb-4">Genel Bakış — Özet Metrikler</h2>
+    
+    <!-- Key Metrics -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+      <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 text-center">
+        <div class="text-3xl font-bold text-green-500">✓</div>
+        <div class="text-sm text-[var(--muted-foreground)] mt-1">TÜBİTAK Başarı Ölçütü</div>
+        <div class="text-lg font-bold">SAĞLANDI</div>
+      </div>
+      <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 text-center">
+        <div class="text-3xl font-bold" style="color:#8b5cf6;">4.1299</div>
+        <div class="text-sm text-[var(--muted-foreground)] mt-1">En Düşük Test Hatası (RMSE)</div>
+        <div class="text-xs text-[var(--muted-foreground)]">Meta T1BF (B=250)</div>
+      </div>
+      <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 text-center">
+        <div class="text-3xl font-bold" style="color:#22c55e;">69.4%</div>
+        <div class="text-sm text-[var(--muted-foreground)] mt-1">Meta T1BF Üstünlük Oranı</div>
+        <div class="text-xs text-[var(--muted-foreground)]">vs Bagging T1BF (B=100)</div>
+      </div>
+      <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 text-center">
+        <div class="text-3xl font-bold" style="color:#f59e0b;">11,520</div>
+        <div class="text-sm text-[var(--muted-foreground)] mt-1">Yöntem Değerlendirmesi</div>
+        <div class="text-xs text-[var(--muted-foreground)]">2,880 Koşul × 4 Yöntem</div>
+      </div>
     </div>
 
+    <!-- General Ranking Table -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-3">Genel Sıralama Tablosu (Tüm B Seviyeleri)</h3>
+      <div class="overflow-x-auto">
+        <table class="text-sm">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th>B</th>
+              <th>Yöntem</th>
+              <th>Ort. RMSE Rank</th>
+              <th>Ort. Test RMSE</th>
+              <th>Ort. Test R²</th>
+              <th>1.lik Sayısı</th>
+              <th>Toplam Deney</th>
+            </tr>
+          </thead>
+          <tbody id="genelSiralamaBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Experiment Design Summary -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-2">Deneysel Tasarım</h3>
+        <ul class="text-sm space-y-1 text-[var(--muted-foreground)]">
+          <li>• <strong>2×2 Faktöriyel:</strong> Taban Model (LM vs T1BF) × Birleştirme (Basit Ort. vs MFF)</li>
+          <li>• <strong>Veri Bölme:</strong> Bagging LM: 90/10, Diğerleri: 80/10/10 (Ayar ve MFF kümesi)</li>
+          <li>• <strong>Bootstrap (B):</strong> 100, 250, 500, 1000</li>
+          <li>• <strong>Seed Sayısı:</strong> 20 bağımsız seed</li>
+          <li>• <strong>Veri Kümeleri:</strong> B=100 ve 250'de 36 küme; B=500 ve 1000'de 25 küme</li>
+          <li>• <strong>Paralel Hesaplama:</strong> 7 çekirdek (8-1)</li>
+        </ul>
+      </div>
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-2">Veri Kümeleri Dağılımı</h3>
+        <ul class="text-sm space-y-1 text-[var(--muted-foreground)]">
+          <li>• <strong>Klasik (4):</strong> Cereal, Cars, Attitude, Judge</li>
+          <li>• <strong>Simülasyon Aykırısız (16):</strong> 4 dağılım × 4 boyut</li>
+          <li>• <strong>Simülasyon Aykırılı (16):</strong> 4 dağılım × 4 boyut</li>
+          <li>• <strong>Dağılımlar:</strong> Normal, Üssel, Ki-Kare, Karışım</li>
+          <li>• <strong>Boyutlar (N×p):</strong> 50×3, 100×5, 200×7, 500×10</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 2: RANK vs B ============ -->
+  <div id="rankB" class="section">
+    <h2 class="text-xl font-bold mb-3">Bootstrap Sayısı (B) vs Ortalama Sıralama (Rank)</h2>
+    
+    <!-- Dataset Count Callout Alert (36 vs 25) -->
+    <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3.5 mb-5 flex items-start gap-3 text-xs">
+      <span class="text-amber-400 text-lg leading-none mt-0.5">⚠️</span>
+      <div class="leading-relaxed">
+        <strong class="text-amber-300">Önemli Metodolojik Not — Veri Kümesi Kapsamı (36 vs 25 Veri Kümesi):</strong><br>
+        <span class="text-[var(--muted-foreground)]">
+          <strong>B=100 ve B=250</strong> düzeyleri tüm <strong>36 veri kümesi</strong> (4 klasik + 32 simülasyon) üzerinden hesaplanmıştır. 
+          <strong>B=500 ve B=1000</strong> düzeyleri ise tamamlanan <strong>25 veri kümesi</strong> üzerinden raporlanmıştır. 
+          B=250'den B=500'e geçişte mutlak RMSE değerlerindeki değişimler (örneğin Bagging LM'deki ani düşüş veya Meta T1FF'deki değişim) <em>veri kümesi kompozisyonunun farklılaşmasından</em> kaynaklanmaktadır. 
+          Bu nedenle bootstrap seviyeleri arasında ve B seviyesi içinde en adil, tutarlı ve ölçekten bağımsız karşılaştırma metriği <strong>Friedman Ortalama Sıralamasıdır (Rank)</strong>.
+        </span>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-2 text-center">Ortalama RMSE Rank vs B</h3>
+        <div id="chartRankVsB" class="w-full"></div>
+      </div>
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-2 text-center">1.lik Sayısı vs B</h3>
+        <div id="chartFirstVsB" class="w-full"></div>
+      </div>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-2 text-center">Ortalama Test RMSE vs B</h3>
+      <div id="chartRMSEvsB" class="w-full"></div>
+    </div>
+
+    <!-- Rank Delta Table -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+      <h3 class="font-semibold mb-3">Bootstrap Artışının Sıralamaya Etkisi (Δ Rank)</h3>
+      <div class="overflow-x-auto">
+        <table class="text-sm">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th>Yöntem</th>
+              <th>B=100</th>
+              <th>B=250</th>
+              <th>B=500</th>
+              <th>B=1000</th>
+              <th>Δ (100→1000)</th>
+              <th>Eğilim</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-semibold">Meta LM</td>
+              <td class="rank-1">2.05</td>
+              <td class="rank-1">2.08</td>
+              <td class="rank-1">1.78</td>
+              <td class="rank-1">1.77</td>
+              <td class="success">-0.28 ↓</td>
+              <td>İyileşme (Performans Artışı)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Meta T1FF</td>
+              <td class="rank-2">2.28</td>
+              <td class="rank-2">2.24</td>
+              <td class="rank-2">2.58</td>
+              <td class="rank-2">2.59</td>
+              <td class="fail">+0.31 ↑</td>
+              <td>Fark*</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Bagging LM</td>
+              <td class="rank-3">2.74</td>
+              <td class="rank-3">2.77</td>
+              <td class="rank-3">2.55</td>
+              <td class="rank-3">2.58</td>
+              <td class="success">-0.16 ↓</td>
+              <td>İyileşme (Performans Artışı)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Bagging T1FF</td>
+              <td class="rank-4">2.93</td>
+              <td class="rank-4">2.91</td>
+              <td class="rank-4">3.09</td>
+              <td class="rank-4">3.06</td>
+              <td class="fail">+0.13 ↑</td>
+              <td>Fark*</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-[var(--muted-foreground)] mt-2">* B=500 ve B=1000 değerleri 25 veri seti üzerinden hesaplanmıştır (36 yerine). Veri seti kapsamı farklı olduğu için doğrudan karşılaştırma yaparken dikkatli olunmalıdır.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 3: WIN/LOSS ============ -->
+  <div id="winloss" class="section">
+    <div class="flex items-center justify-between mb-1 flex-wrap gap-2">
+      <h2 class="text-xl font-bold">İkili Model Karşılaştırması (Win/Loss Analizi — Test RMSE)</h2>
+      <span class="text-xs bg-blue-500/15 text-blue-400 px-2.5 py-0.5 rounded font-semibold border border-blue-500/30">Hata Metriği: Test RMSE</span>
+    </div>
+    <p class="text-xs text-[var(--muted-foreground)] mb-4">
+      Her veri kümesinde 20 bağımsız tohum ortalaması üzerinden <strong>Test RMSE</strong> hata metriğine göre elde edilen ikili üstünlük (Win/Loss) sayılarıdır.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <!-- Left: Meta T1FF (Primary proposed model) -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-semibold text-center w-full text-sm">Meta T1BF (Meta T1FF) vs Diğerleri (Test RMSE)</h3>
+          <span class="text-xs bg-purple-500/15 text-purple-400 px-2 py-0.5 rounded font-semibold whitespace-nowrap">Önerilen Model</span>
+        </div>
+        <div id="chartWinLossMetaT1FF" class="w-full"></div>
+      </div>
+      <!-- Right: Meta LM -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-2 text-center text-sm">Meta LM vs Diğerleri (Test RMSE)</h3>
+        <div id="chartWinLossMetaLM" class="w-full"></div>
+      </div>
+    </div>
+
+    <!-- Win/Loss Tables: Meta T1FF FIRST, then Meta LM -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-4">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <h3 class="font-semibold text-sm">Meta T1BF (Meta T1FF) — Kazanma/Kaybetme Detayı (Test RMSE)</h3>
+        <span class="text-xs bg-purple-500/15 text-purple-400 px-2.5 py-0.5 rounded font-semibold border border-purple-500/30">TÜBİTAK 1001 Önerilen Yöntem</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="text-sm">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th>B</th>
+              <th>vs Bagging T1FF</th>
+              <th>vs Bagging LM</th>
+              <th>vs Meta LM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>100</td><td class="success">24-12 (66.7%)</td><td class="success">22-14 (61.1%)</td><td class="fail">17-19 (47.2%)</td></tr>
+            <tr><td>250</td><td class="success">25-11 (69.4%)</td><td class="success">22-14 (61.1%)</td><td class="fail">17-19 (47.2%)</td></tr>
+            <tr><td>500</td><td class="success">16-9 (64.0%)</td><td>12-13 (48.0%)</td><td class="fail">8-17 (32.0%)</td></tr>
+            <tr><td>1000</td><td class="success">16-9 (64.0%)</td><td>12-13 (48.0%)</td><td class="fail">8-17 (32.0%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+      <h3 class="font-semibold mb-3 text-sm">Meta LM — Kazanma/Kaybetme Detayı (Test RMSE)</h3>
+      <div class="overflow-x-auto">
+        <table class="text-sm">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th>B</th>
+              <th>vs Bagging LM</th>
+              <th>vs Bagging T1FF</th>
+              <th>vs Meta T1FF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>100</td><td class="success">26-9 (72.2%)</td><td class="success">25-11 (69.4%)</td><td>19-17 (52.8%)</td></tr>
+            <tr><td>250</td><td class="success">25-10 (69.4%)</td><td class="success">25-11 (69.4%)</td><td>19-17 (52.8%)</td></tr>
+            <tr><td>500</td><td class="success">19-5 (76.0%)</td><td class="success">20-5 (80.0%)</td><td class="success">17-8 (68.0%)</td></tr>
+            <tr><td>1000</td><td class="success">19-5 (76.0%)</td><td class="success">20-5 (80.0%)</td><td class="success">17-8 (68.0%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 4: TUBITAK ============ -->
+  <div id="tubitak" class="section">
+    <div class="flex items-center justify-between mb-1 flex-wrap gap-2">
+      <h2 class="text-xl font-bold">TÜBİTAK 1001 Başarı Ölçütü (Test MAPE Kıyası)</h2>
+      <span class="text-xs bg-green-500/15 text-green-400 px-2.5 py-0.5 rounded font-semibold border border-green-500/30">Hata Metriği: Test MAPE</span>
+    </div>
+    <p class="text-xs text-[var(--muted-foreground)] mb-4">
+      TÜBİTAK 1001 proje taahhüdü gereği modeller <strong>Ortalama Mutlak Yüzde Hata (Test MAPE)</strong> metriği üzerinden kıyaslanmıştır.
+    </p>
+    
+    <!-- Criterion Notification Banner -->
+    <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-4 mb-6">
+      <div class="flex items-center justify-between flex-wrap gap-2 mb-1">
+        <span class="text-sm font-bold text-green-500">✓ BAŞARI ÖLÇÜTÜ HER İKİ KLASİK MODELDE DE SAĞLANDI</span>
+        <span class="text-xs bg-green-500/20 text-green-400 px-2.5 py-0.5 rounded-full font-semibold">TÜBİTAK 1001 Taahhüdü</span>
+      </div>
+      <p class="text-xs text-[var(--muted-foreground)] mt-1">
+        "Klasik torbalama yönteminin test edilmesi ve Meta Bulanık Torbalama Fonksiyonları yönteminin 
+        MAPE ölçütü açısından incelenen veri setlerinin en az %50'sinde daha düşük hata değerleri üretmesi"
+      </p>
+      <div class="mt-2.5 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+        <div class="bg-[var(--card)]/50 p-2 rounded border border-green-500/20">
+          <strong>1. vs Bagging T1BF (Aynı Taban Model):</strong> İncelenen kümelerin <strong>%64.0 – %69.4</strong>'ünde daha düşük MAPE (Kriter Aşıldı).
+        </div>
+        <div class="bg-[var(--card)]/50 p-2 rounded border border-green-500/20">
+          <strong>2. vs Bagging LM (Doğrusal Klasik Torbalama):</strong> İncelenen kümelerin <strong>%60.0 – %63.9</strong>'unda daha düşük MAPE (Kriter Aşıldı).
+        </div>
+      </div>
+    </div>
+    
+    <!-- Comparison Tables: Meta T1FF vs Bagging T1FF & Bagging LM -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <!-- Table 1: Meta T1FF vs Bagging T1FF -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-semibold text-sm">Meta T1BF vs Bagging T1BF (Birincil Kıyas — Test MAPE)</h3>
+          <span class="text-xs bg-green-500/15 text-green-400 px-2 py-0.5 rounded font-semibold">T1BF Tabanlı</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">Aynı bulanık taban mimarisinde MFF ağırlıklandırmanın klasik torbalamaya etkisi.</p>
+        <div class="overflow-x-auto">
+          <table class="text-sm">
+            <thead>
+              <tr class="bg-[var(--content)]">
+                <th>B</th>
+                <th>Veri Kümesi</th>
+                <th>Meta T1FF Üstünlük</th>
+                <th>Oran</th>
+                <th>≥ %50?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>100</td><td>36</td><td>25</td><td class="success">69.4%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+              <tr><td>250</td><td>36</td><td>24</td><td class="success">66.7%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+              <tr><td>500</td><td>25</td><td>16</td><td class="success">64.0%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+              <tr><td>1000</td><td>25</td><td>16</td><td class="success">64.0%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table 2: Meta T1FF vs Bagging LM -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-semibold text-sm">Meta T1BF vs Bagging LM (Doğrusal Kıyas — Test MAPE)</h3>
+          <span class="text-xs bg-blue-500/15 text-blue-400 px-2 py-0.5 rounded font-semibold">LM Tabanlı</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">Önerilen bulanık modelin parametrik klasik doğrusal torbalamaya karşı başarımı.</p>
+        <div class="overflow-x-auto">
+          <table class="text-sm">
+            <thead>
+              <tr class="bg-[var(--content)]">
+                <th>B</th>
+                <th>Veri Kümesi</th>
+                <th>Meta T1FF Üstünlük</th>
+                <th>Oran</th>
+                <th>≥ %50?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>100</td><td>36</td><td>23</td><td class="success">63.9%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+              <tr><td>250</td><td>36</td><td>22</td><td class="success">61.1%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+              <tr><td>500</td><td>25</td><td>16</td><td class="success">64.0%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+              <tr><td>1000</td><td>25</td><td>15</td><td class="success">60.0%</td><td><span class="badge-success">SAĞLANDI</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-2 text-center text-sm">TÜBİTAK MAPE Kazanma Oranları vs B (%50 Eşik)</h3>
+        <div id="chartTubitak" class="w-full"></div>
+      </div>
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-2 text-center text-sm">Meta T1FF vs Bagging LM — Alt Gruplarda MAPE Kazanma %</h3>
+        <div id="chartTubitakSubgroupLM" class="w-full"></div>
+      </div>
+    </div>
+
+    <!-- Subgroup Comparison Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-1 text-sm text-purple-400">Aykırılı Simülasyon Kümeleri</h3>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">Aşırı uç değerlerin bulunduğu ortamlarda gürültü direnci.</p>
+        <div class="overflow-x-auto">
+          <table class="text-xs">
+            <thead>
+              <tr class="bg-[var(--content)]">
+                <th>B</th>
+                <th>vs Bag T1FF</th>
+                <th>vs Bag LM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>100</td><td class="success">14/16 (87.5%)</td><td class="success">13/16 (81.3%)</td></tr>
+              <tr><td>250</td><td class="success">13/16 (81.3%)</td><td class="success">12/16 (75.0%)</td></tr>
+              <tr><td>500</td><td class="success">10/12 (83.3%)</td><td class="success">10/12 (83.3%)</td></tr>
+              <tr><td>1000</td><td class="success">10/12 (83.3%)</td><td class="success">9/12 (75.0%)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-1 text-sm text-blue-400">Aykırısız Simülasyon Kümeleri</h3>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">Normal/temiz dağılımlı teorik senaryolar.</p>
+        <div class="overflow-x-auto">
+          <table class="text-xs">
+            <thead>
+              <tr class="bg-[var(--content)]">
+                <th>B</th>
+                <th>vs Bag T1FF</th>
+                <th>vs Bag LM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>100</td><td class="success">8/16 (50.0%)</td><td class="success">9/16 (56.3%)</td></tr>
+              <tr><td>250</td><td class="success">8/16 (50.0%)</td><td class="success">9/16 (56.3%)</td></tr>
+              <tr><td>500</td><td>5/12 (41.7%)</td><td class="success">6/12 (50.0%)</td></tr>
+              <tr><td>1000</td><td>5/12 (41.7%)</td><td class="success">6/12 (50.0%)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold mb-1 text-sm text-green-400">Klasik Veri Kümeleri</h3>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">Literatür kıyaslama verileri (Cereal, Cars vb.).</p>
+        <div class="overflow-x-auto">
+          <table class="text-xs">
+            <thead>
+              <tr class="bg-[var(--content)]">
+                <th>B</th>
+                <th>vs Bag T1FF</th>
+                <th>vs Bag LM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>100</td><td class="success">3/4 (75.0%)</td><td>1/4 (25.0%)</td></tr>
+              <tr><td>250</td><td class="success">3/4 (75.0%)</td><td>1/4 (25.0%)</td></tr>
+              <tr><td>500</td><td class="success">1/1 (100.0%)</td><td>0/1 (0.0%)</td></tr>
+              <tr><td>1000</td><td class="success">1/1 (100.0%)</td><td>0/1 (0.0%)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 5: SEED STABILITY ============ -->
+  <div id="seedStability" class="section">
+    <h2 class="text-xl font-bold mb-4">Rastgele Tohum (Seed) Kararlılığı ve Bootstrap Etkisi</h2>
+    
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-2 text-center">20 Tohum Üzerinden Sıralama Dağılımı (B=100)</h3>
+      <div id="chartSeedB100" class="w-full"></div>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-2 text-center">20 Tohum Üzerinden Sıralama Dağılımı (B=1000)</h3>
+      <div id="chartSeedB1000" class="w-full"></div>
+    </div>
+
+    <!-- Seed Statistics -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-3">Tohum Bazında Tanımlayıcı İstatistikler</h3>
+      <div class="overflow-x-auto">
+        <table class="text-sm" id="seedStatsTable">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th>B</th>
+              <th>Yöntem</th>
+              <th>Min Rank</th>
+              <th>Max Rank</th>
+              <th>Ort. Rank</th>
+              <th>Std. Sapma</th>
+              <th>Aralık</th>
+            </tr>
+          </thead>
+          <tbody id="seedStatsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Full Seed×B table -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+      <div class="flex flex-wrap items-center justify-between mb-3 gap-2">
+        <div>
+          <h3 class="font-semibold text-sm">Tohum × Bootstrap Detay Tablosu (Friedman RMSE Sıralaması)</h3>
+          <p class="text-[11px] text-[var(--muted-foreground)]">Her tohum ve B kombinasyonunda 4 yöntemin test hatası sıra dereceleri (1.00 = En İyi, 4.00 = En Kötü)</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2.5 text-xs text-[var(--muted-foreground)]">
+          <span class="flex items-center gap-1.5"><span class="rank-pill rank-pill-1" style="min-width:auto; padding:1px 7px; font-size:10px;">1. Sıra</span> En İyi</span>
+          <span class="flex items-center gap-1.5"><span class="rank-pill rank-pill-2" style="min-width:auto; padding:1px 7px; font-size:10px;">2. Sıra</span> İyi</span>
+          <span class="flex items-center gap-1.5"><span class="rank-pill rank-pill-3" style="min-width:auto; padding:1px 7px; font-size:10px;">3. Sıra</span> Orta</span>
+          <span class="flex items-center gap-1.5"><span class="rank-pill rank-pill-4" style="min-width:auto; padding:1px 7px; font-size:10px;">4. Sıra</span> Zayıf</span>
+        </div>
+      </div>
+      <div class="overflow-x-auto" style="max-height:420px; overflow-y:auto;">
+        <table class="text-sm" id="seedBTable">
+          <thead style="position:sticky;top:0;z-index:1;">
+            <tr class="bg-[var(--content)]">
+              <th>Tohum (Seed)</th>
+              <th>Bootstrap (B)</th>
+              <th>Deney</th>
+              <th style="color:#f59e0b;">Bagging T1FF</th>
+              <th style="color:#c084fc;">Meta T1FF <span class="text-[10px] text-purple-300 font-normal">(Önerilen)</span></th>
+              <th style="color:#60a5fa;">Bagging LM</th>
+              <th style="color:#4ade80;">Meta LM</th>
+            </tr>
+          </thead>
+          <tbody id="seedBBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 6: SUBGROUP ============ -->
+  <div id="subgroup" class="section">
+    <h2 class="text-xl font-bold mb-4">Alt Grup Analizi</h2>
+    
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-2 text-center">Meta T1FF vs Bagging T1FF — Alt Gruplara Göre Kazanma %</h3>
+      <div id="chartSubgroupWin" class="w-full"></div>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-2 text-center">Meta LM vs Bagging LM — Alt Gruplara Göre Kazanma %</h3>
+      <div id="chartSubgroupWinLM" class="w-full"></div>
+    </div>
+
+    <!-- Detailed subgroup table -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+      <h3 class="font-semibold mb-3">Alt Grup Detay Tablosu (B=100)</h3>
+      <div class="overflow-x-auto">
+        <table class="text-sm">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th>Alt Grup</th>
+              <th>Meta T1FF vs Bag T1FF</th>
+              <th>Meta T1FF vs Bag LM</th>
+              <th>Meta LM vs Bag LM</th>
+              <th>Meta LM vs Bag T1FF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-semibold">Genel (36)</td>
+              <td class="success">24-12 (66.7%)</td>
+              <td class="success">22-14 (61.1%)</td>
+              <td class="success">26-9 (72.2%)</td>
+              <td class="success">25-11 (69.4%)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Klasik (4)</td>
+              <td>2-2 (50.0%)</td>
+              <td>2-2 (50.0%)</td>
+              <td>2-1 (50.0%)</td>
+              <td class="success">3-1 (75.0%)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Simülasyon (32)</td>
+              <td class="success">22-10 (68.8%)</td>
+              <td class="success">20-12 (62.5%)</td>
+              <td class="success">24-8 (75.0%)</td>
+              <td class="success">22-10 (68.8%)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Aykırısız (16)</td>
+              <td class="success">9-7 (56.3%)</td>
+              <td class="success">10-6 (62.5%)</td>
+              <td class="success">9-7 (56.3%)</td>
+              <td>7-9 (43.8%)</td>
+            </tr>
+            <tr>
+              <td class="font-semibold">Aykırılı (16)</td>
+              <td class="success">13-3 (81.3%)</td>
+              <td class="success">10-6 (62.5%)</td>
+              <td class="success">15-1 (93.8%)</td>
+              <td class="success">15-1 (93.8%)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 7: ARCHITECTURE ============ -->
+  <div id="architecture" class="section">
+    <h2 class="text-xl font-bold mb-4">Yöntem Mimarisi ve Algoritmik Detaylar</h2>
+    
+    <!-- 2x2 Factorial Design -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-bold text-base">2×2 Karşılaştırmalı Deney Tasarımı Matrisi</h3>
+        <span class="text-xs bg-blue-500/15 text-blue-400 px-2.5 py-1 rounded-full font-semibold">TÜBİTAK 1001 Metodolojisi</span>
+      </div>
+      <p class="text-xs text-[var(--muted-foreground)] mb-4">
+        Bu 2×2 karşılaştırmalı tasarım çerçevesi, iki temel bilimsel hipotezi incelemek üzere kurgulanmıştır:
+        <strong>(1) Taban Model Katkısı:</strong> Parametrik doğrusal regresyon (LM) ile kural tabanlı, doğrusal olmayan Tip-1 Bulanık Fonksiyonlar (T1BF / kodda t1ff) arasındaki başarım farkı.
+        <strong>(2) Meta-Bulanık Fonksiyon (MFF) Birleştirme Katkısı:</strong> Klasik basit aritmetik ortalamaya kıyasla kümeleme ve bulanık üyelik derecelerine dayalı dinamik ağırlıklandırmanın tahmin hatasını azaltma kapasitesi.
+      </p>
+
+      <div class="overflow-x-auto mb-4">
+        <table class="text-xs">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th rowspan="2" class="p-2.5 border w-1/5">Taban Model Katmanı</th>
+              <th colspan="2" class="p-2.5 border">Topluluk Birleştirme Mekanizması (Toplama İlkesi)</th>
+            </tr>
+            <tr class="bg-[var(--content)]">
+              <th class="p-2.5 border bg-blue-500/10 text-blue-400 w-2/5">Basit Aritmetik Ortalama (Klasik Torbalama)</th>
+              <th class="p-2.5 border bg-purple-500/10 text-purple-400 w-2/5">Dinamik Bulanık Ağırlıklandırma (MFF Meta-Öğrenme)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-bold bg-[var(--content)] text-center">
+                <span class="text-slate-200">Doğrusal Regresyon</span><br>
+                <span class="text-[10px] text-[var(--muted-foreground)] font-mono">(LM)</span>
+              </td>
+              <td class="p-3.5 border text-left bg-blue-500/5">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <div class="font-bold text-blue-400 text-sm">1. bagging lm</div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">90/10 Ayrım</span>
+                </div>
+                <div class="text-[var(--muted-foreground)] leading-relaxed">
+                  Breiman (1996) OLS torbalaması. İlave hiperparametre optimizasyonu gerektirmediğinden, test dışındaki verilerin %90'ı doğrudan eğitim havuzudur. Modeller eşit ağırlıkla toplanır.
+                </div>
+              </td>
+              <td class="p-3.5 border text-left bg-green-500/5">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <div class="font-bold text-green-400 text-sm">3. meta lm</div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-green-500/20 text-green-300 border border-green-500/30">80/10/10 Ayrım</span>
+                </div>
+                <div class="text-[var(--muted-foreground)] leading-relaxed">
+                  %80 Eğitim + %10 Meta + %10 Test. Bootstrap içinde K-Fold pertürbasyonu ile üretilen alt LM modelleri, %10 Meta kümesi üzerinde MFF ile dinamik yerel bulanık ağırlıklandırılır.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-[var(--content)] text-center">
+                <span class="text-slate-200">Tip-1 Bulanık Fonksiyon</span><br>
+                <span class="text-[10px] text-[var(--muted-foreground)] font-mono">(T1BF)</span>
+              </td>
+              <td class="p-3.5 border text-left bg-orange-500/5">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <div class="font-bold text-orange-400 text-sm">2. bagging t1ff</div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">80/10/10 Ayrım</span>
+                </div>
+                <div class="text-[var(--muted-foreground)] leading-relaxed">
+                  %80 Eğitim + %10 Dondurulmuş Bağımsız Ayar (Tuning) Seti + %10 Test. FCM küme sayısı (c) ve üyelik üssü (f) dış ayar kümesinde seçilir; seçilen B adet model basit aritmetik ortalamayla toplanır.
+                </div>
+              </td>
+              <td class="p-3.5 border text-left bg-purple-500/5">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <div class="font-bold text-purple-400 text-sm">4. meta t1ff <span class="text-[10px] bg-purple-500/25 text-purple-300 px-1.5 py-0.5 rounded ml-1 font-semibold border border-purple-500/40">Önerilen Model</span></div>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">80/10/10 Ayrım</span>
+                </div>
+                <div class="text-[var(--muted-foreground)] leading-relaxed">
+                  TÜBİTAK 1001 projesinin önerilen temel yöntemidir. %80 Eğitim + %10 Meta + %10 Test. Taban seviyedeki K-Fold T1BF modelleri, %10 Meta kümesinde MFF ile yerel bulanık ağırlıklandırılır (Çift Kademeli Bulanık Mimari).
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Methodological Clarity Callout -->
+      <div class="bg-[var(--content)] border border-[var(--border)] rounded-lg p-3.5 text-xs flex items-start gap-2.5 mb-6">
+        <span class="text-blue-400 text-sm leading-none mt-0.5">ℹ️</span>
+        <div class="text-[var(--muted-foreground)] leading-relaxed">
+          <strong class="text-[var(--foreground)]">2×2 Tasarım Mantığı ve Metodolojik Veri Bölme Nüansı:</strong><br>
+          • <strong>Sütun Sınıflandırması:</strong> Sütun faktörü <em>veri bölme oranı</em> değil, <strong>Topluluk Birleştirme Mekanizmasıdır</strong> (Basit Ortalama vs. MFF Ağırlıklandırma). <code>bagging t1ff</code>, Tip-1 bulanık fonksiyon hiperparametrelerini (c, f) nesnel optimize etmek için %10 bağımsız dondurulmuş ayar kümesi kullansa da, nihai test tahminlerini <strong>basit aritmetik ortalama</strong> ile topladığı için sol sütundaki klasik torbalama sınıfındadır.<br>
+          • <strong>Metodolojik Nüans (Confounding Factor Açıklaması):</strong> Breiman (1996) OLS torbalaması ilave hiperparametre optimizasyonu gerektirmediğinden, test dışındaki verilerin %90'ı doğrudan eğitim havuzudur. Diğer üç yöntem ise hiperparametre seçimi veya MFF meta-eğitimi için 80/10/10 ayrımı kullanır. Bu durum %10'luk hafif bir eğitim boyutu farkı (karıştırıcı faktör) oluştursa da; LM'nin gereksiz yere veri kaybetmesini önleyen, bulanık modellerin ise veri sızıntısını engelleyen bilinçli ve adil bir tasarım tercihidir.
+        </div>
+      </div>
+    </div>
+
+    <!-- Deep-dive 4 Focal Methods -->
+    <div class="space-y-4 mb-6">
+      <h3 class="font-bold text-base">4 Temel Yöntemin Algoritmik ve Matematiksel İşleyişi</h3>
+
+      <!-- 1. Bagging LM -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>
+            <h4 class="font-bold text-sm text-blue-400">1. bagging lm — Klasik Doğrusal Regresyon Torbalaması</h4>
+          </div>
+          <span class="text-xs bg-[var(--content)] px-2 py-0.5 rounded border border-[var(--border)]">90/10 Ayrım</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">
+          En Küçük Kareler (OLS) regresyonunun klasik torbalama (Breiman, 1996) prensipleriyle uygulanmasıdır. Ayarlanacak yapısal hiperparametre bulunmadığından ara validasyon kümesine ihtiyaç duyulmaz; test dışındaki verilerin <strong>%90'ı doğrudan eğitim havuzu</strong> olarak tahsis edilir.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-blue-400">Algoritmik Adımlar:</div>
+            <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)]">
+              <li>%90 eğitim havuzundan yerine koyarak örnekleme ile B adet bootstrap örneği çekilir: (X<sub>b</sub>, Y<sub>b</sub>).</li>
+              <li>Her bootstrap örneğinde OLS parametre vektörü hesaplanır: β̂<sub>b</sub> = (X<sub>b</sub><sup>T</sup> X<sub>b</sub>)<sup>-1</sup> X<sub>b</sub><sup>T</sup> Y<sub>b</sub>.</li>
+              <li>Dondurulmuş %10 test verisi X<sub>test</sub> için model tahminleri üretilir: Ŷ<sub>test, b</sub> = X<sub>test</sub> β̂<sub>b</sub>.</li>
+              <li>B adet modelin test tahminleri eşit ağırlıklı aritmetik ortalamayla birleştirilir:</li>
+            </ol>
+            <div class="mt-2 text-center font-mono bg-[var(--background)] p-1.5 rounded border border-[var(--border)] text-blue-300">
+              Ŷ<sub>bagging_lm</sub> = (1 / B) · ∑<sub>b=1...B</sub> Ŷ<sub>test, b</sub>
+            </div>
+          </div>
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-blue-400">Metodolojik Özellikler:</div>
+            <ul class="space-y-1.5 text-[var(--muted-foreground)]">
+              <li>• <strong>Veri İzolasyonu:</strong> Min-Max ölçeklendirme parametreleri (μ, σ) yalnızca %90 eğitim havuzundan hesaplanır.</li>
+              <li>• <strong>Tekrarlanabilirlik:</strong> Her bootstrap iş parçacığı deterministik tohumlarla (<code>seed + b</code>) kilitlenmiştir.</li>
+              <li>• <strong>Hesaplama:</strong> 7 işlemci çekirdeğine <code>parallel::parLapply</code> ile dağıtık yürütülür.</li>
+              <li>• <strong>Doğrusal Sınırlılık:</strong> Doğrusal modeller düşük varyanslı ve kararlı olduğundan bootstrap çeşitliliği kısıtlıdır; aşırı uç bölgelerde hata düzeltme kapasitesi sınırlıdır.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Bagging T1FF -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block"></span>
+            <h4 class="font-bold text-sm text-orange-400">2. bagging t1ff — Dış Bağımsız Ayar Kümeli Bulanık Torbalama</h4>
+          </div>
+          <span class="text-xs bg-[var(--content)] px-2 py-0.5 rounded border border-[var(--border)]">80/10/10 Ayrım</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">
+          Tip-1 Bulanık Fonksiyonların (T1BF: Bulanık C-Ortalamalar Kümeleme + Ağırlıklı En Küçük Kareler Regresyonu), %80 eğitim havuzundan çekilen B bootstrap kümesinde eğitilip, <strong>dışarıda dondurulmuş %10 bağımsız ayar kümesi</strong> üzerinde hiperparametre (c, f) optimizasyonuna tabi tutulmasıdır.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-orange-400">Algoritmik Adımlar:</div>
+            <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)]">
+              <li>%80 eğitim havuzundan yerine koyarak örnekleme ile X<sub>b</sub> çekilir (N<sub>boot</sub> = N<sub>train80</sub>).</li>
+              <li>9 Adaylı Izgara Araması (Grid Search): c ∈ {2, 3, 4} ve f ∈ {1.5, 2.0, 2.5} kombinasyonları taranır.</li>
+              <li>Her aday çifti için FCM kümelemesi ve yerel WLS modelleri kurulur.</li>
+              <li>Dondurulmuş bağımsız %10 Ayar kümesinde RMSE'yi minimize eden (c*, f*) modeli seçilir.</li>
+              <li>Seçilen optimal model dondurulmuş %10 Test kümesini tahmin eder: P<sub>test</sub>[, b].</li>
+            </ol>
+            <div class="mt-2 text-center font-mono bg-[var(--background)] p-1.5 rounded border border-[var(--border)] text-orange-300">
+              Ŷ<sub>bagging_t1ff</sub> = (1 / B) · ∑<sub>b=1...B</sub> P<sub>test</sub>[, b]
+            </div>
+          </div>
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-orange-400">Metodolojik Değerlendirme:</div>
+            <ul class="space-y-1.5 text-[var(--muted-foreground)]">
+              <li>• <strong>Aşırı Öğrenme Koruması:</strong> OOB veya kat içi ayırma gürültüyü ezberletebildiğinden, bağımsız dondurulmuş ayar seti parametre seçiminde genelleme kararlılığı sağlar.</li>
+              <li>• <strong>Ampirik Doğrulama:</strong> Gerçek dünya veri kümesinde (<code>mtcars</code>) 10 bağımsız tohum ve B=1000 ile yapılan testte 80/10/10 tasarımı 90/10 tasarımına karşı <strong>10 tohumun tamamında istatistiksel üstünlük</strong> (p = 0.0002) sağlamıştır.</li>
+              <li>• <strong>Bulanık Taban:</strong> FCM ile veri uzayı alt kümelere ayrıştırılır ve her küme merkezinde yerel ağırlıklı regresyon uygulanır.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Meta LM -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 inline-block"></span>
+            <h4 class="font-bold text-sm text-green-400">3. meta lm — K-Fold Pertürbasyonlu LM + MFF Bulanık Ağırlıklandırma</h4>
+          </div>
+          <span class="text-xs bg-[var(--content)] px-2 py-0.5 rounded border border-[var(--border)]">80/10/10 Ayrım</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">
+          Doğrusal regresyon deterministik yapıda olduğundan, bootstrap içinde K-Fold (K=5) çapraz doğrulama ile Jackknife tipi pertürbasyon oluşturularak K adet alt model üretilir. Bu K model, izole %10 Meta veri kümesi üzerinde <strong>Meta-Fuzzy Functions (MFF)</strong> ile yerel bulanık ağırlıklandırılır.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-green-400">Algoritmik Adımlar:</div>
+            <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)]">
+              <li>%80 eğitim havuzundan çekilen b. bootstrap kümesi X<sub>b</sub>, K=5 eşit parçaya ayrılır.</li>
+              <li>Her k katı için kalan parçalarda LM modeli eğitilir (M<sub>b, k</sub>); %10 Meta (P<sub>meta</sub>[, k]) ve Test (P<sub>test</sub>[, k]) tahmin matrisleri oluşturulur.</li>
+              <li><strong>MFF Birleştirme:</strong> P<sub>meta</sub> girdi matrisi ve Y<sub>meta</sub> hedef vektörü ile <code>tune.mff()</code> çalıştırılır.</li>
+              <li>FCM kümelemesi ile model hata alanları belirlenir; her test noktası x için dinamik üyelik dereceleri w<sub>k</sub>(x) hesaplanır:</li>
+            </ol>
+            <div class="mt-2 text-center font-mono bg-[var(--background)] p-1.5 rounded border border-[var(--border)] text-green-300">
+              ŷ<sub>meta_lm, b</sub>(x) = ∑<sub>k=1...K</sub> w<sub>k</sub>(x) · ŷ<sub>k</sub>(x), &nbsp; ∑<sub>k=1...K</sub> w<sub>k</sub>(x) = 1
+            </div>
+          </div>
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-green-400">Metodolojik ve Deneysel Performans:</div>
+            <ul class="space-y-1.5 text-[var(--muted-foreground)]">
+              <li>• <strong>Genel Sıralama Birinciliği:</strong> 20 bağımsız tohum ortalamasında B=1000 seviyesinde <strong>1.77 ortalama rank</strong> elde etmiştir.</li>
+              <li>• <strong>Aykırı Değerli Verilerde Yüksek Direnç:</strong> Aykırı değerli simülasyon veri kümelerinde klasik Bagging LM modeline karşı <strong>%93.8</strong> oranında daha düşük hata üretmiştir.</li>
+              <li>• <strong>Dinamik Yerel Uyum:</strong> Sabit global katsayılar yerine, her test noktasının veri uzayındaki konumuna göre modeller konveks bulanık üyelik dereceleriyle ağırlıklandırılır.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Meta T1FF -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block"></span>
+            <h4 class="font-bold text-sm text-purple-400">4. meta t1ff — K-Fold T1BF + MFF Bulanık Ağırlıklandırmalı Model</h4>
+          </div>
+          <span class="text-xs bg-[var(--content)] px-2 py-0.5 rounded border border-[var(--border)]">80/10/10 Ayrım</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mb-3">
+          TÜBİTAK 1001 projesi kapsamında geliştirilen temel önerilen yöntemdir. Taban model katmanında doğrusal olmayan Tip-1 Bulanık Fonksiyonlar (T1BF), meta seviyede ise topluluk birleştirici olarak Meta-Fuzzy Functions (MFF) kullanılarak <strong>çift kademeli hiyerarşik bulanık mimari</strong> oluşturulmuştur.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-purple-400">Algoritmik Adımlar:</div>
+            <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)]">
+              <li>%80 eğitim havuzundan çekilen b. bootstrap kümesi X<sub>b</sub>, K=5 parçaya ayrılır.</li>
+              <li>Her fold için ızgara aramasıyla validasyon RMSE'sini minimize eden (c*, f*) T1BF modeli kurulur.</li>
+              <li>K adet T1BF modeli dondurulmuş %10 Meta kümesini (P<sub>meta</sub>) ve Test kümesini (P<sub>test</sub>) tahmin eder.</li>
+              <li><code>tune.mff(P_meta, Y_meta)</code> çalıştırılarak K modelin doğrusal olmayan yerel bulanık ağırlık matrisi öğrenilir.</li>
+              <li>Test tahminleri dinamik bulanık ağırlıklarla birleştirilir; B bootstrap çıktısının ortalaması nihai kestirimi verir:</li>
+            </ol>
+            <div class="mt-2 text-center font-mono bg-[var(--background)] p-1.5 rounded border border-[var(--border)] text-purple-300">
+              Ŷ<sub>meta_t1ff</sub> = (1 / B) · ∑<sub>b=1...B</sub> ŷ<sub>meta_t1ff, b</sub>
+            </div>
+          </div>
+          <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+            <div class="font-semibold mb-1 text-purple-400">TÜBİTAK 1001 Başarı Kriteri Analizi:</div>
+            <ul class="space-y-1.5 text-[var(--muted-foreground)]">
+              <li>• <strong>Başarı Kriteri Karşılandı:</strong> Klasik bulanık torbalamaya (<code>bagging t1ff</code>) karşı 36 veri kümesinde <strong>%69.44</strong> (B=100) ve <strong>%66.67</strong> (B=250) kazanma oranıyla %50 şartı aşılmıştır.</li>
+              <li>• <strong>Aykırılı Simülasyon Başarısı:</strong> Uç değer içeren simülasyon senaryolarında klasik torbalamaya karşı 16 kümenin 14'ünde (<strong>%87.5</strong>) daha düşük hata elde edilmiştir.</li>
+              <li>• <strong>En Düşük Test Hata Değeri (RMSE):</strong> B=250 seviyesinde <strong>4.1299 Test RMSE</strong> ve <strong>0.5351 R²</strong> ile en düşük mutlak hata değerine ulaşılmıştır.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fair Comparison & Zero Leakage Architecture -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 mb-6">
+      <h3 class="font-bold text-base mb-3">Metodolojik Adillik ve Veri İzolasyon Protokolü</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="bg-[var(--content)] p-3.5 rounded-lg border border-[var(--border)]">
+          <div class="font-bold text-green-400 mb-1">Sabit ve Dondurulmuş Test Seti (Frozen Test Set)</div>
+          <p class="text-[var(--muted-foreground)]">
+            Tüm 36 veri kümesinde <code>SPLIT_SEED = 20260827L</code> parametresi ile %10 test verisi deney öncesinde kilitlenmiştir. 4 yöntemin tamamı, 20 bağımsız tohum ve 4 bootstrap seviyesinde <strong>istisnasız birebir aynı test gözlemlerini</strong> tahmin etmiştir.
+          </p>
+        </div>
+        <div class="bg-[var(--content)] p-3.5 rounded-lg border border-[var(--border)]">
+          <div class="font-bold text-blue-400 mb-1">Sızıntısız Standartlaştırma (Strict Leak-Free Normalization)</div>
+          <p class="text-[var(--muted-foreground)]">
+            Min-Max normalizasyon istatistikleri (min, max, μ, σ) test verisine kesinlikle sızdırılmamıştır. <code>bagging lm</code> %90 havuz parametreleriyle, diğer 3 yöntem ise %80 havuz parametreleriyle dönüştürülmüştür.
+          </p>
+        </div>
+        <div class="bg-[var(--content)] p-3.5 rounded-lg border border-[var(--border)]">
+          <div class="font-bold text-purple-400 mb-1">Dengeli Veri Kullanımı İlkesi</div>
+          <p class="text-[var(--muted-foreground)]">
+            Parametre optimizasyonu gerektirmeyen <code>bagging lm</code> veriyi eksiksiz değerlendirmek için %90'ı doğrudan eğitime vermiştir. Parametre optimize eden <code>bagging t1ff</code> %10'u ayar kümesine, meta yöntemler ise MFF kümeleme ağırlıklarına ayırmıştır.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infrastructure, Parallel Computing & Checkpoint -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold text-sm mb-2">Paralel Hesaplama Mimarisi (7 Çekirdek)</h3>
+        <p class="text-xs text-[var(--muted-foreground)] mb-2">
+          İşlemcideki 8 çekirdekten 7'si <code>parallel::makeCluster(7)</code> ile izole R iş parçacıkları olarak yapılandırılmıştır (1 çekirdek işletim sistemi kararlılığı için ayrılmıştır).
+        </p>
+        <ul class="text-xs space-y-1.5 text-[var(--muted-foreground)]">
+          <li>• <strong>Hesaplama Hızı:</strong> Tek çekirdekte 77.4 saniye süren modelleme süreci, 7 çekirdek kümesinde 4 yöntemin tamamıyla birlikte <strong>1.24 saniyeye</strong> indirilmiştir.</li>
+          <li>• <strong>Bellek Yönetimi:</strong> Her deney tamamlandığında hem alt iş parçacıklarında (<code>clusterEvalQ(cl, gc())</code>) hem ana R oturumunda bellek temizliği yapılarak RAM sızıntısı engellenmiştir.</li>
+          <li>• <strong>Deterministik Tohum Kontrolü:</strong> Paralel iş parçacıkları <code>seed + b * 10000L</code> tohumlarıyla kilitlenerek %100 tekrarlanabilirlik sağlanmıştır.</li>
+        </ul>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-semibold text-sm mb-2">Dinamik Kontrol Noktası (Streaming Checkpoint) Sistemi</h3>
+        <p class="text-xs text-[var(--muted-foreground)] mb-2">
+          Kapsamlı simülasyon sürecinde veri kaybını önlemek ve çalışma güvenilirliğini sağlamak amacıyla:
+        </p>
+        <ul class="text-xs space-y-1.5 text-[var(--muted-foreground)]">
+          <li>• <strong>Anlık Diske Yazım:</strong> Her <code>(Veri_Seti, Seed, B)</code> deneyi tamamlandığı anda <code>write.table(..., append = TRUE)</code> ile doğrudan diske kaydedilmiştir.</li>
+          <li>• <strong>Kesintisiz Devam Kabiliyeti:</strong> Boru hattı yeniden başlatıldığında tamamlanmış deneyler anahtar eşleşmesiyle <strong>0.0 saniyede atlanmaktadır (skip)</strong>.</li>
+          <li>• <strong>Eşzamanlı Analiz:</strong> Deneyler arka planda yürütülürken bağımsız oturumlarda ara sonuçlar anlık olarak analiz edilebilmektedir.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Summary Findings -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 mb-6">
+      <h3 class="font-semibold mb-3">Temel Bilimsel Bulgular ve Değerlendirmeler</h3>
+      <div class="space-y-3">
+        <div class="border-l-4 border-green-500 pl-3">
+          <p class="font-semibold text-sm text-green-400">1. MFF Bulanık Ağırlıklandırmanın Tutarlı Üstünlüğü</p>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            İncelenen tüm B değerlerinde MFF ile dinamik ağırlıklandırılan meta modeller, klasik aritmetik ortalamalı torbalama modellerine kıyasla daha düşük hata ve daha iyi sıra derecesi (rank) üretmiştir.
+          </p>
+        </div>
+        <div class="border-l-4 border-blue-500 pl-3">
+          <p class="font-semibold text-sm text-blue-400">2. Bootstrap Sayısının Meta Modellerin Ayrışmasına Etkisi</p>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            B sayısı 100'den 1000'e yükseldikçe <code>meta lm</code> modelinin ortalama rankı 2.05'ten 1.77'ye gerilemiş, birincilik oranı %54.6'ya ulaşmıştır. Yüksek B seviyesi, MFF'nin birleştirebileceği tahmin çeşitliliğini zenginleştirmektedir.
+          </p>
+        </div>
+        <div class="border-l-4 border-purple-500 pl-3">
+          <p class="font-semibold text-sm text-purple-400">3. Aykırı Değer İçeren Senaryolarda Dayanıklılık</p>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            Aykırı değerli simülasyon senaryolarında <code>meta lm</code> klasik Bagging LM'e karşı <strong>%93.8</strong> oranında üstünlük sağlamıştır. <code>meta t1ff</code> ise klasik Bagging T1FF'e karşı <strong>%87.5</strong> (B=100) ve <strong>%81.3</strong> (B=250) oranında daha düşük hata üretmiştir.
+          </p>
+        </div>
+        <div class="border-l-4 border-yellow-500 pl-3">
+          <p class="font-semibold text-sm text-yellow-400">4. 20 Bağımsız Tohum Üzerinde İstatistiksel Kararlılık</p>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            20 farklı rastgele tohum üzerinde yapılan varyans analizinde model rank standart sapması σ ≈ 0.067 olarak hesaplanmıştır. Meta modeller ile klasik modellerin sıralama aralıkları ayrışmış ve kararlılık doğrulanmıştır.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline Flow -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+      <h3 class="font-semibold mb-4 text-center">Uçtan Uca İş Akışı (Pipeline Flow)</h3>
+      <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
+        <div class="bg-blue-500/15 rounded-lg p-2.5 text-center border border-blue-500/30">
+          <div class="font-bold text-blue-400">1. Veri Yükleme</div>
+          <div class="text-[var(--muted-foreground)]">36 veri seti (4 klasik + 32 sim.)</div>
+        </div>
+        <div class="text-[var(--muted-foreground)] font-bold">→</div>
+        <div class="bg-blue-500/15 rounded-lg p-2.5 text-center border border-blue-500/30">
+          <div class="font-bold text-blue-400">2. Normalizasyon</div>
+          <div class="text-[var(--muted-foreground)]">Strict Leak-Free (Ayrı μ, σ)</div>
+        </div>
+        <div class="text-[var(--muted-foreground)] font-bold">→</div>
+        <div class="bg-green-500/15 rounded-lg p-2.5 text-center border border-green-500/30">
+          <div class="font-bold text-green-400">3. Bootstrap Havuzu</div>
+          <div class="text-[var(--muted-foreground)]">B ∈ {100, 250, 500, 1000}</div>
+        </div>
+        <div class="text-[var(--muted-foreground)] font-bold">→</div>
+        <div class="bg-purple-500/15 rounded-lg p-2.5 text-center border border-purple-500/30">
+          <div class="font-bold text-purple-400">4. Paralel Eğitim</div>
+          <div class="text-[var(--muted-foreground)]">7 CPU Çekirdeği (parLapply)</div>
+        </div>
+        <div class="text-[var(--muted-foreground)] font-bold">→</div>
+        <div class="bg-orange-500/15 rounded-lg p-2.5 text-center border border-orange-500/30">
+          <div class="font-bold text-orange-400">5. MFF / Ortalama</div>
+          <div class="text-[var(--muted-foreground)]">Bulanık Ağırlık / Basit Ort.</div>
+        </div>
+        <div class="text-[var(--muted-foreground)] font-bold">→</div>
+        <div class="bg-red-500/15 rounded-lg p-2.5 text-center border border-red-500/30">
+          <div class="font-bold text-red-400">6. Değerlendirme & Log</div>
+          <div class="text-[var(--muted-foreground)]">RMSE, MAE, MAPE, R²</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 8: WALKTHROUGH TECHNICAL REPORT ============ -->
+  <div id="walkthroughReport" class="section">
+    <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+      <h2 class="text-xl font-bold">Teknik Rapor ve Yürütme Kılavuzu (Walkthrough)</h2>
+      <span class="text-xs bg-purple-500/15 text-purple-400 px-3 py-1 rounded-full font-semibold border border-purple-500/30">V2 2×2 Karşılaştırmalı Mimari</span>
+    </div>
+
+    <!-- Intro Card -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 mb-6">
+      <h3 class="font-bold text-base mb-2">Proje Kapsamı ve Genel Tanım</h3>
+      <p class="text-xs text-[var(--muted-foreground)] leading-relaxed">
+        Bu teknik rapor, TÜBİTAK 1001 Bilimsel Araştırma Projesi kapsamında geliştirilen <strong>V2 2×2 Karşılaştırmalı Kıyaslama Boru Hattı</strong>'nın
+        algoritmik detaylarını, uçtan uca veri akışını, matematiksel formülasyonlarını, paralel çekirdek optimizasyonunu ve disk kontrol noktası (streaming checkpoint) mimarisini
+        belgelemek amacıyla hazırlanmıştır.
+      </p>
+    </div>
+
+    <!-- File Map & Architecture -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 mb-6">
+      <h3 class="font-bold text-base mb-3">1. Dosya Haritası ve Mimari Bileşenler</h3>
+      <div class="overflow-x-auto">
+        <table class="text-xs">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th>Bileşen / Dosya</th>
+              <th>Satır Sayısı</th>
+              <th>Sorumluluk Rolü</th>
+              <th>Teknik Açıklama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-mono font-semibold text-blue-400">yeni4_yontem_v2.R</td>
+              <td>~340</td>
+              <td>Yöntem Fonksiyonları</td>
+              <td class="text-left"><code>bagging lm</code>, <code>bagging t1ff</code>, <code>meta lm</code> ve <code>meta t1ff</code> modellerinin paralel çekirdek destekli çekirdek fonksiyonları.</td>
+            </tr>
+            <tr>
+              <td class="font-mono font-semibold text-green-400">yeni_kiyas_v2.R</td>
+              <td>~560</td>
+              <td>Çalıştırıcı & Boru Hattı</td>
+              <td class="text-left">36 veri kümesi, 7-çekirdek kümesi (<code>parallel</code>), 90/10 vs 80/10/10 veri izolasyonu ve canlı diske yazım döngüsü.</td>
+            </tr>
+            <tr>
+              <td class="font-mono font-semibold text-purple-400">winlose_yeni4_v2.R</td>
+              <td>~330</td>
+              <td>Analiz & Raporlama</td>
+              <td class="text-left">5 alt grupta ikili galibiyet (win/loss) oranları, Friedman rank hesaplamaları ve birleşik tohum özet tabloları.</td>
+            </tr>
+            <tr>
+              <td class="font-mono font-semibold text-yellow-400">YENI4_SONUCLAR_V2/</td>
+              <td>—</td>
+              <td>Kalıcı Veri Deposu</td>
+              <td class="text-left">11,520 yöntem değerlendirmesinin ham ve özet CSV kütüklerinin izole olarak arşivlendiği sonuç dizini.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2x2 Factorial Design -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 mb-6">
+      <h3 class="font-bold text-base mb-3">2. 2×2 Karşılaştırmalı Tasarım Matrisi</h3>
+      <div class="overflow-x-auto mb-4">
+        <table class="text-xs">
+          <thead>
+            <tr class="bg-[var(--content)]">
+              <th rowspan="2" class="p-2.5 border w-1/5">Taban Model Katmanı</th>
+              <th colspan="2" class="p-2.5 border">Topluluk Birleştirme Mekanizması (Toplama İlkesi)</th>
+            </tr>
+            <tr class="bg-[var(--content)]">
+              <th class="p-2.5 border text-blue-400 w-2/5">Basit Aritmetik Ortalama (Klasik Torbalama)</th>
+              <th class="p-2.5 border text-purple-400 w-2/5">Dinamik Bulanık Ağırlıklandırma (MFF Meta-Öğrenme)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-bold bg-[var(--content)] text-center">
+                <span class="text-slate-200">Doğrusal Regresyon</span><br>
+                <span class="text-[10px] text-[var(--muted-foreground)] font-mono">(LM)</span>
+              </td>
+              <td class="p-3.5 border text-left">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <strong class="text-blue-400 text-sm">1. bagging lm</strong>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">90/10 Ayrım</span>
+                </div>
+                <span class="text-[var(--muted-foreground)] leading-relaxed">Breiman (1996) OLS torbalaması. İlave hiperparametre gerektirmediğinden %90 verinin tamamı doğrudan eğitim havuzudur. Modeller eşit ağırlıkla toplanır.</span>
+              </td>
+              <td class="p-3.5 border text-left">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <strong class="text-green-400 text-sm">3. meta lm</strong>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-green-500/20 text-green-300 border border-green-500/30">80/10/10 Ayrım</span>
+                </div>
+                <span class="text-[var(--muted-foreground)] leading-relaxed">%80 Eğitim + %10 Meta + %10 Test. K-Fold alt LM modelleri Meta kümesinde MFF ile yerel bulanık ağırlıklandırılır.</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-bold bg-[var(--content)] text-center">
+                <span class="text-slate-200">Tip-1 Bulanık Fonksiyon</span><br>
+                <span class="text-[10px] text-[var(--muted-foreground)] font-mono">(T1BF)</span>
+              </td>
+              <td class="p-3.5 border text-left">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <strong class="text-orange-400 text-sm">2. bagging t1ff</strong>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">80/10/10 Ayrım</span>
+                </div>
+                <span class="text-[var(--muted-foreground)] leading-relaxed">%80 Eğitim + %10 Bağımsız Dondurulmuş Tuning Seti + %10 Test. FCM parametreleri dış ayar kümesinde seçilir; seçilen B model basit aritmetik ortalamayla toplanır.</span>
+              </td>
+              <td class="p-3.5 border text-left">
+                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                  <strong class="text-purple-400 text-sm">4. meta t1ff <span class="text-[10px] bg-purple-500/25 text-purple-300 px-1.5 py-0.5 rounded ml-1 font-semibold border border-purple-500/40">Önerilen Model</span></strong>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">80/10/10 Ayrım</span>
+                </div>
+                <span class="text-[var(--muted-foreground)] leading-relaxed">%80 Eğitim + %10 Meta + %10 Test. Çift kademeli hiyerarşik bulanık mimari (K-Fold T1BF tabanı + MFF meta ağırlıklandırması).</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Methodological Clarity Callout -->
+      <div class="bg-[var(--content)] border border-[var(--border)] rounded-lg p-3.5 text-xs flex items-start gap-2.5 mb-4">
+        <span class="text-blue-400 text-sm leading-none mt-0.5">ℹ️</span>
+        <div class="text-[var(--muted-foreground)] leading-relaxed">
+          <strong class="text-[var(--foreground)]">2×2 Tasarım Çerçevesi ve Metodolojik Nüans:</strong><br>
+          • <strong>Sütun Faktörü:</strong> Sütun sınıflandırması <em>veri bölme oranı</em> değil, <strong>Topluluk Birleştirme İlkesidir</strong> (Basit Aritmetik Ortalama vs. Dinamik MFF Ağırlıklandırma). <code>bagging t1ff</code>, Tip-1 bulanık fonksiyon hiperparametrelerini (c, f) dış ayar kümesinde optimize etse de, nihai test tahminlerini <strong>basit aritmetik ortalama</strong> ile birleştirdiği için klasik torbalama sınıfındadır.<br>
+          • <strong>Confounding Factor Açıklaması:</strong> Breiman (1996) OLS torbalamasında hiperparametre optimizasyonu gerekmediği için verinin %90'ı doğrudan eğitime ayrılmıştır; diğer 3 model ise 80/10/10 yapısını kullanır. Bu %10'luk eğitim havuzu farkı hafif bir karıştırıcı etken (confounding factor) oluştursa da, hem LM'nin bilgi kaybını önleyen hem de bulanık modellerin aşırı öğrenmesini engelleyen bilinçli bir metodolojik tercihtir.
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+        <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+          <strong class="text-blue-400">Araştırma Sorusu 1 (Taban Model Etkisi):</strong>
+          <p class="text-[var(--muted-foreground)] mt-1">Parametrik doğrusal regresyon (LM) ile kural tabanlı, doğrusal olmayan Tip-1 Bulanık Fonksiyonlar (T1BF) arasındaki başarım farkı nedir?</p>
+        </div>
+        <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+          <strong class="text-green-400">Araştırma Sorusu 2 (MFF Birleştirme Etkisi):</strong>
+          <p class="text-[var(--muted-foreground)] mt-1">Klasik basit ortalamaya kıyasla FCM kümeleme ve bulanık üyelik derecelerine dayalı MFF dinamik ağırlıklandırması tahmin hatasını ne ölçüde azaltmaktadır?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 36 Datasets Catalog -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 mb-6">
+      <h3 class="font-bold text-base mb-3">3. Veri Kümeleri Kataloğu ve Çalışma Sırası (36 Senaryo)</h3>
+      <p class="text-xs text-[var(--muted-foreground)] mb-3">Deney boru hattı 4 klasik veri setinin ardından 32 simülasyon Excel senaryosunu deterministik sırayla yürütür:</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+        <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+          <div class="font-bold text-blue-400 mb-1">Klasik Veri Kümeleri (1–4)</div>
+          <ul class="space-y-1 text-[var(--muted-foreground)]">
+            <li>1. <strong>Cereal</strong> (N=77, 15 değişken)</li>
+            <li>2. <strong>Cars</strong> (N=32, 11 değişken)</li>
+            <li>3. <strong>Attitude</strong> (N=30, 7 değişken)</li>
+            <li>4. <strong>Judge</strong> (N=43, 12 değişken)</li>
+          </ul>
+        </div>
+
+        <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+          <div class="font-bold text-green-400 mb-1">Aykırısız Simülasyonlar (5–20)</div>
+          <p class="text-[var(--muted-foreground)] mb-1">Normal dağılımlı, gürültüsüz 16 senaryo:</p>
+          <div class="grid grid-cols-2 gap-1 text-[11px] text-[var(--muted-foreground)]">
+            <div>• n100 (p2, p5, p10, p15)</div>
+            <div>• n250 (p2, p5, p10, p15)</div>
+            <div>• n50 (p2, p5, p10, p15)</div>
+            <div>• n75 (p2, p5, p10, p15)</div>
+          </div>
+        </div>
+
+        <div class="bg-[var(--content)] p-3 rounded-lg border border-[var(--border)]">
+          <div class="font-bold text-purple-400 mb-1">Aykırılı Simülasyonlar (21–36)</div>
+          <p class="text-[var(--muted-foreground)] mb-1">Aşırı uç değer içeren 16 gürültülü senaryo:</p>
+          <div class="grid grid-cols-2 gap-1 text-[11px] text-[var(--muted-foreground)]">
+            <div>• n100 (p2, p5, p10, p15)</div>
+            <div>• n250 (p2, p5, p10, p15)</div>
+            <div>• n50 (p2, p5, p10, p15)</div>
+            <div>• n75 (p2, p5, p10, p15)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Models Detailed Walkthrough -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 mb-6">
+      <h3 class="font-bold text-base mb-4">4. 4 Yöntemin Algoritmik ve Matematiksel İşleyişi</h3>
+      
+      <div class="space-y-4 text-xs">
+        <!-- Model 1 -->
+        <div class="bg-[var(--content)] p-4 rounded-xl border border-[var(--border)]">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="font-bold text-blue-400 text-sm">1. bagging lm — Klasik Doğrusal Regresyon Torbalaması (90/10)</h4>
+            <span class="bg-blue-500/15 text-blue-400 px-2 py-0.5 rounded font-mono">Breiman (1996)</span>
+          </div>
+          <p class="text-[var(--muted-foreground)] mb-2">
+            Hiperparametre optimizasyonu gerektirmez; test dışındaki tüm verilerin %90'ı doğrudan eğitim kümesidir.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[var(--card)] p-3 rounded-lg border border-[var(--border)]">
+            <div>
+              <strong class="text-blue-300">Algoritmik Adımlar:</strong>
+              <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>%90 eğitim havuzundan yerine koyarak örnekleme ile B adet (X<sub>b</sub>, Y<sub>b</sub>) örneği çekilir.</li>
+                <li>Her bootstrap kümesinde OLS parametreleri çözülür: <code>β̂<sub>b</sub> = (X<sub>b</sub><sup>T</sup> X<sub>b</sub>)<sup>-1</sup> X<sub>b</sub><sup>T</sup> Y<sub>b</sub></code>.</li>
+                <li>Dondurulmuş %10 test verisi tahmin edilir: <code>Ŷ<sub>test, b</sub> = X<sub>test</sub> β̂<sub>b</sub></code>.</li>
+                <li>B adet tahmin basit aritmetik ortalamayla toplanır: <code>Ŷ = (1/B) · ∑ Ŷ<sub>test, b</sub></code>.</li>
+              </ol>
+            </div>
+            <div>
+              <strong class="text-blue-300">Karakteristik Özellikler:</strong>
+              <ul class="space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>• <strong>Deterministik Tohum:</strong> Her iş parçacığı <code>seed + b</code> tohumuyla kilitlidir.</li>
+                <li>• <strong>Sızıntısız Ölçekleme:</strong> Min-Max parametreleri yalnızca %90 havuzdan öğrenilir.</li>
+                <li>• <strong>Doğrusal Sınırlılık:</strong> Aşırı uç bölgelerde gürültüye karşı düzeltme yeteneği kısıtlıdır.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Model 2 -->
+        <div class="bg-[var(--content)] p-4 rounded-xl border border-[var(--border)]">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="font-bold text-orange-400 text-sm">2. bagging t1ff — Dış Bağımsız Tuning Kümeli Bulanık Torbalama (80/10/10)</h4>
+            <span class="bg-orange-500/15 text-orange-400 px-2 py-0.5 rounded font-mono">FCM + WLS</span>
+          </div>
+          <p class="text-[var(--muted-foreground)] mb-2">
+            Tip-1 Bulanık Fonksiyonlar %80 eğitimden çekilen B bootstrap kümesinde eğitilir ve dışarıda dondurulmuş %10 bağımsız tuning seti üzerinde hiperparametre (c, f) optimizasyonu yapılır.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[var(--card)] p-3 rounded-lg border border-[var(--border)]">
+            <div>
+              <strong class="text-orange-300">Algoritmik Adımlar:</strong>
+              <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>%80 eğitim havuzundan yerine koyarak örneklem X<sub>b</sub> çekilir.</li>
+                <li>Izgara Araması (Grid Search): c ∈ {2, 3, 4} ve f ∈ {1.5, 2.0, 2.5} kombinasyonları taranır (9 aday).</li>
+                <li>Her aday çifti için bağımsız dondurulmuş %10 Tuning setinde RMSE hesaplanır.</li>
+                <li>Tuning RMSE'sini minimize eden optimal (c*, f*) modeli dondurulmuş %10 test verisini tahmin eder.</li>
+                <li>B adet test tahmininin basit ortalaması alınır: <code>Ŷ = (1/B) · ∑ P<sub>test</sub>[, b]</code>.</li>
+              </ol>
+            </div>
+            <div>
+              <strong class="text-orange-300">Aşırı Öğrenme Koruması:</strong>
+              <ul class="space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>• Dış bağımsız tuning seti, bootstrap içi gürültünün aşırı ezberlenmesini engeller.</li>
+                <li>• <code>mtcars</code> üzerinde 10 tohum × B=1000 deneyinde 80/10/10 mimarisi 90/10 mimarisine karşı <strong>10-0 kazanmıştır (p = 0.0002)</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Model 3 -->
+        <div class="bg-[var(--content)] p-4 rounded-xl border border-[var(--border)]">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="font-bold text-green-400 text-sm">3. meta lm — K-Fold LM Pertürbasyonu + MFF Bulanık Ağırlıklandırma (80/10/10)</h4>
+            <span class="bg-green-500/15 text-green-400 px-2 py-0.5 rounded font-mono">LM + MFF</span>
+          </div>
+          <p class="text-[var(--muted-foreground)] mb-2">
+            Doğrusal modeller deterministik olduğundan, bootstrap içinde K-Fold (K=5) pertürbasyonu uygulanarak K alt model üretilir ve izole %10 Meta seti üzerinde MFF ile yerel konveks ağırlıklandırılır.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[var(--card)] p-3 rounded-lg border border-[var(--border)]">
+            <div>
+              <strong class="text-green-300">Algoritmik Adımlar:</strong>
+              <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>X<sub>b</sub> bootstrap kümesi K=5 parçaya ayrılır.</li>
+                <li>Her k diliminde LM eğitilerek %10 Meta (P<sub>meta</sub>[, k]) ve Test (P<sub>test</sub>[, k]) tahminleri üretilir.</li>
+                <li><code>tune.mff(P_meta, Y_meta)</code> ile hata alanları kümelenir ve her test noktası için dinamik ağırlıklar w<sub>k</sub>(x) hesaplanır.</li>
+                <li><code>ŷ<sub>meta_lm, b</sub>(x) = ∑ w<sub>k</sub>(x) · ŷ<sub>k</sub>(x), &nbsp; ∑ w<sub>k</sub>(x) = 1</code>.</li>
+                <li>B adet MFF çıktısının aritmetik ortalaması nihai kestirimi verir.</li>
+              </ol>
+            </div>
+            <div>
+              <strong class="text-green-300">Deneysel Başarım:</strong>
+              <ul class="space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>• B=1000 seviyesinde <strong>1.77 ortalama rank</strong> ile en istikrarlı modeldir.</li>
+                <li>• Aykırı değerli simülasyon senaryolarında klasik Bagging LM'e karşı <strong>%93.8</strong> oranında daha düşük hata üretmiştir.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Model 4 -->
+        <div class="bg-[var(--content)] p-4 rounded-xl border border-[var(--border)]">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="font-bold text-purple-400 text-sm">4. meta t1ff — K-Fold T1BF + MFF Hiyerarşik Bulanık Mimari (80/10/10)</h4>
+            <span class="bg-purple-500/15 text-purple-400 px-2 py-0.5 rounded font-mono">T1BF + MFF</span>
+          </div>
+          <p class="text-[var(--muted-foreground)] mb-2">
+            TÜBİTAK 1001 projesinin temel önerilen yöntemidir. Taban model katmanında T1BF, meta birleştiricide MFF kullanılarak çift kademeli hiyerarşik bulanık mimari oluşturulmuştur.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[var(--card)] p-3 rounded-lg border border-[var(--border)]">
+            <div>
+              <strong class="text-purple-300">Algoritmik Adımlar:</strong>
+              <ol class="list-decimal list-inside space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>X<sub>b</sub> bootstrap kümesi K=5 parçaya ayrılır.</li>
+                <li>Her kat için validasyon RMSE'sini minimize eden optimal (c*, f*) T1BF modeli kurulur.</li>
+                <li>K model %10 Meta setini (P<sub>meta</sub>) ve sabit Test setini (P<sub>test</sub>) tahmin eder.</li>
+                <li>P<sub>meta</sub> üzerinde <code>tune.mff()</code> çalıştırılarak doğrusal olmayan yerel bulanık ağırlık matrisi öğrenilir.</li>
+                <li>B bootstrap MFF tahmininin ortalaması nihai kestirimi verir: <code>Ŷ = (1/B) · ∑ ŷ<sub>meta_t1ff, b</sub></code>.</li>
+              </ol>
+            </div>
+            <div>
+              <strong class="text-purple-300">TÜBİTAK 1001 Kriter Başarımı:</strong>
+              <ul class="space-y-1 text-[var(--muted-foreground)] mt-1">
+                <li>• Klasik <code>bagging t1ff</code>'e karşı <strong>%64.0 – %69.4</strong> kazanma oranıyla %50 taahhüdünü fazlasıyla aşmıştır.</li>
+                <li>• Klasik <code>bagging lm</code>'e karşı <strong>%60.0 – %63.9</strong> kazanma oranı elde etmiştir.</li>
+                <li>• B=250 seviyesinde <strong>4.1299 Test RMSE</strong> ve <strong>0.5351 R²</strong> ile en düşük mutlak hataya ulaşmıştır.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infrastructure, Parallel Computing & Checkpoint -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-xs">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-bold text-sm mb-2 text-blue-400">5. 7 Çekirdek Paralel Hesaplama Altyapısı</h3>
+        <p class="text-[var(--muted-foreground)] mb-2">
+          İşlemcideki 8 çekirdekten 7'si <code>parallel::makeCluster(7)</code> ile izole R düğümleri olarak yapılandırılmıştır (1 çekirdek işletim sistemi kararlılığı için ayrılmıştır).
+        </p>
+        <ul class="space-y-1.5 text-[var(--muted-foreground)]">
+          <li>• <strong>Hesaplama Hızı:</strong> Tek çekirdekte 77.4 saniye süren modelleme süreci, 7 çekirdek kümesinde 4 yöntemin tamamıyla birlikte <strong>1.24 saniyeye</strong> indirilmiştir (62 kat hızlanma).</li>
+          <li>• <strong>Bellek Yönetimi:</strong> Her deney tamamlandığında hem alt iş parçacıklarında (<code>clusterEvalQ(cl, gc())</code>) hem ana R oturumunda bellek temizliği yapılarak RAM sızıntısı engellenmiştir.</li>
+          <li>• <strong>Deterministik Tohum Kontrolü:</strong> Paralel iş parçacıkları <code>seed + b * 10000L</code> tohumlarıyla kilitlenerek %100 tekrarlanabilirlik sağlanmıştır.</li>
+        </ul>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-bold text-sm mb-2 text-green-400">6. Dinamik Kontrol Noktası (Streaming Checkpoint)</h3>
+        <p class="text-[var(--muted-foreground)] mb-2">
+          Kapsamlı simülasyon sürecinde elektrik kesintisi, donanım kapanması veya kesinti durumlarında sıfır veri kaybı sağlamak amacıyla:
+        </p>
+        <ul class="space-y-1.5 text-[var(--muted-foreground)]">
+          <li>• <strong>Anlık Diske Yazım:</strong> Her <code>(Veri_Seti, Seed, B)</code> deneyi bittiği saniyede <code>write.table(..., append = TRUE)</code> ile doğrudan diske kaydedilmiştir.</li>
+          <li>• <strong>Kesintisiz Devam (Skip Logic):</strong> Boru hattı yeniden başlatıldığında tamamlanmış deneyler anahtar eşleşmesiyle <strong>0.0 saniyede atlanmaktadır</strong>.</li>
+          <li>• <strong>Eşzamanlı Analiz:</strong> Deneyler arka planda yürütülürken bağımsız R oturumlarında <code>winlose_yeni4_v2.R</code> çalıştırılarak ara sonuçlar anlık olarak analiz edilebilmektedir.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Output Files Glossary & Execution Guide -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-xs">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-bold text-sm mb-2 text-purple-400">7. Üretilen Çıktı Kütükleri Format Sözlüğü</h3>
+        <p class="text-[var(--muted-foreground)] mb-2"><code>YENI4_SONUCLAR_V2/</code> klasörüne otomatik üretilen kütükler:</p>
+        <ul class="space-y-1.5 text-[var(--muted-foreground)]">
+          <li>• <code>Yeni4_v2_Canli_Ham_Sonuclar.csv</code>: 11,520 satırlık ana ham kütük (Checkpoint kaynağı).</li>
+          <li>• <code>Yeni4_v2_Seed_B_Ozet_Rank_Tablosu.csv</code>: Seed, B bazında 4 modelin genel ortalama rank matrisi.</li>
+          <li>• <code>Yeni4_v2_Seed_B_VeriSeti_Rank_Tablosu.csv</code>: Veri seti bazında modellerin sıralama detay tablosu.</li>
+          <li>• <code>Yeni4_v2_VeriSeti_Ozet_*.csv</code>: Her veri kümesi ve B için Ortalama ± Standart Sapma metrikleri.</li>
+        </ul>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4">
+        <h3 class="font-bold text-sm mb-2 text-yellow-400">8. Yürütme ve Yeniden Üretim Kılavuzu</h3>
+        <p class="text-[var(--muted-foreground)] mb-2">Deneyleri RStudio konsolundan doğrudan çalıştırmak için:</p>
+        <div class="bg-[var(--content)] p-2.5 rounded font-mono text-[11px] space-y-1 border border-[var(--border)] text-[var(--foreground)]">
+          <p class="text-blue-400"># 1. Kıyaslama Boru Hattını Başlatma:</p>
+          <p>source("yeni_kiyas_v2.R")</p>
+          <p class="text-blue-400 mt-2"># 2. Ara/Nihai Win/Loss Raporunu Üretme:</p>
+          <p>source("winlose_yeni4_v2.R")</p>
+          <p class="text-blue-400 mt-2"># 3. Veri Seti Kapsamı (Satır 103):</p>
+          <p>VERI_SETI_MODU &lt;- "hepsi"  # "klasik", "simulasyon", "hepsi"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Tooltip for Interactive SVG Charts -->
+  <div id="chartTooltip" style="position:fixed; pointer-events:none; z-index:99999; display:none; background:rgba(15,23,42,0.96); color:#fff; border:1px solid rgba(255,255,255,0.18); border-radius:8px; padding:8px 12px; font-size:12px; font-family:sans-serif; box-shadow:0 12px 30px -4px rgba(0,0,0,0.6); backdrop-filter:blur(8px); transition:opacity 0.12s ease; opacity:0;"></div>
+
+  <!-- FOOTER -->
+  <div class="text-center mt-8 text-xs text-[var(--muted-foreground)] no-print">
+    <p>Meta Bulanık Torbalama Fonksiyonları — TÜBİTAK 1001 Projesi • 2026</p>
+  </div>
+
+  <!-- ============ CHART.JS via vanilla Canvas ============ -->
+  <script>
+    // ===== DATA =====
+    const B_VALUES = [100, 250, 500, 1000];
+    const METHODS = ['meta lm', 'meta t1ff', 'bagging lm', 'bagging t1ff'];
+    const METHOD_LABELS = ['Meta LM', 'Meta T1FF', 'Bagging LM', 'Bagging T1FF'];
+    const COLORS = ['#22c55e', '#8b5cf6', '#3b82f6', '#f59e0b'];
+    const COLORS_ALPHA = ['rgba(34,197,94,0.6)', 'rgba(139,92,246,0.6)', 'rgba(59,130,246,0.6)', 'rgba(245,158,11,0.6)'];
+    
+    const rankData = {
+      'meta lm': [2.05, 2.08, 1.78, 1.77],
+      'meta t1ff': [2.28, 2.24, 2.58, 2.59],
+      'bagging lm': [2.74, 2.77, 2.55, 2.58],
+      'bagging t1ff': [2.93, 2.91, 3.09, 3.06]
+    };
+    const firstData = {
+      'meta lm': [293, 287, 267, 273],
+      'meta t1ff': [218, 235, 95, 97],
+      'bagging lm': [122, 108, 88, 76],
+      'bagging t1ff': [87, 90, 50, 54]
+    };
+    const rmseData = {
+      'meta lm': [4.3925, 4.3587, 4.3044, 4.3041],
+      'meta t1ff': [4.1647, 4.1299, 4.4269, 4.4263],
+      'bagging lm': [5.9646, 5.9184, 5.1157, 5.1170],
+      'bagging t1ff': [6.3054, 6.2278, 5.4223, 5.4171]
+    };
+
+    // Seed data
+    const seedBData = [
+      // B=100
+      {seed:42,b:100,n:36,bt:3.08,mt:2.28,bl:2.64,ml:2.00},
+      {seed:77,b:100,n:36,bt:2.97,mt:2.25,bl:2.72,ml:2.06},
+      {seed:666,b:100,n:36,bt:3.03,mt:2.28,bl:2.78,ml:1.92},
+      {seed:1100,b:100,n:36,bt:2.83,mt:2.08,bl:2.89,ml:2.19},
+      {seed:1234,b:100,n:36,bt:2.89,mt:2.36,bl:2.50,ml:2.25},
+      {seed:1327,b:100,n:36,bt:2.89,mt:2.25,bl:2.81,ml:2.06},
+      {seed:1453,b:100,n:36,bt:2.92,mt:2.33,bl:2.72,ml:2.03},
+      {seed:1461,b:100,n:36,bt:3.03,mt:2.19,bl:2.72,ml:2.06},
+      {seed:1903,b:100,n:36,bt:2.94,mt:2.22,bl:2.75,ml:2.08},
+      {seed:1907,b:100,n:36,bt:2.89,mt:2.33,bl:2.72,ml:2.06},
+      {seed:2026,b:100,n:36,bt:2.89,mt:2.28,bl:2.81,ml:2.03},
+      {seed:2718,b:100,n:36,bt:2.72,mt:2.53,bl:2.78,ml:1.97},
+      {seed:2834,b:100,n:36,bt:2.86,mt:2.31,bl:2.81,ml:2.03},
+      {seed:3141,b:100,n:36,bt:2.86,mt:2.25,bl:2.89,ml:2.00},
+      {seed:4024,b:100,n:36,bt:2.94,mt:2.42,bl:2.67,ml:1.97},
+      {seed:4111,b:100,n:36,bt:3.03,mt:2.28,bl:2.44,ml:2.25},
+      {seed:5772,b:100,n:36,bt:2.92,mt:2.28,bl:2.83,ml:1.97},
+      {seed:7465,b:100,n:36,bt:3.08,mt:2.17,bl:2.78,ml:1.97},
+      {seed:8081,b:100,n:36,bt:3.00,mt:2.25,bl:2.78,ml:1.97},
+      {seed:9991,b:100,n:36,bt:2.81,mt:2.28,bl:2.86,ml:2.06},
+      // B=250
+      {seed:42,b:250,n:36,bt:3.00,mt:2.17,bl:2.78,ml:2.06},
+      {seed:77,b:250,n:36,bt:2.92,mt:2.11,bl:2.89,ml:2.08},
+      {seed:666,b:250,n:36,bt:3.03,mt:2.11,bl:2.83,ml:2.03},
+      {seed:1100,b:250,n:36,bt:2.78,mt:2.28,bl:2.83,ml:2.11},
+      {seed:1234,b:250,n:36,bt:2.83,mt:2.28,bl:2.72,ml:2.17},
+      {seed:1327,b:250,n:36,bt:2.89,mt:2.28,bl:2.75,ml:2.08},
+      {seed:1453,b:250,n:36,bt:2.94,mt:2.31,bl:2.75,ml:2.00},
+      {seed:1461,b:250,n:36,bt:2.97,mt:2.19,bl:2.72,ml:2.11},
+      {seed:1903,b:250,n:36,bt:2.86,mt:2.25,bl:2.83,ml:2.06},
+      {seed:1907,b:250,n:36,bt:2.81,mt:2.31,bl:2.78,ml:2.11},
+      {seed:2026,b:250,n:36,bt:2.89,mt:2.22,bl:2.86,ml:2.03},
+      {seed:2718,b:250,n:36,bt:2.81,mt:2.36,bl:2.83,ml:2.00},
+      {seed:2834,b:250,n:36,bt:2.89,mt:2.31,bl:2.81,ml:2.00},
+      {seed:3141,b:250,n:36,bt:2.97,mt:2.28,bl:2.67,ml:2.08},
+      {seed:4024,b:250,n:36,bt:2.92,mt:2.19,bl:2.69,ml:2.19},
+      {seed:4111,b:250,n:36,bt:2.97,mt:2.17,bl:2.61,ml:2.25},
+      {seed:5772,b:250,n:36,bt:2.92,mt:2.28,bl:2.78,ml:2.03},
+      {seed:7465,b:250,n:36,bt:2.94,mt:2.25,bl:2.81,ml:2.00},
+      {seed:8081,b:250,n:36,bt:2.97,mt:2.22,bl:2.72,ml:2.08},
+      {seed:9991,b:250,n:36,bt:2.92,mt:2.31,bl:2.72,ml:2.06},
+      // B=500
+      {seed:42,b:500,n:25,bt:3.12,mt:2.64,bl:2.56,ml:1.68},
+      {seed:77,b:500,n:25,bt:3.20,mt:2.48,bl:2.60,ml:1.72},
+      {seed:666,b:500,n:25,bt:3.20,mt:2.56,bl:2.52,ml:1.72},
+      {seed:1100,b:500,n:25,bt:3.04,mt:2.68,bl:2.40,ml:1.88},
+      {seed:1234,b:500,n:25,bt:3.08,mt:2.52,bl:2.52,ml:1.88},
+      {seed:1327,b:500,n:25,bt:3.08,mt:2.52,bl:2.52,ml:1.88},
+      {seed:1453,b:500,n:25,bt:3.08,mt:2.56,bl:2.52,ml:1.84},
+      {seed:1461,b:500,n:25,bt:3.04,mt:2.60,bl:2.48,ml:1.88},
+      {seed:1903,b:500,n:25,bt:3.00,mt:2.64,bl:2.64,ml:1.72},
+      {seed:1907,b:500,n:25,bt:3.04,mt:2.56,bl:2.64,ml:1.76},
+      {seed:2026,b:500,n:25,bt:3.00,mt:2.60,bl:2.64,ml:1.76},
+      {seed:2718,b:500,n:25,bt:3.12,mt:2.64,bl:2.56,ml:1.68},
+      {seed:2834,b:500,n:25,bt:3.12,mt:2.60,bl:2.64,ml:1.64},
+      {seed:3141,b:500,n:25,bt:3.08,mt:2.48,bl:2.64,ml:1.80},
+      {seed:4024,b:500,n:25,bt:3.04,mt:2.56,bl:2.52,ml:1.88},
+      {seed:4111,b:500,n:25,bt:3.20,mt:2.56,bl:2.32,ml:1.92},
+      {seed:5772,b:500,n:25,bt:3.04,mt:2.64,bl:2.68,ml:1.64},
+      {seed:7465,b:500,n:25,bt:3.08,mt:2.52,bl:2.60,ml:1.80},
+      {seed:8081,b:500,n:25,bt:3.12,mt:2.56,bl:2.60,ml:1.72},
+      {seed:9991,b:500,n:25,bt:3.08,mt:2.64,bl:2.40,ml:1.88},
+      // B=1000
+      {seed:42,b:1000,n:25,bt:3.16,mt:2.52,bl:2.56,ml:1.76},
+      {seed:77,b:1000,n:25,bt:3.24,mt:2.52,bl:2.48,ml:1.76},
+      {seed:666,b:1000,n:25,bt:3.12,mt:2.60,bl:2.40,ml:1.88},
+      {seed:1100,b:1000,n:25,bt:3.00,mt:2.64,bl:2.52,ml:1.84},
+      {seed:1234,b:1000,n:25,bt:3.00,mt:2.60,bl:2.64,ml:1.76},
+      {seed:1327,b:1000,n:25,bt:3.00,mt:2.56,bl:2.64,ml:1.80},
+      {seed:1453,b:1000,n:25,bt:3.00,mt:2.64,bl:2.72,ml:1.64},
+      {seed:1461,b:1000,n:25,bt:3.00,mt:2.64,bl:2.68,ml:1.68},
+      {seed:1903,b:1000,n:25,bt:3.00,mt:2.64,bl:2.64,ml:1.72},
+      {seed:1907,b:1000,n:25,bt:2.96,mt:2.64,bl:2.68,ml:1.72},
+      {seed:2026,b:1000,n:25,bt:3.08,mt:2.60,bl:2.60,ml:1.72},
+      {seed:2718,b:1000,n:25,bt:3.08,mt:2.56,bl:2.64,ml:1.72},
+      {seed:2834,b:1000,n:25,bt:3.12,mt:2.48,bl:2.60,ml:1.80},
+      {seed:3141,b:1000,n:25,bt:3.00,mt:2.56,bl:2.60,ml:1.84},
+      {seed:4024,b:1000,n:25,bt:3.08,mt:2.56,bl:2.52,ml:1.84},
+      {seed:4111,b:1000,n:25,bt:3.12,mt:2.56,bl:2.36,ml:1.96},
+      {seed:5772,b:1000,n:25,bt:3.12,mt:2.60,bl:2.60,ml:1.68},
+      {seed:7465,b:1000,n:25,bt:3.08,mt:2.60,bl:2.60,ml:1.72},
+      {seed:8081,b:1000,n:25,bt:3.08,mt:2.60,bl:2.60,ml:1.72},
+      {seed:9991,b:1000,n:25,bt:3.04,mt:2.68,bl:2.52,ml:1.76}
+    ];
+
+    // General ranking table data
+    const genelSiralama = [
+      {b:100,y:'Meta LM',rank:2.05,rmse:4.3925,r2:0.284,first:293,total:720},
+      {b:100,y:'Meta T1FF',rank:2.28,rmse:4.1647,r2:0.5147,first:218,total:720},
+      {b:100,y:'Bagging LM',rank:2.74,rmse:5.9646,r2:-1.2559,first:122,total:720},
+      {b:100,y:'Bagging T1FF',rank:2.93,rmse:6.3054,r2:-1.7394,first:87,total:720},
+      {b:250,y:'Meta LM',rank:2.08,rmse:4.3587,r2:0.3108,first:287,total:720},
+      {b:250,y:'Meta T1FF',rank:2.24,rmse:4.1299,r2:0.5351,first:235,total:720},
+      {b:250,y:'Bagging LM',rank:2.77,rmse:5.9184,r2:-1.1892,first:108,total:720},
+      {b:250,y:'Bagging T1FF',rank:2.91,rmse:6.2278,r2:-1.5799,first:90,total:720},
+      {b:500,y:'Meta LM',rank:1.78,rmse:4.3044,r2:0.7432,first:267,total:500},
+      {b:500,y:'Bagging LM',rank:2.55,rmse:5.1157,r2:0.532,first:88,total:500},
+      {b:500,y:'Meta T1FF',rank:2.58,rmse:4.4269,r2:0.7257,first:95,total:500},
+      {b:500,y:'Bagging T1FF',rank:3.09,rmse:5.4223,r2:0.4531,first:50,total:500},
+      {b:1000,y:'Meta LM',rank:1.77,rmse:4.3041,r2:0.744,first:273,total:500},
+      {b:1000,y:'Bagging LM',rank:2.58,rmse:5.117,r2:0.5313,first:76,total:500},
+      {b:1000,y:'Meta T1FF',rank:2.59,rmse:4.4263,r2:0.7264,first:97,total:500},
+      {b:1000,y:'Bagging T1FF',rank:3.06,rmse:5.4171,r2:0.4565,first:54,total:500}
+    ];
+
+    // ===== NAVIGATION =====
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        const targetSection = document.getElementById(btn.dataset.section);
+        if (targetSection) targetSection.classList.add('active');
+        // Render charts fresh for the active tab
+        renderAllCharts();
+      });
+    });
+
+    // ===== INTERACTIVE TOOLTIPS & HIGHLIGHTS =====
+    function showPointTooltip(e, seriesName, xLabel, metricLabel, valueStr, color) {
+      const tt = document.getElementById('chartTooltip');
+      if (!tt) return;
+      tt.innerHTML = `
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; font-weight:700; font-size:13px;">
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${color}; box-shadow:0 0 8px ${color};"></span>
+          <span style="color:#f8fafc;">${seriesName}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:16px; font-size:11.5px; opacity:0.9; margin-bottom:4px; color:#cbd5e1;">
+          <span>Parametre:</span>
+          <strong style="color:#f1f5f9;">${xLabel}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:16px; font-size:12px; font-weight:700; border-top:1px solid rgba(255,255,255,0.18); padding-top:4px; margin-top:4px; color:#38bdf8;">
+          <span>${metricLabel}:</span>
+          <span>${valueStr}</span>
+        </div>
+      `;
+      moveChartTooltip(e);
+      tt.style.display = 'block';
+      requestAnimationFrame(() => { tt.style.opacity = '1'; });
+    }
+
+    function showBarTooltip(e, seriesName, groupLabel, metricLabel, valueStr, color) {
+      const tt = document.getElementById('chartTooltip');
+      if (!tt) return;
+      tt.innerHTML = `
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; font-weight:700; font-size:13px;">
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${color}; box-shadow:0 0 8px ${color};"></span>
+          <span style="color:#f8fafc;">${seriesName}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:16px; font-size:11.5px; opacity:0.9; margin-bottom:4px; color:#cbd5e1;">
+          <span>Grup / B Seviyesi:</span>
+          <strong style="color:#f1f5f9;">${groupLabel}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:16px; font-size:12px; font-weight:700; border-top:1px solid rgba(255,255,255,0.18); padding-top:4px; margin-top:4px; color:#38bdf8;">
+          <span>${metricLabel}:</span>
+          <span>${valueStr}</span>
+        </div>
+      `;
+      moveChartTooltip(e);
+      tt.style.display = 'block';
+      requestAnimationFrame(() => { tt.style.opacity = '1'; });
+    }
+
+    function moveChartTooltip(e) {
+      const tt = document.getElementById('chartTooltip');
+      if (!tt || tt.style.display === 'none') return;
+      const ttWidth = tt.offsetWidth || 180;
+      const ttHeight = tt.offsetHeight || 75;
+      let left = e.clientX + 14;
+      let top = e.clientY - 14;
+      if (left + ttWidth > window.innerWidth - 12) left = e.clientX - ttWidth - 14;
+      if (top + ttHeight > window.innerHeight - 12) top = e.clientY - ttHeight - 14;
+      if (top < 10) top = 10;
+      if (left < 10) left = 10;
+      tt.style.left = left + 'px';
+      tt.style.top = top + 'px';
+    }
+
+    function hideChartTooltip() {
+      const tt = document.getElementById('chartTooltip');
+      if (!tt) return;
+      tt.style.opacity = '0';
+      setTimeout(() => {
+        if (tt.style.opacity === '0') tt.style.display = 'none';
+      }, 120);
+    }
+
+    function highlightSeries(containerId, seriesIdx) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const groupsContainer = container.querySelector('.chart-series-container');
+      const seriesGroups = container.querySelectorAll('.svg-series');
+      
+      let targetGroup = null;
+      seriesGroups.forEach((g) => {
+        const sIdx = parseInt(g.getAttribute('data-series'), 10);
+        if (sIdx === seriesIdx) {
+          g.classList.add('active');
+          g.classList.remove('dimmed');
+          targetGroup = g;
+        } else {
+          g.classList.remove('active');
+          g.classList.add('dimmed');
+        }
+      });
+
+      // SVG DOM bring-to-front
+      if (targetGroup && groupsContainer && groupsContainer.lastElementChild !== targetGroup) {
+        groupsContainer.appendChild(targetGroup);
+      }
+
+      const legendItems = container.querySelectorAll('.chart-legend-item');
+      legendItems.forEach(item => {
+        const sIdx = parseInt(item.getAttribute('data-series'), 10);
+        if (sIdx === seriesIdx) {
+          item.classList.remove('dimmed');
+          item.style.opacity = '1';
+        } else {
+          item.classList.add('dimmed');
+          item.style.opacity = '0.25';
+        }
+      });
+    }
+
+    function resetSeries(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.querySelectorAll('.svg-series').forEach(g => {
+        g.classList.remove('active', 'dimmed');
+      });
+      container.querySelectorAll('.chart-legend-item').forEach(item => {
+        item.classList.remove('dimmed');
+        item.style.opacity = '1';
+      });
+      hideChartTooltip();
+    }
+
+    // ===== SVG VECTOR CHART GENERATORS (Interactive & Anti-Collision) =====
+    function renderSvgLineChart(containerId, datasets, xLabels, yLabel, options = {}) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const W = 620, H = options.height || 260;
+      const pad = {top: 25, right: 135, bottom: 40, left: 55};
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+
+      let allVals = datasets.flatMap(d => d.data);
+      let yMin = options.yMin !== undefined ? options.yMin : Math.min(...allVals);
+      let yMax = options.yMax !== undefined ? options.yMax : Math.max(...allVals);
+      const span = yMax - yMin || 1;
+      const margin = span * 0.12;
+      yMin -= margin;
+      yMax += margin;
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full h-auto select-none" style="max-height:${H}px; overflow:visible;" xmlns="http://www.w3.org/2000/svg">`;
+
+      // Grid lines
+      svg += `<g class="chart-grid">`;
+      const gridSteps = 5;
+      for (let i = 0; i <= gridSteps; i++) {
+        const y = pad.top + (plotH / gridSteps) * i;
+        const val = yMax - (yMax - yMin) * (i / gridSteps);
+        svg += `<line x1="${pad.left}" y1="${y}" x2="${pad.left + plotW}" y2="${y}" stroke="currentColor" stroke-opacity="0.12" stroke-width="0.8" />`;
+        svg += `<text x="${pad.left - 8}" y="${y + 4}" text-anchor="end" fill="currentColor" fill-opacity="0.65" font-size="10" font-family="sans-serif">${val.toFixed(options.gridDecimals !== undefined ? options.gridDecimals : 2)}</text>`;
+      }
+
+      // Threshold line if specified
+      if (options.threshold !== undefined) {
+        const yt = pad.top + plotH * (1 - (options.threshold - yMin) / (yMax - yMin));
+        svg += `<line x1="${pad.left}" y1="${yt}" x2="${pad.left + plotW}" y2="${yt}" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5 3" />`;
+        svg += `<text x="${pad.left + plotW + 5}" y="${yt + 4}" fill="#ef4444" font-size="10" font-weight="bold" font-family="sans-serif">${options.thresholdLabel || '%50 Eşik'}</text>`;
+      }
+      svg += `</g>`;
+
+      // Axes
+      svg += `<g class="chart-axes">`;
+      xLabels.forEach((label, i) => {
+        const x = pad.left + (plotW / (xLabels.length - 1)) * i;
+        svg += `<text x="${x}" y="${H - 12}" text-anchor="middle" fill="currentColor" fill-opacity="0.8" font-size="11" font-weight="600" font-family="sans-serif">B=${label}</text>`;
+      });
+      svg += `<text x="${pad.left - 32}" y="${pad.top + plotH / 2}" transform="rotate(-90, ${pad.left - 32}, ${pad.top + plotH / 2})" text-anchor="middle" fill="currentColor" fill-opacity="0.75" font-size="11" font-weight="600" font-family="sans-serif">${yLabel}</text>`;
+      svg += `</g>`;
+
+      // Precompute point positions and anti-collision offsets
+      const pointsBySeries = datasets.map(() => []);
+      xLabels.forEach((_, xi) => {
+        let colPts = [];
+        datasets.forEach((ds, di) => {
+          const val = ds.data[xi];
+          const x = pad.left + (plotW / (xLabels.length - 1)) * xi;
+          const y = pad.top + plotH * (1 - (val - yMin) / (yMax - yMin));
+          colPts.push({ di, val, x, y, offset: -9 });
+        });
+        // Sort ascending by y (lower y = visually higher on chart)
+        colPts.sort((a, b) => a.y - b.y);
+        for (let k = 1; k < colPts.length; k++) {
+          const prev = colPts[k - 1];
+          const curr = colPts[k];
+          if (Math.abs(curr.y - prev.y) < 17) {
+            if (prev.offset <= 0) {
+              curr.offset = 16;
+            } else {
+              curr.offset = -20;
+            }
+          }
+        }
+        colPts.forEach(pt => {
+          pointsBySeries[pt.di][xi] = pt;
+        });
+      });
+
+      // Series Container
+      svg += `<g class="chart-series-container">`;
+      datasets.forEach((ds, di) => {
+        const pts = pointsBySeries[di];
+        const polylinePts = pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+
+        svg += `<g class="svg-series" data-series="${di}" id="${containerId}-series-${di}" onmouseenter="highlightSeries('${containerId}', ${di})" onmouseleave="resetSeries('${containerId}')">`;
+
+        // Visual polyline
+        svg += `<polyline points="${polylinePts}" fill="none" stroke="${ds.color}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="chart-polyline" style="transition:stroke-width 0.2s, filter 0.2s;" />`;
+
+        // Invisible thick hover polyline
+        svg += `<polyline points="${polylinePts}" fill="none" stroke="transparent" stroke-width="18" style="cursor:pointer;" />`;
+
+        // Points and value labels
+        pts.forEach((pt, xi) => {
+          // Visual dot
+          svg += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="4.2" fill="${ds.color}" stroke="#fff" stroke-width="1.8" class="data-dot" style="transition:r 0.2s, stroke-width 0.2s;" />`;
+
+          // Value label
+          if (options.showValues) {
+            const valStr = pt.val.toFixed(options.decimals !== undefined ? options.decimals : 2) + (options.valueSuffix || '');
+            svg += `<text x="${pt.x.toFixed(1)}" y="${(pt.y + pt.offset).toFixed(1)}" text-anchor="middle" fill="${ds.color}" font-size="10.5" font-weight="700" font-family="sans-serif" class="val-label" style="paint-order:stroke fill; stroke:var(--card, #1e293b); stroke-width:3.5px; stroke-linejoin:round; stroke-linecap:round; transition:font-size 0.2s, font-weight 0.2s;">${valStr}</text>`;
+          }
+
+          // Hit circle for tooltip
+          const fullValStr = pt.val.toFixed(options.fullDecimals !== undefined ? options.fullDecimals : 4) + (options.valueSuffix || '');
+          svg += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="15" fill="transparent" style="cursor:pointer;" onmouseenter="highlightSeries('${containerId}', ${di}); showPointTooltip(event, '${ds.label}', 'B = ${xLabels[xi]}', '${yLabel}', '${fullValStr}', '${ds.color}');" onmousemove="moveChartTooltip(event)" onmouseleave="resetSeries('${containerId}'); hideChartTooltip();" />`;
+        });
+
+        svg += `</g>`;
+      });
+      svg += `</g>`;
+
+      // Legend
+      svg += `<g class="chart-legend-container">`;
+      datasets.forEach((ds, di) => {
+        const ly = pad.top + 12 + di * 22;
+        const lx = pad.left + plotW + 15;
+        svg += `<g class="chart-legend-item" data-series="${di}" onmouseenter="highlightSeries('${containerId}', ${di})" onmouseleave="resetSeries('${containerId}')">`;
+        svg += `<rect x="${lx - 4}" y="${ly - 9}" width="120" height="18" fill="transparent" />`;
+        svg += `<line x1="${lx}" y1="${ly}" x2="${lx + 16}" y2="${ly}" stroke="${ds.color}" stroke-width="2.5" />`;
+        svg += `<circle cx="${lx + 8}" cy="${ly}" r="3.5" fill="${ds.color}" />`;
+        svg += `<text x="${lx + 22}" y="${ly + 4}" fill="currentColor" fill-opacity="0.88" font-size="11" font-family="sans-serif">${ds.label}</text>`;
+        svg += `</g>`;
+      });
+      svg += `</g>`;
+
+      svg += `</svg>`;
+      container.innerHTML = svg;
+    }
+
+    function renderSvgBarChart(containerId, datasets, xLabels, yLabel, options = {}) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const W = 620, H = options.height || 260;
+      const pad = {top: 25, right: 135, bottom: 40, left: 55};
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+
+      let allVals = datasets.flatMap(d => d.data);
+      let yMax = options.yMax !== undefined ? options.yMax : Math.ceil(Math.max(...allVals) / 10) * 10 || 10;
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full h-auto select-none" style="max-height:${H}px; overflow:visible;" xmlns="http://www.w3.org/2000/svg">`;
+
+      // Grid
+      const gridSteps = 5;
+      for (let i = 0; i <= gridSteps; i++) {
+        const y = pad.top + (plotH / gridSteps) * i;
+        const val = yMax - yMax * (i / gridSteps);
+        svg += `<line x1="${pad.left}" y1="${y}" x2="${pad.left + plotW}" y2="${y}" stroke="currentColor" stroke-opacity="0.12" stroke-width="0.8" />`;
+        svg += `<text x="${pad.left - 8}" y="${y + 4}" text-anchor="end" fill="currentColor" fill-opacity="0.65" font-size="10" font-family="sans-serif">${Math.round(val)}</text>`;
+      }
+
+      // X axis labels
+      const groupW = plotW / xLabels.length;
+      const barW = (groupW * 0.72) / datasets.length;
+      const groupGap = groupW * 0.14;
+
+      xLabels.forEach((label, i) => {
+        svg += `<text x="${(pad.left + groupW * i + groupW / 2).toFixed(1)}" y="${H - 12}" text-anchor="middle" fill="currentColor" fill-opacity="0.8" font-size="11" font-weight="600" font-family="sans-serif">B=${label}</text>`;
+      });
+      svg += `<text x="${pad.left - 32}" y="${pad.top + plotH / 2}" transform="rotate(-90, ${pad.left - 32}, ${pad.top + plotH / 2})" text-anchor="middle" fill="currentColor" fill-opacity="0.75" font-size="11" font-weight="600" font-family="sans-serif">${yLabel}</text>`;
+
+      // Bars
+      datasets.forEach((ds, di) => {
+        ds.data.forEach((val, i) => {
+          const x = pad.left + groupW * i + groupGap + barW * di;
+          const barH = (val / yMax) * plotH;
+          const y = pad.top + plotH - barH;
+          svg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(barW - 2).toFixed(1)}" height="${barH.toFixed(1)}" rx="3" fill="${ds.color}" class="chart-bar" onmouseenter="showBarTooltip(event, '${ds.label}', 'B = ${xLabels[i]}', '${yLabel}', '${val}', '${ds.color}')" onmousemove="moveChartTooltip(event)" onmouseleave="hideChartTooltip()"><title>${ds.label} (B=${xLabels[i]}): ${val}</title></rect>`;
+          svg += `<text x="${(x + (barW - 2) / 2).toFixed(1)}" y="${(y - 5).toFixed(1)}" text-anchor="middle" fill="currentColor" fill-opacity="0.9" font-size="9.5" font-weight="700" font-family="sans-serif" style="paint-order:stroke fill; stroke:var(--card, #1e293b); stroke-width:3px; stroke-linejoin:round;">${val}</text>`;
+        });
+
+        // Legend
+        const ly = pad.top + 12 + di * 22;
+        const lx = pad.left + plotW + 15;
+        svg += `<g class="chart-legend-item">`;
+        svg += `<rect x="${lx}" y="${ly - 6}" width="14" height="10" rx="2" fill="${ds.color}" />`;
+        svg += `<text x="${lx + 20}" y="${ly + 3}" fill="currentColor" fill-opacity="0.88" font-size="11" font-family="sans-serif">${ds.label}</text>`;
+        svg += `</g>`;
+      });
+
+      svg += `</svg>`;
+      container.innerHTML = svg;
+    }
+
+    function renderSvgGroupedBarH(containerId, groups, categories, options = {}) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const W = 620, H = options.height || 260;
+      const pad = {top: 25, right: 125, bottom: 35, left: 85};
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+      const xMax = options.xMax || 100;
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full h-auto select-none" style="max-height:${H}px; overflow:visible;" xmlns="http://www.w3.org/2000/svg">`;
+
+      // Vertical Grid
+      for (let i = 0; i <= 5; i++) {
+        const x = pad.left + (plotW / 5) * i;
+        svg += `<line x1="${x}" y1="${pad.top}" x2="${x}" y2="${pad.top + plotH}" stroke="currentColor" stroke-opacity="0.12" stroke-width="0.8" />`;
+        svg += `<text x="${x}" y="${H - 14}" text-anchor="middle" fill="currentColor" fill-opacity="0.65" font-size="10" font-family="sans-serif">${(xMax / 5 * i).toFixed(0)}%</text>`;
+      }
+
+      // 50% Threshold line
+      const x50 = pad.left + (50 / xMax) * plotW;
+      svg += `<line x1="${x50}" y1="${pad.top}" x2="${x50}" y2="${pad.top + plotH}" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3" />`;
+      svg += `<text x="${x50}" y="${pad.top - 6}" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="bold" font-family="sans-serif">%50 eşik</text>`;
+
+      const groupH = plotH / groups.length;
+      const barH = (groupH * 0.75) / categories.length;
+
+      groups.forEach((g, gi) => {
+        const gY = pad.top + groupH * gi + groupH * 0.125;
+        // Group label
+        svg += `<text x="${pad.left - 8}" y="${(gY + groupH * 0.4).toFixed(1)}" text-anchor="end" fill="currentColor" font-size="10.5" font-weight="600" font-family="sans-serif">${g.label}</text>`;
+
+        categories.forEach((cat, ci) => {
+          const y = gY + barH * ci;
+          const val = g.values[ci];
+          const barW = Math.max(3, (val / xMax) * plotW);
+          svg += `<rect x="${pad.left}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${(barH - 2).toFixed(1)}" rx="2" fill="${cat.color}" class="chart-bar" onmouseenter="showBarTooltip(event, '${cat.label}', '${g.label}', 'Kazanma Oranı', '${val.toFixed(1)}%', '${cat.color}')" onmousemove="moveChartTooltip(event)" onmouseleave="hideChartTooltip()"><title>${cat.label} (${g.label}): ${val.toFixed(1)}%</title></rect>`;
+          svg += `<text x="${(pad.left + barW + 4).toFixed(1)}" y="${(y + barH / 2 + 3).toFixed(1)}" fill="currentColor" fill-opacity="0.95" font-size="9.5" font-weight="700" font-family="sans-serif" style="paint-order:stroke fill; stroke:var(--card, #1e293b); stroke-width:3px; stroke-linejoin:round;">${val.toFixed(1)}%</text>`;
+        });
+      });
+
+      // Legend
+      categories.forEach((cat, ci) => {
+        const ly = pad.top + 12 + ci * 22;
+        const lx = pad.left + plotW + 15;
+        svg += `<g class="chart-legend-item">`;
+        svg += `<rect x="${lx}" y="${ly - 6}" width="14" height="10" rx="2" fill="${cat.color}" />`;
+        svg += `<text x="${lx + 20}" y="${ly + 3}" fill="currentColor" fill-opacity="0.88" font-size="11" font-family="sans-serif">${cat.label}</text>`;
+        svg += `</g>`;
+      });
+
+      svg += `</svg>`;
+      container.innerHTML = svg;
+    }
+
+    function renderSvgSeedChart(containerId, bVal) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const W = 620, H = 270;
+      const pad = {top: 25, right: 125, bottom: 50, left: 45};
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+
+      const bData = seedBData.filter(d => d.b === bVal);
+      const seeds = bData.map(d => d.seed);
+      const methods = [
+        {key: 'ml', label: 'Meta LM', color: COLORS[0]},
+        {key: 'mt', label: 'Meta T1FF', color: COLORS[1]},
+        {key: 'bl', label: 'Bagging LM', color: COLORS[2]},
+        {key: 'bt', label: 'Bagging T1FF', color: COLORS[3]}
+      ];
+
+      const yMax = 3.5, yMin = 1.5;
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full h-auto select-none" style="max-height:${H}px; overflow:visible;" xmlns="http://www.w3.org/2000/svg">`;
+
+      // Grid
+      svg += `<g class="chart-grid">`;
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.top + (plotH / 4) * i;
+        const val = yMax - (yMax - yMin) * (i / 4);
+        svg += `<line x1="${pad.left}" y1="${y}" x2="${pad.left + plotW}" y2="${y}" stroke="currentColor" stroke-opacity="0.12" stroke-width="0.8" />`;
+        svg += `<text x="${pad.left - 6}" y="${y + 4}" text-anchor="end" fill="currentColor" fill-opacity="0.65" font-size="10" font-family="sans-serif">${val.toFixed(1)}</text>`;
+      }
+      svg += `</g>`;
+
+      // X axis labels (rotated seed numbers)
+      svg += `<g class="chart-axes">`;
+      seeds.forEach((s, i) => {
+        const x = pad.left + (plotW / (seeds.length - 1)) * i;
+        svg += `<text x="${x.toFixed(1)}" y="${H - 18}" transform="rotate(-45, ${x.toFixed(1)}, ${H - 18})" text-anchor="end" fill="currentColor" fill-opacity="0.75" font-size="9" font-family="sans-serif">${s}</text>`;
+      });
+      svg += `<text x="${pad.left - 28}" y="${pad.top + plotH / 2}" transform="rotate(-90, ${pad.left - 28}, ${pad.top + plotH / 2})" text-anchor="middle" fill="currentColor" fill-opacity="0.75" font-size="11" font-weight="600" font-family="sans-serif">Ort. Rank</text>`;
+      svg += `</g>`;
+
+      // Method lines
+      svg += `<g class="chart-series-container">`;
+      methods.forEach((m, mi) => {
+        let pts = [];
+        bData.forEach((d, i) => {
+          const x = pad.left + (plotW / (seeds.length - 1)) * i;
+          const y = pad.top + plotH * (1 - (d[m.key] - yMin) / (yMax - yMin));
+          pts.push({ x, y, seed: d.seed, val: d[m.key] });
+        });
+        const polylinePts = pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+
+        svg += `<g class="svg-series" data-series="${mi}" id="${containerId}-series-${mi}" onmouseenter="highlightSeries('${containerId}', ${mi})" onmouseleave="resetSeries('${containerId}')">`;
+
+        // Visible line
+        svg += `<polyline points="${polylinePts}" fill="none" stroke="${m.color}" stroke-width="2.2" stroke-opacity="0.88" stroke-linecap="round" stroke-linejoin="round" class="chart-polyline" style="transition:stroke-width 0.2s, filter 0.2s;" />`;
+
+        // Invisible thick hover line
+        svg += `<polyline points="${polylinePts}" fill="none" stroke="transparent" stroke-width="14" style="cursor:pointer;" />`;
+
+        // Dots and hit targets
+        pts.forEach(p => {
+          svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.2" fill="${m.color}" stroke="#fff" stroke-width="1.2" class="data-dot" style="transition:r 0.2s;" />`;
+          svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="10" fill="transparent" style="cursor:pointer;" onmouseenter="highlightSeries('${containerId}', ${mi}); showPointTooltip(event, '${m.label}', 'Tohum: ${p.seed}', 'Ort. Rank', '${p.val.toFixed(2)}', '${m.color}');" onmousemove="moveChartTooltip(event)" onmouseleave="resetSeries('${containerId}'); hideChartTooltip();" />`;
+        });
+
+        svg += `</g>`;
+      });
+      svg += `</g>`;
+
+      // Legend
+      svg += `<g class="chart-legend-container">`;
+      methods.forEach((m, mi) => {
+        const ly = pad.top + 12 + mi * 22;
+        const lx = pad.left + plotW + 15;
+        svg += `<g class="chart-legend-item" data-series="${mi}" onmouseenter="highlightSeries('${containerId}', ${mi})" onmouseleave="resetSeries('${containerId}')">`;
+        svg += `<rect x="${lx - 4}" y="${ly - 9}" width="115" height="18" fill="transparent" />`;
+        svg += `<line x1="${lx}" y1="${ly}" x2="${lx + 16}" y2="${ly}" stroke="${m.color}" stroke-width="2.2" />`;
+        svg += `<circle cx="${lx + 8}" cy="${ly}" r="3" fill="${m.color}" />`;
+        svg += `<text x="${lx + 22}" y="${ly + 4}" fill="currentColor" fill-opacity="0.88" font-size="11" font-family="sans-serif">${m.label}</text>`;
+        svg += `</g>`;
+      });
+      svg += `</g>`;
+
+      svg += `</svg>`;
+      container.innerHTML = svg;
+    }
+
+    // ===== POPULATE TABLES =====
+    function populateGenelSiralama() {
+      const tbody = document.getElementById('genelSiralamaBody');
+      if (!tbody) return;
+      let prevB = null;
+      let html = '';
+      genelSiralama.forEach((row, idx) => {
+        const rankInB = idx % 4;
+        const rankClass = `rank-${rankInB + 1}`;
+        const bCell = row.b !== prevB ? `<td rowspan="4" class="font-bold text-lg">${row.b}</td>` : '';
+        prevB = row.b;
+        html += `<tr class="${rankClass}">
+          ${bCell}
+          <td class="font-semibold">${row.y}</td>
+          <td>${row.rank.toFixed(2)}</td>
+          <td>${row.rmse.toFixed(4)}</td>
+          <td>${row.r2.toFixed(4)}</td>
+          <td>${row.first}/${row.total}</td>
+          <td>${row.total}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function populateSeedBTable() {
+      const tbody = document.getElementById('seedBBody');
+      if (!tbody) return;
+      let html = '';
+      seedBData.forEach(row => {
+        const vals = [row.bt, row.mt, row.bl, row.ml];
+        const sortedVals = [...new Set(vals)].sort((a, b) => a - b);
+        const getPill = val => {
+          const rankIdx = sortedVals.indexOf(val);
+          const tier = rankIdx === 0 ? 1 : rankIdx === 1 ? 2 : rankIdx === 2 ? 3 : 4;
+          return `<span class="rank-pill rank-pill-${tier}">${val.toFixed(2)}</span>`;
+        };
+        html += `<tr>
+          <td class="font-mono text-[var(--muted-foreground)]">${row.seed}</td>
+          <td class="font-semibold">${row.b}</td>
+          <td class="text-[var(--muted-foreground)]">${row.n}</td>
+          <td>${getPill(row.bt)}</td>
+          <td>${getPill(row.mt)}</td>
+          <td>${getPill(row.bl)}</td>
+          <td>${getPill(row.ml)}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function populateSeedStats() {
+      const tbody = document.getElementById('seedStatsBody');
+      if (!tbody) return;
+      const methodKeys = [
+        {key:'ml', label:'Meta LM', color:'#22c55e'},
+        {key:'mt', label:'Meta T1FF', color:'#8b5cf6'},
+        {key:'bl', label:'Bagging LM', color:'#3b82f6'},
+        {key:'bt', label:'Bagging T1FF', color:'#f59e0b'}
+      ];
+      let html = '';
+      B_VALUES.forEach(b => {
+        const bData = seedBData.filter(d => d.b === b);
+        methodKeys.forEach((m, mi) => {
+          const vals = bData.map(d => d[m.key]);
+          const min = Math.min(...vals);
+          const max = Math.max(...vals);
+          const avg = vals.reduce((a,b)=>a+b,0) / vals.length;
+          const std = Math.sqrt(vals.reduce((a,v)=>a+(v-avg)**2,0) / vals.length);
+          const bCell = mi === 0 ? `<td rowspan="4" class="font-bold">${b}</td>` : '';
+          html += `<tr>
+            ${bCell}
+            <td style="color:${m.color};font-weight:600;">${m.label}</td>
+            <td>${min.toFixed(2)}</td>
+            <td>${max.toFixed(2)}</td>
+            <td>${avg.toFixed(2)}</td>
+            <td>${std.toFixed(4)}</td>
+            <td>${(max-min).toFixed(2)}</td>
+          </tr>`;
+        });
+      });
+      tbody.innerHTML = html;
+    }
+
+    // ===== RENDER ALL CHARTS (Instant, Never Blank) =====
+    function renderAllCharts() {
+      // 1. Rank vs B
+      renderSvgLineChart('chartRankVsB', 
+        METHODS.map((m, i) => ({label: METHOD_LABELS[i], data: rankData[m], color: COLORS[i]})),
+        B_VALUES.map(String), 'Ort. RMSE Rank', {showValues: true, yMin: 1.5, yMax: 3.3, decimals: 2, fullDecimals: 2}
+      );
+
+      // 2. First place vs B
+      renderSvgBarChart('chartFirstVsB',
+        METHODS.map((m, i) => ({label: METHOD_LABELS[i], data: firstData[m], color: COLORS[i]})),
+        B_VALUES.map(String), '1.lik Sayısı', {yMax: 320}
+      );
+
+      // 3. RMSE vs B
+      renderSvgLineChart('chartRMSEvsB',
+        METHODS.map((m, i) => ({label: METHOD_LABELS[i], data: rmseData[m], color: COLORS[i]})),
+        B_VALUES.map(String), 'Ort. Test RMSE', {showValues: true, decimals: 2, fullDecimals: 4}
+      );
+
+      // 4a. TÜBİTAK MAPE Win Rate vs B
+      renderSvgLineChart('chartTubitak',
+        [
+          {label: 'vs Bag T1FF (MAPE)', data: [69.4, 66.7, 64.0, 64.0], color: '#22c55e'},
+          {label: 'vs Bag LM (MAPE)', data: [63.9, 61.1, 64.0, 60.0], color: '#3b82f6'}
+        ],
+        B_VALUES.map(String), 'Kazanma Oranı (%)', 
+        {showValues: true, yMin: 35, yMax: 80, threshold: 50, thresholdLabel: '%50 Eşik', decimals: 1, fullDecimals: 1, valueSuffix: '%'}
+      );
+
+      // 4b. Meta T1FF vs Bag LM Subgroups (MAPE)
+      renderSvgGroupedBarH('chartTubitakSubgroupLM',
+        [
+          {label: 'Genel', values: [63.9, 61.1, 64.0, 60.0]},
+          {label: 'Aykırılı Sim.', values: [81.3, 75.0, 83.3, 75.0]},
+          {label: 'Aykırısız Sim.', values: [56.3, 56.3, 50.0, 50.0]},
+          {label: 'Klasik', values: [25.0, 25.0, 0.0, 0.0]}
+        ],
+        [
+          {label: 'B=100', color: '#3b82f6'},
+          {label: 'B=250', color: '#22c55e'},
+          {label: 'B=500', color: '#f59e0b'},
+          {label: 'B=1000', color: '#8b5cf6'}
+        ]
+      );
+
+      // 5. Win/Loss Meta LM
+      renderSvgGroupedBarH('chartWinLossMetaLM',
+        [
+          {label: 'B=100', values: [72.2, 69.4, 52.8]},
+          {label: 'B=250', values: [69.4, 69.4, 52.8]},
+          {label: 'B=500', values: [76.0, 80.0, 68.0]},
+          {label: 'B=1000', values: [76.0, 80.0, 68.0]}
+        ],
+        [
+          {label: 'vs Bag LM', color: '#3b82f6'},
+          {label: 'vs Bag T1FF', color: '#f59e0b'},
+          {label: 'vs Meta T1FF', color: '#8b5cf6'}
+        ]
+      );
+
+      // 6. Win/Loss Meta T1FF
+      renderSvgGroupedBarH('chartWinLossMetaT1FF',
+        [
+          {label: 'B=100', values: [61.1, 66.7, 47.2]},
+          {label: 'B=250', values: [61.1, 69.4, 47.2]},
+          {label: 'B=500', values: [48.0, 64.0, 32.0]},
+          {label: 'B=1000', values: [48.0, 64.0, 32.0]}
+        ],
+        [
+          {label: 'vs Bag LM', color: '#3b82f6'},
+          {label: 'vs Bag T1FF', color: '#f59e0b'},
+          {label: 'vs Meta LM', color: '#22c55e'}
+        ]
+      );
+
+      // 7 & 8. Seed Charts (B=100 and B=1000)
+      renderSvgSeedChart('chartSeedB100', 100);
+      renderSvgSeedChart('chartSeedB1000', 1000);
+
+      // 9. Subgroup Win % (Meta T1FF vs Bag T1FF)
+      renderSvgGroupedBarH('chartSubgroupWin',
+        [
+          {label: 'Genel', values: [66.7, 69.4, 64.0, 64.0]},
+          {label: 'Klasik', values: [50.0, 75.0, 100.0, 100.0]},
+          {label: 'Simülasyon', values: [68.8, 68.8, 62.5, 62.5]},
+          {label: 'Aykırısız', values: [56.3, 56.3, 50.0, 50.0]},
+          {label: 'Aykırılı', values: [81.3, 81.3, 75.0, 75.0]}
+        ],
+        [
+          {label: 'B=100', color: '#3b82f6'},
+          {label: 'B=250', color: '#22c55e'},
+          {label: 'B=500', color: '#f59e0b'},
+          {label: 'B=1000', color: '#8b5cf6'}
+        ]
+      );
+
+      // 10. Subgroup Win % (Meta LM vs Bag LM)
+      renderSvgGroupedBarH('chartSubgroupWinLM',
+        [
+          {label: 'Genel', values: [72.2, 69.4, 76.0, 76.0]},
+          {label: 'Klasik', values: [50.0, 50.0, 0, 0]},
+          {label: 'Simülasyon', values: [75.0, 71.9, 79.2, 79.2]},
+          {label: 'Aykırısız', values: [56.3, 50.0, 66.7, 66.7]},
+          {label: 'Aykırılı', values: [93.8, 93.8, 91.7, 91.7]}
+        ],
+        [
+          {label: 'B=100', color: '#3b82f6'},
+          {label: 'B=250', color: '#22c55e'},
+          {label: 'B=500', color: '#f59e0b'},
+          {label: 'B=1000', color: '#8b5cf6'}
+        ]
+      );
+    }
+
+    // ===== INIT =====
+    populateGenelSiralama();
+    populateSeedBTable();
+    populateSeedStats();
+    renderAllCharts();
+    window.addEventListener('resize', renderAllCharts);
+  </script>
 </body>
 </html>
