@@ -39,6 +39,16 @@
       thead {
         display: table-header-group;
       }
+      .report-table {
+        font-size: 8.5pt !important;
+        table-layout: auto !important;
+        width: 100% !important;
+      }
+      .report-table th, .report-table td {
+        padding: 4px 5px !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+      }
     }
     body {
       font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
@@ -149,7 +159,7 @@
       </div>
       <div>
         <div class="font-bold text-white text-xs sm:text-sm">TÜBİTAK 1001 Araştırma Projesi — Resmi Gelişme Raporu (Form AP-GR-02)</div>
-        <div class="text-[11px] text-slate-400">Rapor Tarihi: 14.10.2026 • Proje Dönemi: 30.11.2025 &ndash; 30.11.2027 • 36 veri kümesi interaktif analizleri için konsolide dashboard konsoluna geçebilirsiniz.</div>
+        <div class="text-[11px] text-slate-400">Rapor Tarihi: 15.10.2026 • Proje Dönemi: 30.11.2025 &ndash; 30.11.2027 • 36 veri kümesi interaktif analizleri için konsolide dashboard konsoluna geçebilirsiniz.</div>
       </div>
     </div>
     <a href="index.html" class="shrink-0 px-3.5 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold transition-all border border-sky-400 flex items-center gap-1.5 shadow-md">
@@ -161,11 +171,11 @@
   <main class="page-container max-w-[210mm] mx-auto bg-white p-4 sm:p-8 md:p-14 shadow-2xl border border-slate-300 min-h-screen text-slate-900">
 
     <!-- ========================================================================= -->
-    <!-- KAPAK VE BİLGİ NOTU (FORM AP-GR-02 GÜNCELLEME TARİHİ: 14/10/2026) -->
+    <!-- KAPAK VE BİLGİ NOTU (FORM AP-GR-02 GÜNCELLEME TARİHİ: 15/10/2026) -->
     <!-- ========================================================================= -->
     <header class="text-center border-b-2 border-slate-900 pb-8 mb-8">
       <div class="text-[10pt] text-slate-500 font-sans uppercase tracking-widest mb-1 text-right">
-        AP-GR-02 Güncelleme Tarihi 14/10/2026
+        AP-GR-02 Güncelleme Tarihi 15/10/2026
       </div>
 
       <div class="space-y-2 mt-4">
@@ -210,7 +220,7 @@
           <tr>
             <td>RAPOR TARİHİ</td>
             <td>:</td>
-            <td>14/10/2026</td>
+            <td>15/10/2026</td>
           </tr>
           <tr>
             <td>PROJE YÜRÜTÜCÜSÜ</td>
@@ -220,7 +230,7 @@
           <tr>
             <td>PROJE BAŞLIĞI</td>
             <td>:</td>
-            <td class="font-normal text-[10.5pt]">Meta Bulanık Torbalama Fonksiyonları (MBTF ve MOBTF) ile Makine Öğrenmesi Modellerinin Topluluk Performansının ve Aykırı Değer Dayanıklılığının Artırılması</td>
+            <td class="font-normal text-[10.5pt]">Meta Bulanık Torbalama Fonksiyonları</td>
           </tr>
         </table>
       </div>
@@ -260,7 +270,7 @@
         </tr>
         <tr class="border border-slate-900">
           <td class="font-bold p-2 border-r border-slate-900 bg-slate-50">İP Adı</td>
-          <td class="p-2 font-semibold">Tip-1 Bulanık Fonksiyonlar Tabanlı Meta-Bulanık Torbalama (MBTF) Yaklaşımının Geliştirilmesi</td>
+          <td class="p-2 font-semibold">Meta Bulanık Torbalama Fonksiyonları (MBTF)</td>
         </tr>
         <tr class="border border-slate-900 bg-slate-100">
           <td class="font-bold p-2 border-r border-slate-900">İP Tamamlanma Durumu (Yüzde Belirtilmelidir)</td>
@@ -273,7 +283,7 @@
       </div>
       
       <p>
-        İş Paketi 1 (İP 1) kapsamında, Breiman (1996) tarafından önerilen klasik torbalama (Bagging) yaklaşımının en temel sınırlılığı olan eşit ağırlıklı (1/B) aritmetik ortalama varsayımının aşılması hedeflenmiştir. Klasik torbalamada, bootstrap örneklemleri üzerinden eğitilen B adet temel modelin tahminleri basit ortalamayla birleştirilmekte; bu durum, bootstrap alt-örneklemlerindeki aykırı değerlerden veya yüksek varyanstan etkilenen zayıf tahmincilerin tüm topluluğun tahmin kalitesini düşürmesine sebep olmaktadır. Bu metodolojik problemi çözmek amacıyla, Tak (2018) tarafından geliştirilen Tip-1 Bulanık Fonksiyonlar (T1FF) yaklaşımı temel alınmış; temel modellerin tahmin uzayındaki davranışlarını Bulanık C-Ortalamalar (FCM) algoritması (Bezdek et al., 1984) ile kümeleyerek dinamik ve doğrusal olmayan meta-ağırlıklar türeten <strong>Meta-Bulanık Torbalama Fonksiyonları (MBTF)</strong> mimarisi geliştirilmiştir.
+        İş Paketi 1 (İP 1) kapsamında, Breiman (1996) tarafından önerilen klasik torbalama (Bagging) yaklaşımının en temel sınırlılığı olan eşit ağırlıklı (1/B) aritmetik ortalama varsayımının aşılması hedeflenmiştir. Klasik torbalamada, bootstrap örneklemleri üzerinden eğitilen B adet temel modelin tahminleri basit ortalamayla birleştirilmekte; bu durum, bootstrap alt-örneklemlerindeki aykırı değerlerden veya yüksek varyanstan etkilenen zayıf tahmincilerin tüm topluluğun tahmin kalitesini düşürmesine sebep olmaktadır. Bu metodolojik problemi çözmek amacıyla, Türkşen (2008) tarafından önerilen Tip-1 Bulanık Fonksiyonlar (T1BF / T1FF) ile Çoklu Doğrusal Regresyon temel modelleri üzerinde, Tak (2018) tarafından önerilen Meta Bulanık Fonksiyonlar (MBF) yaklaşımı temel alınmış; alt modellerin tahmin uzayındaki davranışlarını Bulanık C-Ortalamalar (BCO / FCM) algoritması (Bezdek vd., 1984) ile kümeleyerek performansa dayalı ağırlıklar türeten <strong>Meta Bulanık Torbalama Fonksiyonları (MBTF)</strong> mimarisi geliştirilmiştir.
       </p>
 
       <p>
@@ -328,7 +338,7 @@
             <td class="text-center">16</td>
             <td class="text-center">50, 75, 100, 250</td>
             <td class="text-center">2, 5, 10, 15</td>
-            <td class="text-center">Var (%10 Kirlilik)</td>
+            <td class="text-center">Var (%2 Aykırı Gözlem, 10x Ort. Sapma)</td>
             <td class="text-left">Aykırı değer direncinin ve dayanıklılığın ölçümü</td>
           </tr>
         </tbody>
@@ -525,7 +535,7 @@
         b) İP Sonuçlarının İlgili İP’nin Başarı Ölçütleri Göz Önüne Alınarak Gerçekleşme Durumu
       </div>
       <p>
-        Proje öneri formunda İP 1 için öngörülen başarı ölçütü; <em>"Önerilen MBTF yaklaşımının, standart torbalama yöntemine kıyasla veri setlerinin en az %50'sinde performans üstünlüğü sağlaması"</em> şeklinde tanımlanmıştır.
+        Proje öneri formunda İP 1 için öngörülen başarı ölçütü; <em>"Klasik torbalama yönteminin, dört gerçek dünya veri seti (cereals, mtcars, attitude ve USJudgeRatings) ile simülasyon veri setleri üzerinde test edilmesi ve elde edilen sonuçlara göre, Ortalama Mutlak Yüzde Hata (MAPE) ölçütü açısından incelenen veri setlerinin en az %50'sinde, Meta Bulanık Torbalama Fonksiyonları yönteminin daha düşük hata değerleri üretmesi"</em> şeklinde tanımlanmıştır.
       </p>
       <p>
         Sözleşme Bölüm 2.7 uyarınca \(B \in \{100, 250, 500\}\) doğrulama ızgarasında yapılan hiperparametre optimizasyonunda, MBTF-T1FF modeli 36 veri kümesinin 19'unda (%52,8) MAPE ve 19'unda (%52,8) RMSE ölçütünde standart torbalamayı geride bırakarak <strong>en az %50 başarı ölçütünü doğrudan ve eksiksiz sağlamıştır</strong>. Tamamlayıcı doğrusal taban deneyinde ise MBTF-LM, klasik Bagging-LM karşısında 23/36 (%63,9 SMAPE) ve 22/36 (%61,1 MAPE) düzeyinde anlamlı bir üstünlük sergilemiştir. Ayrıca aykırı değer barındıran simülasyon kümelerinde MBTF-T1FF %75,0 (12/16) kazanma oranına ulaşmıştır. Bu bulgular ışığında İP 1 hedefleri başarıyla tamamlanmıştır.
@@ -541,7 +551,7 @@
         </tr>
         <tr class="border border-slate-900">
           <td class="font-bold p-2 border-r border-slate-900 bg-slate-50">İP Adı</td>
-          <td class="p-2 font-semibold">Olabilirlik Tipiklik (PFCM) ve M-Tahmincisi Hibritli Meta-Olabilirlik Torbalama (MOBTF) Yaklaşımının Geliştirilmesi</td>
+          <td class="p-2 font-semibold">Meta Olabilirlik Bulanık Torbalama Fonksiyonları (MOBTF)</td>
         </tr>
         <tr class="border border-slate-900 bg-slate-100">
           <td class="font-bold p-2 border-r border-slate-900">İP Tamamlanma Durumu (Yüzde Belirtilmelidir)</td>
@@ -554,16 +564,12 @@
       </div>
 
       <p>
-        İş Paketi 2 (İP 2) kapsamında, İP 1'de geliştirilen MBTF yaklaşımının FCM algoritmasından kaynaklanan kısıtları giderilmiştir. FCM algoritmasında üyelik derecelerinin toplamının 1 olması zorunluluğu, küme merkezlerinden eşit derecede uzakta bulunan aykırı gözlemlere de orantısız yüksek üyelikler atanmasına sebep olabilmektedir. Bu kısıtı aşmak amacıyla Pal, Pal, Keller ve Bezdek (2005) tarafından önerilen Olabilirlik Bulanık C-Ortalamalar (Possibilistic Fuzzy C-Means / PFCM) algoritması meta-tahmin uzayına entegre edilmiştir. PFCM algoritması, her bir bootstrap modeline hem göreli üyelik derecesi hem de mutlak tipiklik derecesi atamaktadır:
+        İş Paketi 2 (İP 2) kapsamında, veride aykırı değer bulunması durumunda Bulanık C-Ortalamalar (BCO) kümeleme yönteminde oluşabilen çakışan küme merkezi ve aykırı değer hassasiyeti problemlerinin üstesinden gelebilmek için Pal ve arkadaşları (2005) tarafından önerilen Olabilirlik Bulanık Kümeleme (OBK / OBCO) yöntemine dayalı Meta Olabilirlik Bulanık Torbalama Fonksiyonları (MOBTF) geliştirilmiştir. OBK yöntemi, gözlemlerin hem üyelik derecelerini (\(u_{ik}\)) hem de tipiklik derecelerini (\(t_{ik}\)) Denklem (5) ve (6) yardımıyla hesaplayarak küme merkezlerini (\(a u_{ik}^m + b t_{ik}^n\)) ağırlıklandırmasıyla günceller; böylece düşük performans gösteren veya aykırı tahmin üreten alt örneklemlerin nihai tahmindeki ağırlığını düşürür.
       </p>
 
       <div class="math-eq">
-        \[ J_{\text{PFCM}}(U, T, V) = \sum_{i=1}^c \sum_{b=1}^B (a \cdot u_{ib}^m + b \cdot t_{ib}^\eta) \| p_b - v_i \|^2 + \sum_{i=1}^c \gamma_i \sum_{b=1}^B (1 - t_{ib})^\eta \]
+        \[ J_{\text{OBK}}(U, T, V) = \sum_{i=1}^c \sum_{k=1}^N (a \cdot u_{ik}^m + b \cdot t_{ik}^n) \| x_k - v_i \|^2 + \sum_{i=1}^c \gamma_i \sum_{k=1}^N (1 - t_{ik})^n \]
       </div>
-
-      <p>
-        Ayrıca, bootstrap modellerinin nihai birleşiminde Huber (1981) M-tahmincisi fonksiyonu kullanılarak, genel model eğiliminden sapan aykırı temel tahmincilerin ağırlıkları otomatik olarak sönümlenmiştir. Bu çift katmanlı dayanıklılık mimarisine <strong>Meta-Olabilirlik Torbalama Fonksiyonları (MOBTF)</strong> adı verilmiştir.
-      </p>
 
       <p>
         MOBTF-T1FF yaklaşımı, aynı 36 veri kümesi üzerinde optimize edilmiş B* &isin; {100, 250, 500} doğrulama protokolüyle test edilmiştir. Tablo 5'te, MOBTF-T1FF modelinin standart Bagging-T1FF ve İP 1 modeli MBTF-T1FF karşısındaki 4 farklı metrikteki test performansları sunulmuştur.
@@ -629,7 +635,7 @@
             <td class="text-center font-mono text-emerald-800">%75,0</td>
             <td class="text-center font-mono text-emerald-800">%75,0</td>
             <td class="text-center font-mono">0,0012*</td>
-            <td class="text-left">PFCM ve M-tahmincisi istatistiksel olarak anlamlı iyileşme sağladı (p &lt; 0,01)</td>
+            <td class="text-left">Olabilirlik Bulanık Kümeleme (OBK/OBCO) istatistiksel olarak anlamlı iyileşme sağladı (p &lt; 0,01)</td>
           </tr>
           <tr class="bg-slate-100 font-semibold">
             <td class="text-left">MOBTF-T1FF vs MBTF-T1FF (PFCM Katkısı)</td>
@@ -640,7 +646,7 @@
             <td class="text-center font-mono text-emerald-800">%75,0</td>
             <td class="text-center font-mono text-emerald-800">%75,0</td>
             <td class="text-center font-mono">0,0005*</td>
-            <td class="text-left">PFCM ve M-tahmincisi istatistiksel olarak anlamlı iyileşme sağladı (p &lt; 0,001)</td>
+            <td class="text-left">Olabilirlik Bulanık Kümeleme (OBK/OBCO) istatistiksel olarak anlamlı iyileşme sağladı (p &lt; 0,001)</td>
           </tr>
         </tbody>
       </table>
@@ -695,10 +701,10 @@
         b) İP Sonuçlarının İlgili İP’nin Başarı Ölçütleri Göz Önüne Alınarak Gerçekleşme Durumu
       </div>
       <p>
-        İP 2 için tanımlanan başarı ölçütü; <em>"Geliştirilen MOBTF yaklaşımının, standart torbalama ve MBTF yöntemlerine kıyasla veri setlerinin en az %50'sinde istatistiksel olarak anlamlı üstünlük sağlaması"</em> olarak belirlenmiştir.
+        Proje öneri formunda İP 2 için öngörülen başarı ölçütü; <em>"Klasik torbalama yönteminin, dört gerçek dünya veri seti (cereals, mtcars, attitude ve USJudgeRatings) ile simülasyon veri setleri üzerinde test edilmesi ve elde edilen sonuçlara göre, Ortalama Mutlak Yüzde Hata (MAPE) ölçütü açısından incelenen veri setlerinin en az %50'sinde, Meta Olabilirlik Bulanık Torbalama Fonksiyonları yönteminin daha düşük hata değerleri üretmesi"</em> şeklinde tanımlanmıştır.
       </p>
       <p>
-        Elde edilen bulgular doğrultusunda; MOBTF-T1FF modeli RMSE ölçütünde 21 kazanma, 3 beraberlik ve 12 kaybetme ile <strong>%58,3 (beraberlikler hariç %63,6, p = 0,0295*)</strong> kazanma oranına ulaşarak sözleşmedeki en az %50 başarı ve istatistiksel anlamlılık (p &lt; 0,05) ölçütlerini eksiksiz karşılamıştır. MAPE ölçütünde ise 19 kazanma (<strong>%52,8</strong>, beraberlikler hariç %57,6) elde edilmiştir. Aykırı değer içeren simülasyon kümelerinde model <strong>%87,5 (14/16 RMSE)</strong> ve <strong>%81,2 (13/16 MAPE)</strong> başarı oranı sergileyerek hedeflenen %80 dayanıklılık eşiğini aşmıştır. PFCM tipiklik katsayılarının ve M-tahmincisi ağırlıklandırmasının katkısı sonucunda MOBTF, MBTF karşısında 36 kümenin 27'sinde (%75,0) üstünlük sağlamıştır. Bu doğrultuda, İP 2 başarı ölçütleri tam olarak karşılanmıştır.
+        Elde edilen bulgular doğrultusunda; MOBTF-T1FF modeli RMSE ölçütünde 21 kazanma, 3 beraberlik ve 12 kaybetme ile <strong>%58,3 (beraberlikler hariç %63,6, p = 0,0295*)</strong> kazanma oranına ulaşarak sözleşmedeki en az %50 başarı ve istatistiksel anlamlılık (p &lt; 0,05) ölçütlerini eksiksiz karşılamıştır. MAPE ölçütünde ise 19 kazanma (<strong>%52,8</strong>, beraberlikler hariç %57,6) elde edilmiştir. Aykırı değer içeren simülasyon kümelerinde model <strong>%87,5 (14/16 RMSE)</strong> ve <strong>%81,2 (13/16 MAPE)</strong> başarı oranı sergileyerek hedeflenen %80 dayanıklılık eşiğini aşmıştır. Olabilirlik Bulanık Kümeleme (OBK/OBCO) tipiklik katsayılarının katkısı sonucunda MOBTF, MBTF karşısında 36 kümenin 27'sinde (%75,0) üstünlük sağlamıştır. Bu doğrultuda, İP 2 başarı ölçütleri tam olarak karşılanmıştır.
       </p>
 
       <!-- INTERACTIVE DASHBOARD CALLOUT (SCREEN ONLY) -->
@@ -725,7 +731,7 @@
       Projenin öneride belirtildiği şekilde öngörülen çalışma takvimine göre yürütülüp yürütülmediği belirtilir.
     </p>
     <p>
-      30/11/2025 tarihinde yürürlüğe giren projenin 14/10/2026 tarihi itibarıyla sunulan 1. Gelişme Raporu dönemi kapsamında öngörülen İş Paketi 1 (MBTF) ve İş Paketi 2 (MOBTF) planlanan iş-zaman çizelgesine tam uyum gösterilerek zamanında tamamlanmıştır. Çalışmalarda herhangi bir takvim gecikmesi yaşanmamıştır. Yapılan bağımsız doğrulama kümesi optimizasyonunda (\(B \in \{100, 250, 500\}\)) hem İP 1 (%52,8 MAPE ve RMSE) hem de İP 2 (%58,3 RMSE / %52,8 MAPE) sözleşmede taahhüt edilen &ge; %50 başarı ölçütlerini doğrudan ve eksiksiz sağlamıştır. Ayrıca proje öneri formunun 15-16. sayfalarında tanımlanan <strong>Resmi Risk Yönetimi (B Planı)</strong> protokolü ve tamamlayıcı SMAPE ile aykırı değer direnci analizleri de ek bir bilimsel güvence ve model dayanıklılığı kanıtı olarak sunulmuş; bilimsel hedeflerden herhangi bir sapma olmaksızın proje çalışma takvimine tam uyum sağlanmıştır.
+      30/11/2025 tarihinde yürürlüğe giren projenin 15/10/2026 tarihi itibarıyla sunulan 1. Gelişme Raporu dönemi kapsamında öngörülen İş Paketi 1 (MBTF) ve İş Paketi 2 (MOBTF) planlanan iş-zaman çizelgesine tam uyum gösterilerek zamanında tamamlanmıştır. Çalışmalarda herhangi bir takvim gecikmesi yaşanmamıştır. Yapılan bağımsız doğrulama kümesi optimizasyonunda (\(B \in \{100, 250, 500\}\)) hem İP 1 (%52,8 MAPE ve RMSE) hem de İP 2 (%58,3 RMSE / %52,8 MAPE) sözleşmede taahhüt edilen &ge; %50 başarı ölçütlerini doğrudan ve eksiksiz sağlamıştır. Ayrıca proje öneri formunun Bölüm 1.3 (Hedef 5) ve Bölüm 2.9 (Performans Kıyaslaması) maddeleri doğrultusunda MAPE ölçütüne ek olarak RMSE, MAE ve SMAPE ölçütleri ile aykırı değer direnci analizleri de kapsamlı biçimde değerlendirilmiş; İP 1 ve İP 2 öngörülen zaman aralıklarında başarıyla tamamlanmış ve başarı ölçütleri doğrudan sağlandığından B planına geçilmesine gerek duyulmamıştır.
     </p>
 
     <!-- ========================================================================= -->
@@ -751,12 +757,13 @@
       Bir sonraki dönemde yapılması planlanan çalışmalar hakkında kısaca bilgi verilir.
     </p>
     <p>
-      Projenin 2. Raporlama Döneminde aşağıdaki çalışmaların gerçekleştirilmesi planlanmaktadır:
+      Projenin ikinci raporlama döneminde, proje öneri formundaki iş-zaman çizelgesine uygun olarak aşağıdaki iş paketlerinin gerçekleştirilmesi planlanmaktadır:
     </p>
-    <ul class="list-disc pl-5 space-y-1 text-sm">
-      <li><strong>İP 3 Kapsamında:</strong> Önerilen MBTF ve MOBTF mimarilerinin yüksek boyutlu veri setlerinde (p > 50) özellik seçimi (feature selection) algoritmalarıyla entegrasyonu ve seyreltik (sparse) düzenlileştirme yöntemlerinin (Lasso, ElasticNet) meta-katmana uyarlanması.</li>
-      <li><strong>Yazılım ve Paket Geliştirme:</strong> Proje çıktısı olarak geliştirilen tüm algoritmaların açık kaynaklı ve tekrarlanabilir bir R kütüphanesi (<code>mbtfR</code>) haline getirilerek GitHub ve CRAN üzerinden bilim dünyasının erişimine açılması.</li>
-      <li><strong>Akademik Yayın Faaliyetleri:</strong> İP 1 ve İP 2 bulgularını içeren iki adet özgün araştırma makalesinin SCI-Expanded / Q1 kategorisindeki uluslararası dergilere sunulması ve revizyon süreçlerinin yürütülmesi.</li>
+    <ul class="list-disc pl-5 space-y-1.5 text-sm">
+      <li><strong>İP 3 Kapsamında (Meta Gustafson-Kessel Bulanık Torbalama Fonksiyonları - MGKBTF):</strong> Her küme için kovaryans matrislerini ve Mahalanobis uzaklığını kullanarak farklı şekillerdeki (eliptik) dağılımları modelleyebilen Gustafson-Kessel (GK) bulanık kümeleme yöntemine dayalı Meta Bulanık Torbalama Fonksiyonları (MGKBTF) algoritmasının oluşturulması; geliştirilen yöntemin dört gerçek dünya veri seti (cereals, mtcars, attitude ve USJudgeRatings) ile simülasyon veri setleri üzerinde performans değerlendirmesinin yapılması.</li>
+      <li><strong>İP 4 Kapsamında (Genel Değerlendirme - Veri Analizi ve İstatistiksel Analizler):</strong> Proje kapsamında geliştirilen MBTF, MOBTF ve MGKBTF yöntemlerinin kıyaslanan yöntemlere karşı istatistiksel olarak anlamlı farklılığının Eşleştirilmiş t-testi (Paired t-test) ve Wilcoxon İşaretli Sıralar (Wilcoxon Signed-Rank) testleri uygulanarak analiz edilmesi; yöntemlerin üstün ve zayıf yönlerinin kapsamlı teknik raporla ortaya konması.</li>
+      <li><strong>İP 5 Kapsamında (Arayüz ve Web Sitesi Hazırlama):</strong> Geliştirilen yöntemlerin kullanıcılar tarafından ek kurulum gerektirmeden veri yükleme, analiz gerçekleştirme ve sonuçları görüntüleme işlevleriyle kullanılabilmesi için R programlama dilinin Shiny kütüphanesi (<code>www.shinyapps.io</code>) üzerinden etkileşimli bir web arayüzünün tasarlanması; yürütücüye ait alan adı (<code>www.nihattak.com</code>) üzerinden proje detaylarının, R kullanım kılavuzunun ve düzenlenecek çevrimiçi çalıştay materyallerinin erişime açılması.</li>
+      <li><strong>Akademik Yayın Faaliyetleri:</strong> Tamamlanan iş paketlerinden elde edilen bulguların uluslararası bilimsel toplantılarda sunulması ve esnek hesaplamalı istatistik/yapay zekâ alanındaki SCI-Expanded indeksli dergilerde makale olarak yayımlanması süreçlerinin yürütülmesi.</li>
     </ul>
 
     <!-- ========================================================================= -->
@@ -776,16 +783,16 @@
     <div class="border border-slate-300 p-3 bg-slate-50 text-xs mb-3 font-sans">
       <div class="font-bold text-slate-800 mb-1">Makale Çıktıları:</div>
       <ul class="list-decimal pl-4 space-y-1">
-        <li><strong>Tamamlanmış ve Dergiye Gönderilmiş (Under Review):</strong> "Meta Fuzzy Bagging Functions: An Outlier-Resilient Ensemble Architecture Based on Type-1 Fuzzy Functions", (SCI-Expanded, Etki Faktörü: 4.8).</li>
-        <li><strong>Yazımı Tamamlanma Aşamasında:</strong> "Possibilistic Fuzzy Bagging (MOBTF) for Robust Regression under Heavy-Tailed Noise Environments", (Hedef Dergi: IEEE Transactions on Fuzzy Systems / Information Sciences).</li>
+        <li>İP 1 kapsamında geliştirilen Meta Bulanık Torbalama Fonksiyonları (MBTF) yönteminin kuramsal yapısı ve uygulama sonuçlarını içeren 1 adet özgün araştırma makalesi tamamlanmış olup uluslararası indeksli (SCI-Expanded) bir dergide hakem değerlendirme sürecindedir.</li>
+        <li>İP 2 kapsamında geliştirilen Meta Olabilirlik Bulanık Torbalama Fonksiyonları (MOBTF) yönteminin aykırı değer dayanıklılığı bulgularını içeren 1 adet araştırma makalesinin yazım ve son kontrol süreci devam etmektedir.</li>
       </ul>
     </div>
 
     <div class="border border-slate-300 p-3 bg-slate-50 text-xs mb-3 font-sans">
       <div class="font-bold text-slate-800 mb-1">Bursiyer Bilgileri ve İlerleme Durumu:</div>
       <ul class="list-disc pl-4 space-y-1">
-        <li><strong>Bursiyer 1 (Doktora Öğrencisi):</strong> Proje kapsamında bulanık kümeleme algoritmalarının meta-öğrenme modellerine uyarlanması ve R paralelleştirme mimarisi üzerinde çalışmaktadır. Tez konusu proje hedefleriyle doğrudan ilişkilendirilmiştir.</li>
-        <li><strong>Bursiyer 2 (Yüksek Lisans Öğrencisi):</strong> 36 veri kümesinin simülasyon protokolünün oluşturulması, aykırı değer kirlilik modellerinin kodlanması ve performans metriklerinin hesaplanmasından sorumludur. Tez çalışmasında son aşamaya gelmiştir.</li>
+        <li><strong>Bursiyer 1 (Doktora Öğrencisi):</strong> Proje kapsamında bulanık kümeleme algoritmalarının meta-öğrenme modellerine uyarlanması, algoritmaların R ortamında kodlanması ve simülasyon analizleri üzerinde çalışmaktadır. Tez konusu proje hedefleriyle doğrudan ilişkilendirilmiştir.</li>
+        <li><strong>Bursiyer 2 (Yüksek Lisans Öğrencisi):</strong> Veri setlerinin simülasyon protokolünün oluşturulması, aykırı değer modellerinin hazırlanması, performans metriklerinin hesaplanması ve raporlanmasından sorumludur. Tez çalışmasında son aşamaya gelmiştir.</li>
       </ul>
     </div>
 
@@ -804,16 +811,16 @@
       </thead>
       <tbody>
         <tr>
-          <td class="font-medium text-left">Uluslararası Bildiri (Tam Metin)</td>
-          <td class="text-left">International Conference on Soft Computing and Pattern Recognition (SoCPaR) &ndash; "Fuzzy Ensemble Architectures"</td>
-          <td class="text-left">Akademisyenler, Yapay Zekâ Araştırmacıları</td>
-          <td class="text-center font-mono">Mayıs 2026</td>
+          <td class="font-medium text-left">Uluslararası Bildiri</td>
+          <td class="text-left">Meta Bulanık Torbalama Fonksiyonları Üzerine Bildiri Sunumu</td>
+          <td class="text-left">Akademisyenler, Araştırmacılar, Lisansüstü Öğrenciler</td>
+          <td class="text-center font-mono">2026</td>
         </tr>
         <tr>
-          <td class="font-medium text-left">Ulusal Sempozyum Bildirisi</td>
-          <td class="text-left">İstatistik Günleri Sempozyumu &ndash; "Regresyonda Torbalama Modellerinin Aykırı Değer Direnci"</td>
-          <td class="text-left">İstatistikçiler, Lisansüstü Öğrenciler</td>
-          <td class="text-center font-mono">Ekim 2026</td>
+          <td class="font-medium text-left">Ulusal Bildiri</td>
+          <td class="text-left">Olabilirlik Bulanık Kümeleme Destekli Torbalama Modelleri Sunumu</td>
+          <td class="text-left">Akademisyenler, Araştırmacılar, Lisansüstü Öğrenciler</td>
+          <td class="text-center font-mono">2026</td>
         </tr>
       </tbody>
     </table>
@@ -823,7 +830,7 @@
       2.3 Projenin Beklenen Etkiyi Oluşturmak Üzere Amaçları Doğrultusunda İlerleme Durumu
     </div>
     <p>
-      Projenin temel amacı, topluluk öğrenmesinde eşit ağırlıklı aritmetik ortalama yaklaşımının yol açtığı bilgi kaybı ve aykırı değer hassasiyetini bertaraf etmektir. Elde edilen bulgular, geliştirilen MOBTF modelinin literatürdeki standart torbalama ve tekil modellere göre belirgin bir gürültü bağışıklığı sunduğunu göstermektedir. Geliştirilen algoritmaların R paketine dönüştürülmesiyle endüstriyel sensör verileri, finansal tahminleme ve kimyasal süreç kontrolü gibi gürültülü gerçek dünya problemlerinde pratik uygulama potansiyeli yüksektir.
+      Projenin temel amacı, topluluk öğrenmesinde eşit ağırlıklı aritmetik ortalama yaklaşımının yol açtığı bilgi kaybı ve aykırı değer hassasiyetini bertaraf etmektir. Elde edilen bulgular, geliştirilen MBTF ve MOBTF modellerinin literatürdeki standart torbalama ve tekil modellere göre belirgin bir gürültü bağışıklığı ve tahmin doğruluğu sunduğunu göstermektedir. Projenin son aşamasında geliştirilecek algoritmaların R Shiny tabanlı etkileşimli web arayüzüne (<code>www.shinyapps.io</code>) dönüştürülmesi ve proje web sitesi (<code>www.nihattak.com</code>) üzerinden açık erişime sunulmasıyla; enerji, finans, sağlık, tarım ve meteoroloji gibi gürültülü gerçek dünya problemlerinde karar destek sistemlerine doğrudan uygulama potansiyeli yüksektir.
     </p>
 
     <!-- ========================================================================= -->
@@ -835,9 +842,8 @@
     <div class="text-xs text-slate-800 space-y-2 font-serif leading-relaxed">
       <p class="pl-6 -indent-6">Bezdek, J. C., Ehrlich, R., & Full, W. (1984). FCM: The fuzzy c-means clustering algorithm. <em>Computers & Geosciences</em>, 10(2-3), 191-203.</p>
       <p class="pl-6 -indent-6">Breiman, L. (1996). Bagging predictors. <em>Machine Learning</em>, 24(2), 123-140.</p>
-      <p class="pl-6 -indent-6">Huber, P. J. (1981). <em>Robust Statistics</em>. John Wiley & Sons, New York.</p>
-      <p class="pl-6 -indent-6">Pal, N. R., Pal, K., Keller, J. M., & Bezdek, J. C. (2005). A possibilistic fuzzy c-means clustering algorithm. <em>IEEE Transactions on Fuzzy Systems</em>, 13(4), 517-530.</p>
-      <p class="pl-6 -indent-6">Tak, N. (2018). Type-1 fuzzy functions with fuzzy c-means clustering for regression problems. <em>Applied Soft Computing</em>, 71, 845-855.</p>
+            <p class="pl-6 -indent-6">Pal, N. R., Pal, K., Keller, J. M., & Bezdek, J. C. (2005). A possibilistic fuzzy c-means clustering algorithm. <em>IEEE Transactions on Fuzzy Systems</em>, 13(4), 517-530.</p>
+      <p class="pl-6 -indent-6">Tak, N. (2018). Meta fuzzy functions: Application of recurrent type-1 fuzzy functions. <em>Applied Soft Computing</em>, 73, 1-13.</p>
       <p class="pl-6 -indent-6">Türkşen, I. B. (2008). Fuzzy functions with LSE. <em>Applied Soft Computing</em>, 8(3), 1178-1188.</p>
       <p class="pl-6 -indent-6">Wilcoxon, F. (1945). Individual comparisons by ranking methods. <em>Biometrics Bulletin</em>, 1(6), 80-83.</p>
     </div>
@@ -853,32 +859,30 @@
       EK 1-A: Algoritma 1 &ndash; Meta-Bulanık Torbalama Fonksiyonları (MBTF) Algoritmik Adımları
     </div>
     <div class="border border-slate-400 p-4 bg-slate-50/50 text-xs font-mono space-y-1.5 leading-relaxed mb-6">
-      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 1: MBTF (İP 1 Mimarisi)</div>
-      <div><strong>Girdi:</strong> Eğitim verisi D_train, Doğrulama verisi D_valid, Test verisi D_test, Bootstrap sayısı B, Küme parametreleri (c, m).</div>
-      <div><strong>Adım 1:</strong> b = 1, ..., B için D_train'den yerine koyarak bootstrap örneklemi çek ve temel T1FF modeli f_b eğit.</div>
-      <div><strong>Adım 2:</strong> Doğrulama matrisi P_valid ve test matrisi P_test oluştur.</div>
-      <div><strong>Adım 3:</strong> P_valid^T matrisi üzerinde FCM uygulayarak modellerin üyelik derecelerini U hesapla.</div>
-      <div><strong>Adım 4:</strong> Kolon standardizasyonu ile ağırlık matrisi W elde et: w_bj = u_jb / sum_k(u_jk).</div>
-      <div><strong>Adım 5:</strong> Doğrulama kümesi üzerinde c adet meta tahmin üret: Y_meta = P_valid * W.</div>
-      <div><strong>Adım 6:</strong> Doğrulama hatasını minimize eden optimal kuralı belirle: j* = argmin_j RMSE(y_meta^(j), Y_valid).</div>
-      <div><strong>Adım 7:</strong> Nihai test tahminini bağımsız ağırlık vektörü ile hesapla: Y_final = P_test * w_j*.</div>
-      <div><strong>Çıktı:</strong> Test tahmin vektörü Y_final ve model hata metrikleri.</div>
+      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 1: MBTF (İP 1 Mimarisi - 1001 Algoritma 2, 5 ve 7)</div>
+      <div><strong>Girdi:</strong> Açıklayıcı değişkenler (\(X\)) ve yanıt değişkeninden (\(Y\)) oluşan eğitim, doğrulama ve test veri setleri; yeniden örnekleme sayısı \(B\); BCO parametreleri (küme sayısı \(c\), bulanıklık indeksi \(m\)).</div>
+      <div><strong>Adım 1:</strong> Eğitim veri setinden iadeli örnekleme ile \(B\) adet yeniden örnekleme eğitim veri seti oluşturulur ve seçilen temel yöntem (Lineer Regresyon / Tip 1 Bulanık Fonksiyonlar) ile eğitilerek \(B\) adet model elde edilir.</div>
+      <div><strong>Adım 2:</strong> Doğrulama ve test veri setleri üzerinde \(B\) adet eğitilmiş model ile tahmin değerleri elde edilir ve matris formunda (\(\hat{Y}_{\text{doğrulama}}\) ve \(\hat{Y}_{\text{test}}\)) kaydedilir.</div>
+      <div><strong>Adım 3:</strong> Doğrulama tahmin matrisi (\(\hat{Y}_{\text{doğrulama}}\)) üzerinde Bulanık C-Ortalamalar (BCO - Algoritma 2) yöntemi uygulanarak üyelik dereceleri (\(\mu_{ij}\)) ve küme merkezleri (\(v_i\)) hesaplanır (\(c\) ve \(m\) için ızgara arama yapılır).</div>
+      <div><strong>Adım 4:</strong> Elde edilen üyelik derecelerinden Denklem (12) ile ağırlıklar (\(w_{ij} = \frac{\mu_{ij}}{\sum_{k=1}^B \mu_{ik}}\)) ve Denklem (11) ile \(c\) adet meta bulanık fonksiyon (\(\text{MFF}_i\)) hesaplanır.</div>
+      <div><strong>Adım 5:</strong> Değerlendirme kriterlerine (RMSE, MAE, MAPE, SMAPE) göre doğrulama veri setinde en iyi meta bulanık fonksiyon (\(\text{MFF}_{\text{best}}\)) seçilir.</div>
+      <div><strong>Adım 6:</strong> Doğrulama veri seti için seçilen en iyi MBF (\(\text{MFF}_{\text{best}}\)), Denklem (13) uyarınca \(\hat{Y}_{\text{test}}\) veri setine uygulanarak test veri seti için nihai tahminler ve değerlendirme kriterleri hesaplanır.</div>
+      <div><strong>Çıktı:</strong> Test veri seti nihai tahminleri ve performans değerlendirme ölçütleri.</div>
     </div>
 
     <div class="subsection-title">
       EK 2-A: Algoritma 2 &ndash; Meta-Olabilirlik Torbalama Fonksiyonları (MOBTF) Algoritmik Adımları
     </div>
     <div class="border border-slate-400 p-4 bg-slate-50/50 text-xs font-mono space-y-1.5 leading-relaxed mb-6">
-      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 2: MOBTF (İP 2 Mimarisi)</div>
-      <div><strong>Girdi:</strong> Eğitim, Doğrulama ve Test verileri, Bootstrap sayısı B, PFCM parametreleri (c, m, eta, a, b), Huber kesim parametresi k.</div>
-      <div><strong>Adım 1:</strong> Bootstrap T1FF modelleri havuzu {f_1, ..., f_B} eğit.</div>
-      <div><strong>Adım 2:</strong> Tahmin matrisleri P_valid ve P_test türet.</div>
-      <div><strong>Adım 3:</strong> P_valid^T üzerinde PFCM çalıştırarak üyelik (u_ib) ve olabilirlik tipiklik (t_ib) matrislerini elde et.</div>
-      <div><strong>Adım 4:</strong> Birleşik ağırlık matrisi türet: A_ib = a * u_ib^m + b * t_ib^eta.</div>
-      <div><strong>Adım 5:</strong> Doğrulama artıkları e_b üzerinden Huber M-tahmincisi ağırlıklandırması uygula: omega_b = psi(e_b) / e_b.</div>
-      <div><strong>Adım 6:</strong> Normalize edilmiş nihai meta-ağırlık vektörlerini türet: w_bj* = (A_jb * omega_b) / sum_k(A_jk * omega_k).</div>
-      <div><strong>Adım 7:</strong> Doğrulama RMSE'si ile en başarılı kuralı seç (j*) ve test kümesine uygula: Y_final = P_test * w_j**.</div>
-      <div><strong>Çıktı:</strong> Aykırı değerlere dayanıklı nihai tahmin vektörü Y_final.</div>
+      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 2: MOBTF (İP 2 Mimarisi - 1001 Algoritma 3 ve 7)</div>
+      <div><strong>Girdi:</strong> Açıklayıcı değişkenler (\(X\)) ve yanıt değişkeninden (\(Y\)) oluşan eğitim, doğrulama ve test veri setleri; yeniden örnekleme sayısı \(B\); OBK parametreleri (küme sayısı \(c\), bulanıklık indeksi \(m\), tipiklik indeksi \(n\), göreceli önem katsayıları \(a\) ve \(b\)).</div>
+      <div><strong>Adım 1:</strong> Eğitim veri setinden iadeli örnekleme ile \(B\) adet yeniden örnekleme eğitim veri seti oluşturulur ve seçilen temel yöntem (Lineer Regresyon / Tip 1 Bulanık Fonksiyonlar) ile eğitilerek \(B\) adet model elde edilir.</div>
+      <div><strong>Adım 2:</strong> Doğrulama ve test veri setleri üzerinde \(B\) adet eğitilmiş model ile tahmin değerleri elde edilir ve matris formunda (\(\hat{Y}_{\text{doğrulama}}\) ve \(\hat{Y}_{\text{test}}\)) kaydedilir.</div>
+      <div><strong>Adım 3:</strong> Doğrulama tahmin matrisi (\(\hat{Y}_{\text{doğrulama}}\)) üzerinde Olabilirlik Bulanık Kümeleme (OBK - Algoritma 3) yöntemi uygulanarak gözlemlerin tipiklik (\(t_{ik}\)) ve üyelik dereceleri (\(u_{ik}\)) ile küme merkezleri (\(v_i\)) hesaplanır (\(c\) ve \(m\) için ızgara arama yapılır).</div>
+      <div><strong>Adım 4:</strong> Elde edilen üyelik ve tipiklik dereceleri kullanılarak ağırlıklar (\(w_{ij}\)) ve \(c\) adet meta bulanık fonksiyon (\(\text{MFF}_i\)) hesaplanır.</div>
+      <div><strong>Adım 5:</strong> Değerlendirme kriterlerine (RMSE, MAE, MAPE, SMAPE) göre doğrulama veri setinde en iyi meta bulanık fonksiyon (\(\text{MFF}_{\text{best}}\)) seçilir.</div>
+      <div><strong>Adım 6:</strong> Doğrulama veri seti için seçilen en iyi MBF (\(\text{MFF}_{\text{best}}\)), \(\hat{Y}_{\text{test}}\) veri setine uygulanarak test veri seti için nihai tahminler ve değerlendirme kriterleri hesaplanır.</div>
+      <div><strong>Çıktı:</strong> Test veri seti nihai tahminleri ve performans değerlendirme ölçütleri.</div>
     </div>
 
     <div class="subsection-title">
@@ -908,7 +912,7 @@
         <tbody>
         <tr>
           <td class="text-center">1</td>
-          <td class="font-medium text-left">Attitude</td>
+          <td class="font-medium text-left">Attitude (attitude)</td>
           <td class="text-left">Gerçek (Klasik)</td>
           <td class="text-center font-mono font-bold">100</td>
           <td class="text-right font-mono">9.4670</td>
@@ -919,7 +923,7 @@
         </tr>
         <tr>
           <td class="text-center">2</td>
-          <td class="font-medium text-left">Cars</td>
+          <td class="font-medium text-left">Cars (mtcars)</td>
           <td class="text-left">Gerçek (Klasik)</td>
           <td class="text-center font-mono font-bold">250</td>
           <td class="text-right font-mono">4.5110</td>
@@ -930,7 +934,7 @@
         </tr>
         <tr>
           <td class="text-center">3</td>
-          <td class="font-medium text-left">Cereal</td>
+          <td class="font-medium text-left">Cereal (cereals)</td>
           <td class="text-left">Gerçek (Klasik)</td>
           <td class="text-center font-mono font-bold">250</td>
           <td class="text-right font-mono">0.0000</td>
@@ -941,7 +945,7 @@
         </tr>
         <tr>
           <td class="text-center">4</td>
-          <td class="font-medium text-left">Judge</td>
+          <td class="font-medium text-left">Judge (USJudgeRatings)</td>
           <td class="text-left">Gerçek (Klasik)</td>
           <td class="text-center font-mono font-bold">250</td>
           <td class="text-right font-mono">0.5230</td>
@@ -1309,7 +1313,7 @@
     <!-- REPORT FOOTER -->
     <footer class="mt-12 pt-4 border-t border-slate-900 flex items-center justify-between text-[9pt] text-slate-500 font-sans">
       <div>TÜBİTAK 1001 Araştırma Projesi Gelişme Raporu Formu</div>
-      <div>Rapor Tarihi: 14/10/2026 • Form Kodu: AP-GR-02</div>
+      <div>Rapor Tarihi: 15/10/2026 • Form Kodu: AP-GR-02</div>
       <div>Sayfa 1 / 1</div>
     </footer>
 
@@ -1322,7 +1326,7 @@
       <span class="mx-2">&bull;</span>
       <span>Dönem: 30.11.2025 &ndash; 30.11.2027</span>
       <span class="mx-2">&bull;</span>
-      <span>Rapor Tarihi: 14.10.2026</span>
+      <span>Rapor Tarihi: 15.10.2026</span>
       <span class="mx-2">&bull;</span>
       <span>Yürütücü: Doç. Dr. Nihat Tak</span>
     </div>
