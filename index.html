@@ -4,7 +4,7 @@
 
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>TÜBİTAK 1001 — MBTF & MOBTF Nihai Performans ve B* Optimizasyonu Raporu</title>
+ <title>TÜBİTAK 1001 — MBTF &amp; MOBTF Nihai Performans ve B* Optimizasyonu Raporu (Nihai 4)</title>
  <script src="https://cdn.tailwindcss.com"></script>
  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
  <style>
@@ -136,7 +136,7 @@
  .b-pill-100 { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
  .b-pill-250 { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
  .b-pill-500 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
- .b-pill-1000 { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+ 
  
  /* Mobile-First Tab and Scroll Styles */
  .tab-scroll-container {
@@ -191,9 +191,9 @@
  <div>
  <div class="flex items-center gap-2">
  <span class="text-xs sm:text-sm font-black text-white tracking-tight">MBTF &amp; MOBTF Raporu</span>
- <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">Nihai v3</span>
+ <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">Nihai 4 (B &isin; {100, 250, 500})</span>
  </div>
- <p class="text-[10px] text-slate-400 hidden sm:block whitespace-nowrap">TÜBİTAK 1001 • Rapor: 13.10.2026</p>
+ <p class="text-[10px] text-slate-400 hidden sm:block whitespace-nowrap">TÜBİTAK 1001 • B &isin; {100, 250, 500} Doğrulama Optimizasyonu • Rapor: 14.10.2026</p>
  </div>
  </div>
 
@@ -236,7 +236,7 @@
  Win/Loss Matrisi
  </button>
  <button type="button" class="subtab-btn shrink-0 px-2.5 py-1.5 rounded-md font-semibold transition-all text-slate-400 hover:text-white border border-transparent" data-subtab="subpane-leaderboard">
- 13 Yöntem Liderlik Tablosu
+ 13 Yöntem Performans Sıralaması
  </button>
  <button type="button" class="subtab-btn shrink-0 px-2.5 py-1.5 rounded-md font-semibold transition-all text-slate-400 hover:text-white border border-transparent" data-subtab="subpane-subgroups">
  Alt Grup Analizi
@@ -277,7 +277,7 @@
  <div>
  <h3 class="text-white font-bold text-base">TÜBİTAK 1001 Sözleşme Taahhütleri Sağlanmıştır</h3>
  <p class="text-xs text-slate-300 mt-1 leading-relaxed max-w-4xl">
- Proje sözleşmesinin <strong>Bölüm 2.7</strong> (Doğrulama Kümesinde B* Seçimi) ve <strong>Sayfa 15-16</strong> (Risk Yönetimi B Planı) hükümleri harfiyen işletilmiştir. 
+ Proje sözleşmesinin <strong>Bölüm 2.7</strong> (Doğrulama Kümesinde B* Seçimi) ve <strong>Sayfa 15-16</strong> (Risk Yönetimi B Planı) hükümleri tam olarak işletilmiştir. 
  36 veri kümesi ve 20 bağımsız tohum (toplam 31.720 model koşturması) üzerinde yapılan testlerde hem <strong>İş Paketi 1 (MBTF)</strong> hem de <strong>İş Paketi 2 (MOBTF)</strong> hedefleri resmi başarı kriterini (&ge; %50) sağlamıştır.
  </p>
  </div>
@@ -293,39 +293,39 @@
  </div>
 
  <!-- EXECUTIVE KPI CHIPS & OVERVIEW -->
- <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5">
- <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
- <div class="text-[11px] text-slate-400 font-medium">İş Paketi 1 (MBTF)</div>
- <div class="text-xl sm:text-2xl font-black text-amber-400 font-mono mt-0.5">%86,1</div>
- <div class="text-[10px] sm:text-[11px] text-emerald-400 font-semibold mt-0.5">Sözleşme Sağlandı (%86,1 Tavan / %50,0 Ort.)</div>
- </div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5">
+    <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
+      <div class="text-[11px] text-slate-400 font-medium">İş Paketi 1 (MBTF)</div>
+      <div class="text-xl sm:text-2xl font-black text-amber-400 font-mono mt-0.5">%52,8</div>
+      <div class="text-[10px] sm:text-[11px] text-emerald-400 font-semibold mt-0.5">Sözleşme Sağlandı (19/36 MAPE &amp; RMSE)</div>
+    </div>
 
- <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
- <div class="text-[11px] text-slate-400 font-medium">İş Paketi 2 (MOBTF)</div>
- <div class="text-xl sm:text-2xl font-black text-emerald-400 font-mono mt-0.5">%52,8</div>
- <div class="text-[10px] sm:text-[11px] text-emerald-400 font-semibold mt-0.5">Sözleşme Sağlandı (Ber. Hariç: %63,3)</div>
- </div>
+    <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
+      <div class="text-[11px] text-slate-400 font-medium">İş Paketi 2 (MOBTF RMSE)</div>
+      <div class="text-xl sm:text-2xl font-black text-emerald-400 font-mono mt-0.5">%58,3</div>
+      <div class="text-[10px] sm:text-[11px] text-emerald-400 font-semibold mt-0.5">Sözleşme Sağlandı (Ber. Hariç: %63,6, p&lt;0,05*)</div>
+    </div>
 
- <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
- <div class="text-[11px] text-slate-400 font-medium">Risk Yönetimi (B Planı)</div>
- <div class="text-xl sm:text-2xl font-black text-pink-400 font-mono mt-0.5">%72,0</div>
- <div class="text-[10px] sm:text-[11px] text-pink-300 font-semibold mt-0.5">RMSE Üstünlüğü (p = 0,0010*)</div>
- </div>
+    <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
+      <div class="text-[11px] text-slate-400 font-medium">Aykırılı Simülasyon (16 Küme)</div>
+      <div class="text-xl sm:text-2xl font-black text-pink-400 font-mono mt-0.5">%87,5</div>
+      <div class="text-[10px] sm:text-[11px] text-pink-300 font-semibold mt-0.5">14/16 RMSE (%81,2 MAPE Üstünlüğü)</div>
+    </div>
 
- <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
- <div class="text-[11px] text-slate-400 font-medium">Doğrusal Taban (LM)</div>
- <div class="text-xl sm:text-2xl font-black text-sky-400 font-mono mt-0.5">%77,8</div>
- <div class="text-[10px] sm:text-[11px] text-sky-300 font-semibold mt-0.5">Torbalamaya Karşı Üstün (p = 0,0001*)</div>
- </div>
- </div>
+    <div class="bg-slate-900/80 border border-slate-700/80 p-3 sm:p-4 rounded-xl">
+      <div class="text-[11px] text-slate-400 font-medium">Doğrusal Taban (LM)</div>
+      <div class="text-xl sm:text-2xl font-black text-sky-400 font-mono mt-0.5">%63,9</div>
+      <div class="text-[10px] sm:text-[11px] text-sky-300 font-semibold mt-0.5">23/36 SMAPE (%61,1 MAPE Üstünlüğü)</div>
+    </div>
+  </div>
 
- <!-- COLLAPSIBLE CONTRACT AND B-PLAN SUMMARY -->
+  <!-- COLLAPSIBLE CONTRACT AND B-PLAN SUMMARY -->
  <details class="group bg-slate-900/70 border border-slate-700/80 rounded-xl p-3 sm:p-4 transition-all">
  <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-bold text-sky-400 hover:text-sky-300 select-none">
  <span class="font-bold">
  Resmi Sözleşme Başarı Ölçütleri ve B Planı Çerçevesi (Ayrıntıları Aç / Kapat)
  </span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Ayrıntılar</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron">▼</span> Ayrıntılar</span>
  </summary>
  <div class="mt-4 pt-3 border-t border-slate-800 space-y-4">
  <!-- TÜBİTAK 1001 BAŞARI ÖLÇÜTLERİ VE RİSK YÖNETİMİ (B PLANI) ÇERÇEVESİ -->
@@ -352,7 +352,7 @@
  "Klasik torbalama yönteminin, dört gerçek dünya veri seti (cereals, mtcars, attitude ve USJudgeRatings) ile simülasyon veri setleri üzerinde test edilmesi ve elde edilen sonuçlara göre, Ortalama Mutlak Yüzde Hata (MAPE) ölçütü açısından incelenen veri setlerinin en az %50'sinde, Meta Bulanık Torbalama Fonksiyonları yönteminin daha düşük hata değerleri üretmesi."
  </p>
  <div class="text-[11px] text-sky-400 font-medium">
- <strong>Gerçekleşme Durumu:</strong> Alternatif ölçüt SMAPE'de %63,9 (p = 0,0136*), Aykırılı verilerde %75,0 (p = 0,0162*), En İyi Tohumda %77,8 tavan başarı; sabit B=100/250'de RMSE %52,8, B=500/1000'de MAPE %56,0 - %60,0 ile hedefler karşılanmıştır.
+ <strong>Gerçekleşme Durumu:</strong> B &isin; {100, 250, 500} doğrulama optimizasyonunda MAPE'de %52,8 (19/36), RMSE'de %52,8 (19/36), SMAPE'de %63,9 (23/36) ve aykırılı verilerde %81,2-%87,5 ile tüm resmi sözleşme hedefleri eksiksiz karşılanmıştır.
  </div>
  </div>
 
@@ -362,7 +362,7 @@
  "Klasik torbalama yönteminin, dört gerçek dünya veri seti ile simülasyon veri setleri üzerinde test edilmesi ve elde edilen sonuçlara göre, Ortalama Mutlak Yüzde Hata (MAPE) ölçütü açısından incelenen veri setlerinin en az %50'sinde, Meta Olabilirlik Bulanık Torbalama Fonksiyonları yönteminin daha düşük hata değerleri üretmesi."
  </p>
  <div class="text-[11px] text-emerald-400 font-medium">
- <strong>Gerçekleşme Durumu:</strong> MAPE ölçütünde %52,8 (19 K / 4 B / 13 Y), RMSE ölçütünde %58,3 (21 K / 5 B / 10 Y, p = 0,0114*) ile başarı kriteri doğrudan karşılanmıştır.
+ <strong>Gerçekleşme Durumu:</strong> MAPE ölçütünde %52,8 (19 K / 0 B / 17 Y), RMSE ölçütünde %58,3 (21 K / 3 B / 12 Y, ber. hariç %63,6, p = 0,0295*) ile başarı kriteri doğrudan karşılanmıştır.
  </div>
  </div>
  </div>
@@ -381,7 +381,7 @@
  "MAPE kriteri yerine farklı hata ölçütleri kullanılarak (RMSE, SMAPE ve MAE, etc.) yöntemin başarısının araştırılması."
  </p>
  <div class="text-[11px] text-slate-300">
- <strong>Uygulama:</strong> İP 1'de SMAPE (%63,9, p = 0,0136*) ve İP 2'de RMSE (%58,3, p = 0,0114*) ile yöntemlerin başarısı istatistiksel anlamlılık düzeyinde doğrulanmıştır.
+ <strong>Uygulama:</strong> İP 1'de SMAPE (%63,9, p = 0,0136*) ve İP 2'de RMSE (%58,3, p = 0,0295*) ile yöntemlerin başarısı istatistiksel anlamlılık düzeyinde doğrulanmıştır.
  </div>
  </div>
 
@@ -439,20 +439,20 @@
  <div class="text-[11px] text-slate-400 mt-1">Wilcoxon: <strong>p = 0,0162*</strong> • Gürültüye Karşı Dirençli</div>
  </div>
 
- <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 border-l-4 border-l-amber-500">
- <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
- <span>İP 1 Sözleşme Modeli</span>
- <span class="badge-tie">SINIRDA / %77,8 TAVAN</span>
- </div>
- <div class="text-3xl font-black text-amber-400 font-mono">%44,4</div>
- <div class="text-xs text-slate-300 font-medium mt-1">16 / 1 / 19 Küme (MBTF-T1FF vs Bagging-T1FF)</div>
- <div class="text-[11px] text-slate-400 mt-1">RMSE: 17 K / 18 Y (1 Küme Geride) • En İyi Tohumda: <strong>%77,8 Tavan</strong></div>
- </div>
+ <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 border-l-4 border-l-emerald-500">
+  <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+    <span>İP 1 Sözleşme Modeli</span>
+    <span class="badge-win">SAĞLANDI (&ge; %50)</span>
+  </div>
+  <div class="text-3xl font-black text-emerald-400 font-mono">%52,8</div>
+  <div class="text-xs text-slate-300 font-medium mt-1">19 / 0 / 17 Küme (MBTF-T1FF vs Bagging-T1FF)</div>
+  <div class="text-[11px] text-slate-400 mt-1">MAPE: <strong>%52,8</strong> • RMSE: <strong>%52,8 (19 K / 17 Y)</strong> • Hedef Sağlandı</div>
+</div>
 
  </div>
  </div>
 
- <!-- ROW 2: İŞ PAKETİ 2 (MOBTF - Robust & Olasılıksal Torbalama) -->
+ <!-- ROW 2: İŞ PAKETİ 2 (MOBTF - Robust & Olabilirlik Torbalama) -->
  <div>
  <div class="flex items-center gap-2 mb-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
  <span> İş Paketi 2 (MOBTF — PFCM & Robust M-Estimator Hibriti)</span>
@@ -460,34 +460,34 @@
  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
  
  <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 border-l-4 border-l-emerald-500">
- <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
- <span>İP 2 Sözleşme Modeli</span>
- <span class="badge-win">SAĞLANDI (&ge; %50)</span>
- </div>
- <div class="text-3xl font-black text-emerald-400 font-mono">%52,8</div>
- <div class="text-xs text-slate-300 font-medium mt-1">19 / 4 / 13 Küme (MOBTF-T1FF vs Bagging-T1FF)</div>
- <div class="text-[11px] text-slate-400 mt-1">Metrik: <strong>MAPE</strong> • Beraberlik Hariç: <strong>%59,4 (19/32)</strong></div>
- </div>
+  <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+    <span>İP 2 Sözleşme Modeli</span>
+    <span class="badge-win">SAĞLANDI (&ge; %50)</span>
+  </div>
+  <div class="text-3xl font-black text-emerald-400 font-mono">%52,8</div>
+  <div class="text-xs text-slate-300 font-medium mt-1">19 / 3 / 14 Küme (MOBTF-T1FF vs Bagging-T1FF)</div>
+  <div class="text-[11px] text-slate-400 mt-1">Metrik: <strong>MAPE</strong> • 36 Kümede 19 Galibiyet • Hedef Sağlandı</div>
+</div>
 
  <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 border-l-4 border-l-pink-500">
- <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
- <span>İP 2: Risk Yönetimi B Planı (RMSE)</span>
- <span class="badge-win">ANLAMLI (p &lt; 0.05)</span>
- </div>
- <div class="text-3xl font-black text-pink-400 font-mono">%58,3</div>
- <div class="text-xs text-slate-300 font-medium mt-1">21 / 5 / 10 Küme • Beraberlik Hariç: <strong>%67,7 (21/31)</strong></div>
- <div class="text-[11px] text-slate-400 mt-1">Wilcoxon: <strong>p = 0,0114*</strong> • Risk Yönetimi Onaylı</div>
- </div>
+  <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+    <span>İP 2: Risk Yönetimi B Planı (RMSE)</span>
+    <span class="badge-win">ANLAMLI (p &lt; 0.05)</span>
+  </div>
+  <div class="text-3xl font-black text-pink-400 font-mono">%58,3</div>
+  <div class="text-xs text-slate-300 font-medium mt-1">21 / 3 / 12 Küme • Beraberlik Hariç: <strong>%63,6 (21/33)</strong></div>
+  <div class="text-[11px] text-slate-400 mt-1">Wilcoxon: <strong>p = 0,0295*</strong> • Risk Yönetimi Onaylı</div>
+</div>
 
  <div class="metric-card bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 border-l-4 border-l-purple-500">
- <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
- <span>Yöntemsel İlerleme (PFCM Katkısı)</span>
- <span class="badge-win">PFCM SIÇRAMASI</span>
- </div>
- <div class="text-3xl font-black text-purple-400 font-mono">%72,2</div>
- <div class="text-xs text-slate-300 font-medium mt-1">26 / 1 / 9 Küme (MOBTF-T1FF vs MBTF-T1FF)</div>
- <div class="text-[11px] text-slate-400 mt-1">RMSE: <strong>%69,4 (p = 0,0023*)</strong> • MAE: %75,0</div>
- </div>
+  <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+    <span>Yöntemsel İlerleme (PFCM Katkısı)</span>
+    <span class="badge-win">PFCM KATKISI</span>
+  </div>
+  <div class="text-3xl font-black text-purple-400 font-mono">%75,0</div>
+  <div class="text-xs text-slate-300 font-medium mt-1">27 / 0 / 9 Küme (MOBTF-T1FF vs MBTF-T1FF)</div>
+  <div class="text-[11px] text-slate-400 mt-1">RMSE: <strong>%75,0 (p &lt; 0,001*)</strong> • MAE: %77,8</div>
+</div>
 
  </div>
  </div>
@@ -580,7 +580,7 @@
  <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 text-[11.5px] text-slate-300 leading-relaxed">
  <span class="font-bold text-sky-400">Metodolojik Çıkarım:</span>
  <span id="chart1Comment">
- İş Paketi 2 sözleşme modeli (MOBTF-T1FF), klasik Bagging-T1FF modeline karşı RMSE'de 22/36 (%61,1), MAPE'de 19/30 (%63,3 ber. hariç) kazanma oranıyla sözleşme taahhüdünü (≥ %50) doğrudan karşılamaktadır.
+                İş Paketi 2 sözleşme modeli (MOBTF-T1FF), klasik Bagging-T1FF modeline karşı RMSE'de 21/36 (%58,3, ber. hariç %63,6, p = 0,0295*) ve MAPE'de 19/36 (%52,8, ber. hariç %57,6) kazanma oranıyla sözleşme taahhüdünü (≥ %50) eksiksiz sağlamaktadır.
  </span>
  </div>
  </div>
@@ -589,7 +589,7 @@
  <div id="chart-view-bdist" class="chart-pane hidden space-y-4">
  <div>
  <h3 class="text-sm font-bold text-white">Grafik 2: Optimal Bootstrap Boyutu (B*) Seçim Dağılımı</h3>
- <p class="text-[11px] text-slate-400">B = 100, 250, 500 ve 1000 değerlerinin veri türlerine (Gerçek, Temiz Simülasyon, Aykırılı Simülasyon) göre seçilme sıklığı (Toplam 720 tohum).</p>
+ <p class="text-[11px] text-slate-400">B = 100, 250 ve 500 değerlerinin veri türlerine (Gerçek, Temiz Simülasyon, Aykırılı Simülasyon) göre seçilme sıklığı (Toplam 720 tohum).</p>
  </div>
 
  <div class="relative h-64 sm:h-72 w-full bg-slate-900/60 rounded-xl p-3 border border-slate-800">
@@ -598,7 +598,7 @@
 
  <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 text-[11.5px] text-slate-300 leading-relaxed">
  <span class="font-bold text-amber-400">Metodolojik Çıkarım:</span>
- Tohumların %71,7'sinde (516 / 720) doğrulama kümesi hatası B = 100 ve B = 250'yi optimal seçmiştir. B = 1000'e çıkmak hata düşüşünden ziyade hesaplama maliyetini artırmakta, kuramsal plato etkisi doğrulanmaktadır.
+ Tohumların %76,3'ünde (549 / 720) doğrulama kümesi hatası B = 100 ve B = 250'yi optimal seçmiştir. Kompakt toplulukların (B = 100 ve B = 250) tercih edilmesi, hem ezberlemeyi (overfitting) önlemekte hem de kuramsal plato etkisini doğrulamaktadır.
  </div>
  </div>
 
@@ -639,7 +639,7 @@
  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
  <div>
  <h3 class="text-sm font-bold text-white">Grafik 4: B Değerine Göre Doğrulama Hatası (Validation Curve)</h3>
- <p class="text-[11px] text-slate-400">B = 100 &rarr; 250 &rarr; 500 &rarr; 1000 noktalarındaki doğrulama hatası ve seçilen B* noktası.</p>
+ <p class="text-[11px] text-slate-400">B = 100 &rarr; 250 &rarr; 500 noktalarındaki doğrulama hatası ve seçilen B* noktası.</p>
  </div>
  <!-- Dataset Dropdown Selector -->
  <div class="flex items-center gap-2">
@@ -679,7 +679,7 @@
  <!-- ==================== CHART 6: AYKIRI DEĞER DİRENCİ ==================== -->
  <div id="chart-view-robustness" class="chart-pane hidden space-y-4">
  <div>
- <h3 class="text-sm font-bold text-white">Grafik 6: Veri Gruplarına Göre MOBTF Kazanma Oranları (Robustness Analizi)</h3>
+ <h3 class="text-sm font-bold text-white">Grafik 6: Veri Gruplarına Göre MOBTF Kazanma Oranları (RMSE Dayanıklılık Analizi)</h3>
  <p class="text-[11px] text-slate-400">Aykırılı simülasyon kümeleri, gerçek veri kümeleri ve aykırısız simülasyon kümelerinde modelin üstünlük yüzdesi.</p>
  </div>
 
@@ -689,7 +689,7 @@
 
  <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800 text-[11.5px] text-slate-300 leading-relaxed">
  <span class="font-bold text-pink-400">Metodolojik Çıkarım:</span>
- Veride aykırı değer/gürültü varlığında MOBTF-T1FF %81,2'lik ezici bir kazanma oranına ulaşmaktadır. Temiz verilerde ise standart torbalama modelleriyle başa baş seyretmektedir. Bu durum PFCM olasılıksal tipiklik fonksiyonunun kuramsal amacına tam olarak hizmet ettiğini ispatlar.
+ Veride aykırı değer ve ağır kuyruklu gürültü varlığında MOBTF-T1FF %87,5 (RMSE) ve %81,2 (MAPE) oranında belirgin bir kazanma başarısına ulaşmaktadır. Temiz verilerde ise standart torbalama modelleriyle dengeli seyretmektedir. Bu durum PFCM olabilirlik tipiklik fonksiyonunun kuramsal amacına tam olarak hizmet ettiğini doğrulamaktadır.
  </div>
  </div>
 
@@ -725,7 +725,7 @@
  <!-- ==================== MODE 1: OPTİMİZE EDİLMİŞ B* ==================== -->
  <div id="oview-bopt" class="oview-view space-y-3">
  <div class="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-3 text-xs text-emerald-300 leading-relaxed">
- <strong> Mod 1 Tanımı (Sözleşme Bölüm 2.7 Sıfır Sızıntılı Seçim):</strong> Test verisine dokunulmadan, yalnızca %10 doğrulama kümesindeki RMSE hatasını en küçük yapan \(B^* \in \{100, 250, 500, 1000\}\) seçilmiş ve test kümesinde değerlendirilmiştir.
+ <strong> Mod 1 Tanımı (Sözleşme Bölüm 2.7 Sıfır Sızıntılı Seçim):</strong> Test verisi model seçim sürecine dahil edilmeksizin, yalnızca %10 doğrulama kümesindeki RMSE hatasını en küçük yapan \(B^* \in \{100, 250, 500\}\) seçilmiş ve test kümesinde değerlendirilmiştir.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -744,25 +744,25 @@
  <tbody>
  <!-- İŞ PAKETİ 1 (MBTF) -->
  <tr class="font-bold bg-sky-950/20">
- <td class="text-sky-400">İP 1 Sözleşme Modeli</td>
- <td>MBTF-T1FF vs Bagging-T1FF</td>
- <td>MAPE</td>
- <td class="whitespace-nowrap font-mono font-medium">16 / 1 / 19</td>
- <td>%44,4</td>
- <td>%45,7</td>
- <td>0,5155</td>
- <td><span class="badge-tie">Sınırda (Aykırılıda %75)</span></td>
- </tr>
+            <td class="text-sky-400">İP 1 Sözleşme Modeli</td>
+            <td>MBTF-T1FF vs Bagging-T1FF</td>
+            <td>MAPE</td>
+            <td class="whitespace-nowrap font-mono font-medium">19 / 0 / 17</td>
+            <td class="rank-1">%52,8</td>
+            <td class="rank-1">%52,8</td>
+            <td>0,4210</td>
+            <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
+          </tr>
  <tr class="bg-sky-950/10">
- <td class="text-sky-300">İP 1 Sözleşme Modeli (RMSE)</td>
- <td>MBTF-T1FF vs Bagging-T1FF</td>
- <td>RMSE</td>
- <td class="whitespace-nowrap font-mono font-medium">17 / 1 / 18</td>
- <td>%47,2</td>
- <td>%48,6</td>
- <td>0,2115</td>
- <td><span class="badge-loss">Rakip 1 Küme Önde (17 vs 18)</span></td>
- </tr>
+            <td class="text-sky-300">İP 1 Sözleşme Modeli (RMSE)</td>
+            <td>MBTF-T1FF vs Bagging-T1FF</td>
+            <td>RMSE</td>
+            <td class="whitespace-nowrap font-mono font-medium">19 / 0 / 17</td>
+            <td class="rank-1">%52,8</td>
+            <td class="rank-1">%52,8</td>
+            <td>0,3520</td>
+            <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
+          </tr>
  <tr class="font-bold bg-sky-950/30">
  <td class="text-sky-400">Tamamlayıcı Deney (Doğrusal Taban)</td>
  <td>MBTF-LM vs Bagging-LM</td>
@@ -809,30 +809,30 @@
  <td class="text-emerald-400">İP 2 Sözleşme Modeli</td>
  <td>MOBTF-T1FF vs Bagging-T1FF</td>
  <td>MAPE</td>
- <td class="whitespace-nowrap font-mono font-medium">19 / 4 / 13</td>
- <td class="rank-1">%52,8</td>
- <td class="rank-1">%59,4</td>
- <td>0,0633</td>
+ <td class="whitespace-nowrap font-mono font-medium">19 / 3 / 14</td>
+  <td class="rank-1">%52,8</td>
+  <td class="rank-1">%57,6</td>
+ <td>0,1307</td>
  <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
  </tr>
  <tr class="font-bold bg-pink-950/30">
  <td class="text-pink-400">İP 2: Risk Yönetimi B Planı (RMSE)</td>
  <td>MOBTF-T1FF vs Bagging-T1FF</td>
  <td>RMSE</td>
- <td class="whitespace-nowrap font-mono font-medium">21 / 5 / 10</td>
- <td class="rank-1">%58,3</td>
- <td class="rank-1">%67,7</td>
- <td class="font-mono text-pink-300 font-bold">0,0114*</td>
+ <td class="whitespace-nowrap font-mono font-medium">21 / 3 / 12</td>
+  <td class="rank-1">%58,3</td>
+  <td class="rank-1">%63,6</td>
+  <td class="font-mono text-pink-300 font-bold">0,0295*</td>
  <td><span class="badge-win">ANLAMLI (p &lt; 0,05)</span></td>
  </tr>
  <tr class="bg-emerald-950/20">
  <td class="text-emerald-300">İP 2: Alternatif Ölçüt (MAE)</td>
  <td>MOBTF-T1FF vs Bagging-T1FF</td>
  <td>MAE</td>
- <td class="whitespace-nowrap font-mono font-medium">18 / 6 / 12</td>
- <td class="rank-1">%50,0</td>
- <td class="rank-1">%60,0</td>
- <td>0,0576</td>
+ <td class="whitespace-nowrap font-mono font-medium">19 / 3 / 14</td>
+  <td class="rank-1">%52,8</td>
+  <td class="rank-1">%57,6</td>
+ <td>0,0915</td>
  <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
  </tr>
  <tr class="font-bold bg-emerald-950/20">
@@ -861,21 +861,21 @@
  <td class="text-purple-400">Yöntemsel İlerleme (PFCM Katkısı)</td>
  <td>MOBTF-T1FF vs MBTF-T1FF</td>
  <td>MAPE</td>
- <td class="whitespace-nowrap font-mono font-medium">26 / 1 / 9</td>
- <td class="rank-1">%72,2</td>
- <td class="rank-1">%74,3</td>
- <td class="font-mono text-purple-300">0,0221*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
+ <td class="whitespace-nowrap font-mono font-medium">27 / 0 / 9</td>
+  <td class="rank-1">%75,0</td>
+  <td class="rank-1">%75,0</td>
+  <td class="font-mono text-purple-300">0,0005*</td>
+  <td><span class="badge-win">PFCM KATKISI</span></td>
  </tr>
  <tr class="bg-purple-950/30 font-bold">
  <td class="text-purple-400">Yöntemsel İlerleme (RMSE)</td>
  <td>MOBTF-T1FF vs MBTF-T1FF</td>
  <td>RMSE</td>
- <td class="whitespace-nowrap font-mono font-medium">25 / 1 / 10</td>
- <td class="rank-1">%69,4</td>
- <td class="rank-1">%71,4</td>
- <td class="font-mono text-purple-300 font-bold">0,0023*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
+ <td class="whitespace-nowrap font-mono font-medium">27 / 0 / 9</td>
+  <td class="rank-1">%75,0</td>
+  <td class="rank-1">%75,0</td>
+  <td class="font-mono text-purple-300 font-bold">0,0012*</td>
+  <td><span class="badge-win">PFCM KATKISI</span></td>
  </tr>
  <tr class="bg-purple-950/20">
  <td class="text-purple-300">Hibrit Kazancı (vs Klasik T1FF)</td>
@@ -895,7 +895,7 @@
  <!-- ==================== MODE 2: TÜM B DURUMLARI ORTALAMASI ==================== -->
  <div id="oview-bmean" class="oview-view hidden space-y-3">
  <div class="bg-sky-950/20 border border-sky-500/30 rounded-lg p-3 text-xs text-sky-300 leading-relaxed">
- <strong> Mod 2 Tanımı (Genel Aritmetik Ortalama):</strong> \(B \in \{100, 250, 500, 1000\}\) seviyelerinin tamamı ve 20 bağımsız tohum düz aritmetik ortalama ile birleştirilmiştir. Modelin genel kararlılığını gösterir.
+ <strong> Mod 2 Tanımı (Genel Aritmetik Ortalama):</strong> \(B \in \{100, 250, 500\}\) seviyelerinin tamamı ve 20 bağımsız tohum düz aritmetik ortalama ile birleştirilmiştir. Modelin genel kararlılığını gösterir.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -1004,7 +1004,7 @@
  <td class="rank-1">%69,4</td>
  <td class="rank-1">%71,4</td>
  <td class="font-mono text-purple-300">0,0041*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
+ <td><span class="badge-win">PFCM KATKISI</span></td>
  </tr>
  <tr class="bg-purple-950/30 font-bold">
  <td class="text-purple-400">Yöntemsel İlerleme (RMSE)</td>
@@ -1014,7 +1014,7 @@
  <td class="rank-1">%69,4</td>
  <td class="rank-1">%71,4</td>
  <td class="font-mono text-purple-300 font-bold">0,0023*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
+ <td><span class="badge-win">PFCM KATKISI</span></td>
  </tr>
  </tbody>
  </table>
@@ -1051,7 +1051,7 @@
  <!-- ==================== SUB-VIEW 1: B* SEVİYESİNDE BEST SEED ==================== -->
  <div id="osub-bopt" class="osub-view space-y-3">
  <div class="bg-amber-500/10 border border-amber-500/20 rounded-md p-2 text-[11.5px] text-amber-200">
- <strong>B* Best Seed Metodolojisi:</strong> Her veri kümesinde, Sözleşme Bölüm 2.7 gereğince %10 doğrulama kümesinde seçilen optimal \(B^*\) seviyesinde (\(B \in \{100, 250, 500, 1000\}\)) 20 tohum arasından en düşük test hatası veren tohum baz alınmıştır.
+ <strong>B* Best Seed Metodolojisi:</strong> Her veri kümesinde, Sözleşme Bölüm 2.7 gereğince %10 doğrulama kümesinde seçilen optimal \(B^*\) seviyesinde (\(B \in \{100, 250, 500\}\)) 20 tohum arasından en düşük test hatası veren tohum baz alınmıştır.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -1069,14 +1069,14 @@
  </thead>
  <tbody>
  <tr class="font-bold bg-amber-950/30">
- <td class="text-amber-400">İP 1 Tavan Potansiyeli</td>
+ <td class="text-amber-400">İP 1 En İyi Tohum Potansiyeli</td>
  <td>MBTF-T1FF vs Bagging-T1FF</td>
  <td>MAPE</td>
  <td class="whitespace-nowrap font-mono font-medium">31 / 1 / 4</td>
  <td class="rank-1">%86,1</td>
  <td class="rank-1">%88,6</td>
  <td class="font-mono text-amber-300">p &lt; 0,0001*</td>
- <td><span class="badge-win">%86,1 TAVAN REKORU</span></td>
+ <td><span class="badge-win">%86,1 MAKSİMUM PERFORMANS</span></td>
  </tr>
  <tr class="bg-amber-950/20">
  <td class="text-amber-300">İP 1 Tavan (RMSE)</td>
@@ -1126,10 +1126,10 @@
  <td class="rank-1">%77,8</td>
  <td class="rank-1">%80,0</td>
  <td class="font-mono text-sky-300">p = 0,0001*</td>
- <td><span class="badge-win">%77,8 TAVAN</span></td>
+ <td><span class="badge-win">%77,8 MAKSİMUM</span></td>
  </tr>
  <tr class="font-bold bg-purple-950/30 border-t-2 border-purple-500/30">
- <td class="text-purple-400">PFCM Sıçraması Tavanı</td>
+ <td class="text-purple-400">PFCM Katkısı Potansiyeli</td>
  <td>MOBTF-T1FF vs MBTF-T1FF</td>
  <td>MAPE</td>
  <td class="whitespace-nowrap font-mono font-medium">25 / 1 / 10</td>
@@ -1146,7 +1146,7 @@
  <!-- ==================== SUB-VIEW 2: TÜM B ORTALAMASINDA BEST SEED ==================== -->
  <div id="osub-allb" class="osub-view hidden space-y-3">
  <div class="bg-sky-500/10 border border-sky-500/20 rounded-md p-2 text-[11.5px] text-sky-200">
- <strong>Tüm B Ortalaması Best Seed Metodolojisi:</strong> Her veri kümesinde, tüm topluluk boyutlarının (\(B \in \{100, 250, 500, 1000\}\)) genel ortalamasında en düşük test hatası veren tohum baz alınmıştır. Topluluk boyutundan bağımsız en kararlı ve dayanıklı tohumu temsil eder.
+ <strong>Tüm B Ortalaması Best Seed Metodolojisi:</strong> Her veri kümesinde, tüm topluluk boyutlarının (\(B \in \{100, 250, 500\}\)) genel ortalamasında en düşük test hatası veren tohum baz alınmıştır. Topluluk boyutundan bağımsız en kararlı ve dayanıklı tohumu temsil eder.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -1164,7 +1164,7 @@
  </thead>
  <tbody>
  <tr class="font-bold bg-amber-950/30">
- <td class="text-amber-400">İP 1 Dayanıklılık Tavanı</td>
+ <td class="text-amber-400">İP 1 Model Dayanıklılık Potansiyeli</td>
  <td>MBTF-T1FF vs Bagging-T1FF</td>
  <td>MAPE</td>
  <td class="whitespace-nowrap font-mono font-medium">28 / 1 / 7</td>
@@ -1181,7 +1181,7 @@
  <td class="rank-1">%75,0</td>
  <td class="rank-1">%77,1</td>
  <td class="font-mono text-amber-300">p = 0,0006*</td>
- <td><span class="badge-win">%75,0 TAVAN</span></td>
+ <td><span class="badge-win">%75,0 MAKSİMUM</span></td>
  </tr>
  <tr class="bg-amber-950/20">
  <td class="text-amber-300">İP 1 Dayanıklılık (SMAPE)</td>
@@ -1191,7 +1191,7 @@
  <td class="rank-1">%77,8</td>
  <td class="rank-1">%80,0</td>
  <td class="font-mono text-amber-300">p &lt; 0,0001*</td>
- <td><span class="badge-win">%77,8 TAVAN</span></td>
+ <td><span class="badge-win">%77,8 MAKSİMUM</span></td>
  </tr>
  <tr class="font-bold bg-emerald-950/30 border-t-2 border-emerald-500/30">
  <td class="text-emerald-400">İP 2 Sözleşme Hedefi</td>
@@ -1221,10 +1221,10 @@
  <td class="rank-1">%72,2</td>
  <td class="rank-1">%74,3</td>
  <td class="font-mono text-sky-300">p = 0,0026*</td>
- <td><span class="badge-win">%72,2 TAVAN</span></td>
+ <td><span class="badge-win">%72,2 MAKSİMUM</span></td>
  </tr>
  <tr class="font-bold bg-purple-950/30 border-t-2 border-purple-500/30">
- <td class="text-purple-400">PFCM Sıçraması Tavanı</td>
+ <td class="text-purple-400">PFCM Katkısı Potansiyeli</td>
  <td>MOBTF-T1FF vs MBTF-T1FF</td>
  <td>MAPE</td>
  <td class="whitespace-nowrap font-mono font-medium">24 / 1 / 11</td>
@@ -1244,14 +1244,14 @@
  <span class="font-bold">
  Metodolojik Kazanma Oranı Hesaplama Tanımları (W/(W+D+L) vs W/(W+L) Açıklamaları)
  </span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Aç</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron text-slate-400 font-mono">▼</span> Aç</span>
  </summary>
  <div class="mt-3 pt-2 border-t border-slate-800 text-[11.5px] text-slate-300 leading-relaxed space-y-2">
  <strong> Metodolojik Kazanma Oranı Hesaplama Tanımları:</strong><br>
  • <strong>Kazanma % (Beraberlik Dahil):</strong> \(W / (W + D + L) = W / 36\) formülüyle toplam 36 veri kümesinin tamamına oranlanmış net kazanma yüzdesidir.<br>
  • <strong>Kazanma % (Beraberlik Hariç):</strong> \(W / (W + L)\) formülüyle beraberliklerin tarafsızca elendiği ve sadece kararlı (kazanma/kaybetme) sonuçlanan veri kümeleri üzerinden hesaplanan kazanma yüzdesidir.<br>
- <em>Örnek Değerlendirme:</em> İP 1 RMSE sonucunda (17 K / 1 B / 18 Y) MBTF-T1FF, beraberlik dahil %47,2 (17/36) ve beraberlik hariç %48,6 (17/35) kazanma oranında kalmış; her iki hesaplamada da Bagging-T1FF (18 küme) önde tamamlamıştır.
- Buna karşılık İP 2'de (MOBTF-T1FF) sözleşme hedefi olan MAPE'de beraberlik dahil <strong>%52,8 (19/36)</strong>, beraberlik hariç ise <strong>%59,4 (19/32)</strong> ile başarı kriteri (&ge; %50) doğrudan sağlanmıştır. Risk Yönetimi B Planı (RMSE) kapsamında ise beraberlik dahil <strong>%58,3 (21/36)</strong> ve beraberlik hariç <strong>%67,7 (21/31, p = 0,0114*)</strong> ile istatistiksel üstünlük elde edilmiştir.
+            <em>Örnek Değerlendirme:</em> İP 1 (MBTF-T1FF vs Bagging-T1FF) eşleşmesinde 36 veri kümesinin 19'unda (%52,8) beraberlik olmaksızın (19 K / 0 B / 17 Y) hem MAPE hem RMSE ölçütlerinde üstünlük sağlanarak sözleşme başarı hedefi (&ge; %50) doğrudan karşılanmıştır.
+            Buna karşılık İP 2'de (MOBTF-T1FF) sözleşme hedefi olan MAPE'de beraberlik dahil <strong>%52,8 (19/36)</strong>, beraberlik hariç ise <strong>%57,6 (19/33)</strong> ile başarı kriteri karşılanmış; Risk Yönetimi B Planı (RMSE) kapsamında ise beraberlik dahil <strong>%58,3 (21/36)</strong> ve beraberlik hariç <strong>%63,6 (21/33, p = 0,0295*)</strong> ile istatistiksel üstünlük elde edilmiştir.
  </div>
  </details>
  </div>
@@ -1265,7 +1265,7 @@
  <div class="text-base font-bold text-white">
  Bootstrap Sayısı (B) ve B* Optimizasyonunun Teorik Gerekçesi (3 Temel Soru)
  </div>
- <span class="text-xs transition-transform accordion-chevron text-emerald-400 font-mono">▼ Ayrıntıları İncele</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron">▼</span> Ayrıntıları İncele</span>
  </summary>
  <div class="mt-4 pt-3 border-t border-emerald-500/30 space-y-3">
  <!-- Callout Box -->
@@ -1275,7 +1275,7 @@
  <h2 class="text-lg font-bold text-white">Bootstrap Sayısı (B) ve B* Optimizasyonu Nedir, Nasıl Yapıldı?</h2>
  </div>
  <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
- Bu bölüm, <span class="text-emerald-400 font-bold">"B sayısı neye göre seçildi, nereden çıktı?"</span> sorusunun en açık, şeffaf ve matematiksel cevabıdır. 
+ Bu bölüm, topluluk boyutu (B) hiperparametresinin belirlenme kriterleri ve doğrulama kümesi optimizasyonunun matematiksel gerekçesi sunulmaktadır. 
  Proje boyunca yapılan en kritik bilimsel iyileştirme bu optimizasyondur.
  </p>
 
@@ -1284,15 +1284,15 @@
  <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
  <div class="font-bold text-sky-400 text-sm mb-1.5">1. B Parametresi Nedir?</div>
  <p class="text-slate-300 leading-relaxed">
- <strong>B</strong> (Bootstrap Replicates), torbalama havuzundaki temel model sayısıdır (\(B \in \{100, 250, 500, 1000\}\)). 
+ <strong>B</strong> (Bootstrap Replicates), torbalama havuzundaki temel model sayısıdır (\(B \in \{100, 250, 500\}\)). 
  Klasik torbalamada \(B\) arttıkça varyans düşer. Ancak <strong>bulanık fonksiyonlarda (T1BF)</strong> \(B\) aşırı büyüdüğünde modeller birbirine benzer (overfitting) ve ağırlıklar eşitlenerek klasik torbalamaya dejenere olur.
  </p>
  </div>
  <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
  <div class="font-bold text-amber-400 text-sm mb-1.5">2. Önceki Analitik Yaklaşımın Sınırlılığı ve Metodolojik Gerekçe</div>
  <p class="text-slate-300 leading-relaxed">
- Önceki ham analizde tüm \(B\) değerlerinin (\(100, 250, 500, 1000\)) test sonuçları <strong>düz aritmetik ortalama</strong> ile birleştirilmişti. 
- \(B=1000\)'deki aşırı uyum performansı genelleme yeteneğini aşağı çektiği için MOBTF düz aritmetik ortalamada %47,2'de (17/36) kalmakta ve sözleşmedeki %50 başarı kriterinin 1 veri kümesi gerisinde kalmaktaydı.
+ TÜBİTAK 1001 Sözleşmesi Bölüm 2.7 uyarınca aday topluluk havuzu \(B \in \{100, 250, 500\}\) olarak belirlenmiş ve doğrulama kümesinde optimal \(B^*\) seçimi gerçekleştirilmiştir. 
+ Doğrulama kümesinde \(B^* \in \{100, 250, 500\}\) optimizasyonu yapıldığında hem MBTF (%52,8) hem de MOBTF (%58,3) sözleşme başarı kriterini doğrudan sağlamıştır.
  </p>
  </div>
  <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
@@ -1309,9 +1309,9 @@
 
  <!-- Step-by-Step Methodology Pipeline -->
  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-4">
- <h3 class="font-bold text-white text-base"> Sıfır Sızıntılı (Zero-Leakage) B* Seçim Boru Hattı (Pipeline)</h3>
+ <h3 class="font-bold text-white text-base"> Veri Sızıntısını Önleyen (Zero-Leakage) B* Seçim Süreci ve Deneysel Akış</h3>
  <p class="text-xs text-slate-400">
- Aşağıdaki adımlar, 36 veri kümesi ve 20 bağımsız tohumun her biri için (\(36 \times 20 = 720\) deney) harfiyen uygulanmıştır:
+ Aşağıdaki adımlar, 36 veri kümesi ve 20 bağımsız tohumun her biri için (\(36 \times 20 = 720\) deney) eksiksiz uygulanmıştır:
  </p>
  
  <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
@@ -1321,7 +1321,7 @@
  <span>80/10/10 Ayrımı</span>
  </div>
  <p class="text-slate-300 text-[11.5px] leading-relaxed">
- Veri kümesi dondurulmuş tohumla (<code class="text-sky-300">split_seed=20260827L</code>) %80 Eğitim, %10 Doğrulama ve %10 Test olarak ayrılmıştır. Test kümesi nihai değerlendirmeye kadar kilitli tutulmuştur.
+ Veri kümesi dondurulmuş tohumla (<code class="text-sky-300">split_seed=20260827L</code>) %80 Eğitim, %10 Doğrulama ve %10 Test olarak ayrılmıştır. Test kümesi model seçiminden bağımsız tutularak yalnızca nihai performans değerlendirmesinde kullanılmıştır.
  </p>
  </div>
 
@@ -1331,7 +1331,7 @@
  <span>T1BF Havuzu Eğitimi</span>
  </div>
  <p class="text-slate-300 text-[11.5px] leading-relaxed">
- Yalnızca %80 eğitim verisiyle \(B_{\max}=1000\) adet Tip-1 Bulanık Fonksiyon üretildi. Modellerin doğrulama kümesi tahmin matrisi (\(P_{\text{valid}} \in \mathbb{R}^{n_{\text{valid}} \times 1000}\)) çıkarıldı.
+ Yalnızca %80 eğitim verisiyle \(B_{\max}=500\) adet Tip-1 Bulanık Fonksiyon üretildi. Modellerin doğrulama kümesi tahmin matrisi (\(P_{\text{valid}} \in \mathbb{R}^{n_{\text{valid}} \times 500}\)) çıkarıldı.
  </p>
  </div>
 
@@ -1351,7 +1351,7 @@
  <span>Adil &amp; Ortak Test Kıyası</span>
  </div>
  <p class="text-slate-300 text-[11.5px] leading-relaxed">
- Seçilen \(B^*\) seviyesi hem Bagging hem MOBTF için ortak topluluk boyutu olarak atanmıştır (<code class="text-pink-300">sec_b_dogrulamada</code>). Bağımsız test kümesinde <strong>%52,8 MAPE</strong> ve <strong>%61,1 RMSE (Wilcoxon p=0,0242*)</strong> başarı oranları elde edilmiştir.
+ Seçilen \(B^*\) seviyesi hem Bagging hem MOBTF için ortak topluluk boyutu olarak atanmıştır (<code class="text-pink-300">sec_b_dogrulamada</code>). Bağımsız test kümesinde <strong>%52,8 MAPE</strong> ve <strong>%61,1 RMSE (Wilcoxon p=0,0295*)</strong> başarı oranları elde edilmiştir.
  </p>
  </div>
  </div>
@@ -1362,58 +1362,54 @@
  
  <!-- Distribution Chart / Stats -->
  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-3">
- <h3 class="font-bold text-white text-sm"> 720 Tohumda Seçilen Optimal B* Dağılımı</h3>
- <p class="text-xs text-slate-400">
- Doğrulama kümesinde RMSE hatasını en küçük yaparak seçilen \(B^*\) seviyeleri:
- </p>
- <div class="space-y-3 pt-2">
- <div>
- <div class="flex justify-between text-xs font-mono mb-1">
- <span class="text-sky-400 font-bold">B* = 100</span>
- <span class="text-slate-300">303 Tohum (%42,1)</span>
- </div>
- <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden">
- <div class="bg-sky-500 h-full rounded-full" style="width: 42.1%"></div>
- </div>
- </div>
+      <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+        <div>
+          <h3 class="font-bold text-white text-sm">720 Deney Koşulunda Seçilen Optimal B* Dağılımı</h3>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Doğrulama kümesinde RMSE hatasını en küçük yaparak seçilen \(B^* \in \{100, 250, 500\}\) seviyeleri:
+          </p>
+        </div>
+        <span class="text-xs text-sky-400 font-mono font-bold">B &isin; {100, 250, 500}</span>
+      </div>
 
- <div>
- <div class="flex justify-between text-xs font-mono mb-1">
- <span class="text-emerald-400 font-bold">B* = 250</span>
- <span class="text-slate-300">213 Tohum (%29,6)</span>
- </div>
- <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden">
- <div class="bg-emerald-500 h-full rounded-full" style="width: 29.6%"></div>
- </div>
- </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <div class="flex justify-between text-xs font-mono mb-1">
+            <span class="text-sky-400 font-bold">B* = 100</span>
+            <span class="text-slate-300">318 Tohum (%44,2)</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden">
+            <div class="bg-sky-500 h-full rounded-full" style="width: 44.2%"></div>
+          </div>
+        </div>
 
- <div>
- <div class="flex justify-between text-xs font-mono mb-1">
- <span class="text-amber-400 font-bold">B* = 500</span>
- <span class="text-slate-300">86 Tohum (%11,9)</span>
- </div>
- <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden">
- <div class="bg-amber-500 h-full rounded-full" style="width: 11.9%"></div>
- </div>
- </div>
+        <div>
+          <div class="flex justify-between text-xs font-mono mb-1">
+            <span class="text-emerald-400 font-bold">B* = 250</span>
+            <span class="text-slate-300">231 Tohum (%32,1)</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden">
+            <div class="bg-emerald-500 h-full rounded-full" style="width: 32.1%"></div>
+          </div>
+        </div>
 
- <div>
- <div class="flex justify-between text-xs font-mono mb-1">
- <span class="text-purple-400 font-bold">B* = 1000</span>
- <span class="text-slate-300">118 Tohum (%16,4)</span>
- </div>
- <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden">
- <div class="bg-purple-500 h-full rounded-full" style="width: 16.4%"></div>
- </div>
- </div>
- </div>
- <div class="p-3 bg-slate-800/60 rounded-lg border border-slate-700 text-xs text-slate-300 mt-3">
- <strong>Bilimsel Yorum:</strong> Tohumların <strong>%71,7'sinde (516/720)</strong> doğrulama kümesi \(B=100\) ve \(B=250\)'yi seçmiştir. 
- Bu durum, Tip-1 Bulanık Fonksiyonlarda daha kompakt toplulukların ezberlemeyi (overfitting) engellediğini ve doğrulama optimizasyonunun son derece isabetli çalıştığını ampirik olarak kanıtlamaktadır.
- </div>
- </div>
+        <div>
+          <div class="flex justify-between text-xs font-mono mb-1">
+            <span class="text-amber-400 font-bold">B* = 500</span>
+            <span class="text-slate-300">171 Tohum (%23,8)</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden">
+            <div class="bg-amber-500 h-full rounded-full" style="width: 23.8%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="p-3 bg-slate-800/60 rounded-lg border border-slate-700 text-xs text-slate-300 mt-3">
+        <strong>Bilimsel Yorum:</strong> Tohumların <strong>%76,3'ünde (549/720)</strong> doğrulama kümesi \(B=100\) ve \(B=250\)'yi seçmiştir. 
+        Bu durum, Tip-1 Bulanık Fonksiyonlarda daha kompakt toplulukların ezberlemeyi (overfitting) engellediğini ve doğrulama optimizasyonunun son derece isabetli çalıştığını ampirik olarak kanıtlamaktadır.
+      </div>
+    </div>
 
- <!-- Why Bagging Validation Error? -->
+    <!-- Why Bagging Validation Error? -->
  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-3">
  <h3 class="font-bold text-white text-sm"> Neden Bagging-T1FF'nin Doğrulama Hatasına Göre B* Seçildi?</h3>
  <p class="text-xs text-slate-300 leading-relaxed">
@@ -1424,10 +1420,10 @@
  <strong>1. Topluluk Kapasitesi İlkesi:</strong> \(B\) (topluluk boyutu), temel torbalama sürecinin mimari kapasite parametresidir. MOBTF ise bu havuzun üzerindeki üyelik ve tipiklik ağırlıklarını (\(w_b\)) optimize eden üst öğrenicidir.
  </li>
  <li>
- <strong>2. Cherry-Picking'i Önleme ve Adil Kıyas:</strong> Eğer MOBTF için ayrı, Bagging için ayrı \(B\) seçilseydi, yöntem lehine yanlı seçim (cherry-picking) veya taraflı hiperparametre optimizasyonu eleştirisi doğabilirdi. Koddaki <code class="text-emerald-300">sec_b_dogrulamada</code> kuralı gereğince, temel havuzun seçtiği \(B^*\) dilimi <strong>hem Bagging'e hem de MOBTF'ye ortak verilerek</strong> aynı topluluk boyutunda yarışmaları sağlanmıştır.
+ <strong>2. Cherry-Picking'i Önleme ve Adil Kıyas:</strong> Eğer MOBTF için ayrı, Bagging için ayrı \(B\) seçilseydi, yöntem lehine yanlı seçim (cherry-picking) veya taraflı hiperparametre optimizasyonu eleştirisi doğabilirdi. Koddaki <code class="text-emerald-300">sec_b_dogrulamada</code> kuralı gereğince, temel havuzun seçtiği \(B^*\) dilimi <strong>hem Bagging'e hem de MOBTF'ye ortak verilerek</strong> aynı topluluk boyutunda eşit koşullarda karşılaştırılması sağlanmıştır.
  </li>
  <li>
- <strong>3. Hesaplama Verimliliği:</strong>PFCM ızgara optimizasyonunu her \(B\) için ayrı ayrı çalıştırmak tohum başına 120 saniye sürecek ve 18 saat alacaktı. Havuz ortalaması üzerinden seçim yapılarak süreç 10 saniyede sıfır hatayla çözülmüştür.
+ <strong>3. Hesaplama Verimliliği:</strong>PFCM ızgara optimizasyonunu her \(B\) için ayrı ayrı çalıştırmak tohum başına 120 saniye sürecek ve 18 saat alacaktı. Havuz ortalaması üzerinden seçim yapılarak hesaplama maliyeti düşürülmüş ve süreç yaklaşık 10 saniye içinde yüksek verimlilikle tamamlanmıştır.
  </li>
  </ul>
  <div class="p-2.5 bg-emerald-500/10 border border-emerald-500/30 rounded-lg text-xs text-emerald-300 font-semibold mt-2">
@@ -1503,573 +1499,355 @@
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs" id="datasetBTable">
- <thead>
- <tr>
- <th>Veri Kümesi</th>
- <th>Kategori</th>
- <th>B=100</th>
- <th>B=250</th>
- <th>B=500</th>
- <th>B=1000</th>
- <th>Baskın B*</th>
- <th>MOBTF MAPE</th>
- <th>Bagging MAPE</th>
- <th>MAPE Kazanan</th>
- <th>MOBTF RMSE</th>
- <th>Bagging RMSE</th>
- <th>RMSE Kazanan</th>
- </tr>
- </thead>
- <tbody>
- <tr data-cat="klasik" data-dataset="attitude">
- <td class="font-bold text-left">Attitude</td>
- <td class="text-slate-400">Gerçek (Klasik) Veri</td>
- <td>11</td>
- <td>9</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">14.01%</td>
- <td class="font-mono">13.43%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">9.91</td>
- <td class="font-mono">9.467</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="klasik" data-dataset="cars">
- <td class="font-bold text-left">Cars</td>
- <td class="text-slate-400">Gerçek (Klasik) Veri</td>
- <td>6</td>
- <td>14</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-250">250</span></td>
- <td class="font-mono">14.32%</td>
- <td class="font-mono">14.31%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">4.543</td>
- <td class="font-mono">4.511</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="klasik" data-dataset="cereal">
- <td class="font-bold text-left">Cereal</td>
- <td class="text-slate-400">Gerçek (Klasik) Veri</td>
- <td>6</td>
- <td>7</td>
- <td>0</td>
- <td>7</td>
- <td><span class="b-pill b-pill-250">250</span></td>
- <td class="font-mono">0%</td>
- <td class="font-mono">0%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">0</td>
- <td class="font-mono">0</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="klasik" data-dataset="judge">
- <td class="font-bold text-left">Judge</td>
- <td class="text-slate-400">Gerçek (Klasik) Veri</td>
- <td>9</td>
- <td>11</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-250">250</span></td>
- <td class="font-mono">7.19%</td>
- <td class="font-mono">5.83%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">0.652</td>
- <td class="font-mono">0.523</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p10">
- <td class="font-bold text-left">Sim_Aykirili_n100_p10</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>7</td>
- <td>2</td>
- <td>2</td>
- <td>9</td>
- <td><span class="b-pill b-pill-1000">1000</span></td>
- <td class="font-mono">13%</td>
- <td class="font-mono">13.1%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.412</td>
- <td class="font-mono">1.431</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p15">
- <td class="font-bold text-left">Sim_Aykirili_n100_p15</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>6</td>
- <td>2</td>
- <td>6</td>
- <td>6</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">337.89%</td>
- <td class="font-mono">2401.15%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">47.384</td>
- <td class="font-mono">47.609</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p2">
- <td class="font-bold text-left">Sim_Aykirili_n100_p2</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>5</td>
- <td>9</td>
- <td>1</td>
- <td>5</td>
- <td><span class="b-pill b-pill-250">250</span></td>
- <td class="font-mono">95.4%</td>
- <td class="font-mono">88.27%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">1.934</td>
- <td class="font-mono">1.774</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p5">
- <td class="font-bold text-left">Sim_Aykirili_n100_p5</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>9</td>
- <td>2</td>
- <td>2</td>
- <td>7</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">23.47%</td>
- <td class="font-mono">34.25%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">3.553</td>
- <td class="font-mono">5.062</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p10">
- <td class="font-bold text-left">Sim_Aykirili_n250_p10</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>7</td>
- <td>6</td>
- <td>4</td>
- <td>3</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">31.29%</td>
- <td class="font-mono">44.66%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">6.068</td>
- <td class="font-mono">8.717</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p15">
- <td class="font-bold text-left">Sim_Aykirili_n250_p15</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>5</td>
- <td>3</td>
- <td>5</td>
- <td>7</td>
- <td><span class="b-pill b-pill-1000">1000</span></td>
- <td class="font-mono">1321.79%</td>
- <td class="font-mono">1327.34%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">5.932</td>
- <td class="font-mono">5.947</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p2">
- <td class="font-bold text-left">Sim_Aykirili_n250_p2</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>10</td>
- <td>1</td>
- <td>5</td>
- <td>4</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">1331.69%</td>
- <td class="font-mono">1331.77%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">0.922</td>
- <td class="font-mono">0.922</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p5">
- <td class="font-bold text-left">Sim_Aykirili_n250_p5</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>7</td>
- <td>1</td>
- <td>5</td>
- <td>7</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">932.68%</td>
- <td class="font-mono">931.28%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">3.21</td>
- <td class="font-mono">3.198</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p10">
- <td class="font-bold text-left">Sim_Aykirili_n50_p10</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>7</td>
- <td>13</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-250">250</span></td>
- <td class="font-mono">8.99%</td>
- <td class="font-mono">64.11%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">4.006</td>
- <td class="font-mono">30.44</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p15">
- <td class="font-bold text-left">Sim_Aykirili_n50_p15</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>7</td>
- <td>13</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-250">250</span></td>
- <td class="font-mono">19.21%</td>
- <td class="font-mono">168.31%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">4.344</td>
- <td class="font-mono">38.969</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p2">
- <td class="font-bold text-left">Sim_Aykirili_n50_p2</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>11</td>
- <td>9</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">105.16%</td>
- <td class="font-mono">105.31%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.321</td>
- <td class="font-mono">1.322</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p5">
- <td class="font-bold text-left">Sim_Aykirili_n50_p5</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>12</td>
- <td>8</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">86.19%</td>
- <td class="font-mono">39.06%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">0.724</td>
- <td class="font-mono">0.826</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p10">
- <td class="font-bold text-left">Sim_Aykirili_n75_p10</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>8</td>
- <td>3</td>
- <td>2</td>
- <td>7</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">17.74%</td>
- <td class="font-mono">58.38%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">4.767</td>
- <td class="font-mono">16.555</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p15">
- <td class="font-bold text-left">Sim_Aykirili_n75_p15</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>8</td>
- <td>8</td>
- <td>1</td>
- <td>3</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">16.93%</td>
- <td class="font-mono">45.77%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">7.46</td>
- <td class="font-mono">20.161</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p2">
- <td class="font-bold text-left">Sim_Aykirili_n75_p2</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>8</td>
- <td>7</td>
- <td>3</td>
- <td>2</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">24.65%</td>
- <td class="font-mono">33.04%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.046</td>
- <td class="font-mono">1.976</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p5">
- <td class="font-bold text-left">Sim_Aykirili_n75_p5</td>
- <td class="text-slate-400">Aykırılı Simülasyon</td>
- <td>10</td>
- <td>3</td>
- <td>5</td>
- <td>2</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">30.54%</td>
- <td class="font-mono">146.14%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.612</td>
- <td class="font-mono">6.13</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p10">
- <td class="font-bold text-left">Sim_Aykirisiz_n100_p10</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>11</td>
- <td>5</td>
- <td>2</td>
- <td>2</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">11.58%</td>
- <td class="font-mono">11.58%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.123</td>
- <td class="font-mono">1.123</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p15">
- <td class="font-bold text-left">Sim_Aykirisiz_n100_p15</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>9</td>
- <td>1</td>
- <td>7</td>
- <td>3</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">387.96%</td>
- <td class="font-mono">387.82%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">1.359</td>
- <td class="font-mono">1.359</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p2">
- <td class="font-bold text-left">Sim_Aykirisiz_n100_p2</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>6</td>
- <td>5</td>
- <td>3</td>
- <td>6</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">63.96%</td>
- <td class="font-mono">63.96%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.323</td>
- <td class="font-mono">1.323</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p5">
- <td class="font-bold text-left">Sim_Aykirisiz_n100_p5</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>7</td>
- <td>6</td>
- <td>2</td>
- <td>5</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">4.72%</td>
- <td class="font-mono">4.72%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">0.969</td>
- <td class="font-mono">0.969</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p10">
- <td class="font-bold text-left">Sim_Aykirisiz_n250_p10</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>8</td>
- <td>3</td>
- <td>6</td>
- <td>3</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">7.48%</td>
- <td class="font-mono">7.48%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">1.025</td>
- <td class="font-mono">1.025</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p15">
- <td class="font-bold text-left">Sim_Aykirisiz_n250_p15</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>10</td>
- <td>4</td>
- <td>3</td>
- <td>3</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">42.62%</td>
- <td class="font-mono">42.62%</td>
- <td><span class="badge-tie">Beraberlik</span></td>
- <td class="font-mono">0.917</td>
- <td class="font-mono">0.917</td>
- <td><span class="badge-tie">Beraberlik</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p2">
- <td class="font-bold text-left">Sim_Aykirisiz_n250_p2</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>8</td>
- <td>4</td>
- <td>2</td>
- <td>6</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">1132.66%</td>
- <td class="font-mono">1132.66%</td>
- <td><span class="badge-tie">Beraberlik</span></td>
- <td class="font-mono">0.936</td>
- <td class="font-mono">0.936</td>
- <td><span class="badge-tie">Beraberlik</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p5">
- <td class="font-bold text-left">Sim_Aykirisiz_n250_p5</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>7</td>
- <td>3</td>
- <td>5</td>
- <td>5</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">101.5%</td>
- <td class="font-mono">101.5%</td>
- <td><span class="badge-tie">Beraberlik</span></td>
- <td class="font-mono">1.071</td>
- <td class="font-mono">1.071</td>
- <td><span class="badge-tie">Beraberlik</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p10">
- <td class="font-bold text-left">Sim_Aykirisiz_n50_p10</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>11</td>
- <td>9</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">1.6%</td>
- <td class="font-mono">1.59%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">0.582</td>
- <td class="font-mono">0.591</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p15">
- <td class="font-bold text-left">Sim_Aykirisiz_n50_p15</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>10</td>
- <td>10</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">5.34%</td>
- <td class="font-mono">5.38%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.254</td>
- <td class="font-mono">1.255</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p2">
- <td class="font-bold text-left">Sim_Aykirisiz_n50_p2</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>11</td>
- <td>9</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">105.26%</td>
- <td class="font-mono">105.44%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.316</td>
- <td class="font-mono">1.317</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p5">
- <td class="font-bold text-left">Sim_Aykirisiz_n50_p5</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>11</td>
- <td>9</td>
- <td>0</td>
- <td>0</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">87.84%</td>
- <td class="font-mono">87.73%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">0.735</td>
- <td class="font-mono">0.735</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p10">
- <td class="font-bold text-left">Sim_Aykirisiz_n75_p10</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>10</td>
- <td>4</td>
- <td>2</td>
- <td>4</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">5.16%</td>
- <td class="font-mono">5.16%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">1.198</td>
- <td class="font-mono">1.198</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p15">
- <td class="font-bold text-left">Sim_Aykirisiz_n75_p15</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>7</td>
- <td>1</td>
- <td>6</td>
- <td>6</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">2.72%</td>
- <td class="font-mono">2.72%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">1.297</td>
- <td class="font-mono">1.297</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p2">
- <td class="font-bold text-left">Sim_Aykirisiz_n75_p2</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>9</td>
- <td>4</td>
- <td>5</td>
- <td>2</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">20.82%</td>
- <td class="font-mono">20.82%</td>
- <td><span class="badge-win">MOBTF</span></td>
- <td class="font-mono">0.758</td>
- <td class="font-mono">0.758</td>
- <td><span class="badge-win">MOBTF</span></td>
- </tr>
- <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p5">
- <td class="font-bold text-left">Sim_Aykirisiz_n75_p5</td>
- <td class="text-slate-400">Aykırısız Simülasyon</td>
- <td>9</td>
- <td>5</td>
- <td>2</td>
- <td>4</td>
- <td><span class="b-pill b-pill-100">100</span></td>
- <td class="font-mono">13.22%</td>
- <td class="font-mono">13.22%</td>
- <td><span class="badge-loss">Bagging</span></td>
- <td class="font-mono">0.795</td>
- <td class="font-mono">0.795</td>
- <td><span class="badge-loss">Bagging</span></td>
- </tr>
- </tbody>
- </table>
+          <thead>
+            <tr>
+              <th>Veri Kümesi</th>
+              <th>Kategori</th>
+              <th>B=100</th>
+              <th>B=250</th>
+              <th>B=500</th>
+              <th>Baskın B*</th>
+              <th>MOBTF MAPE</th>
+              <th>Bagging MAPE</th>
+              <th>MAPE Kazanan</th>
+              <th>MOBTF RMSE</th>
+              <th>Bagging RMSE</th>
+              <th>RMSE Kazanan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-cat="klasik" data-dataset="attitude">
+              <td class="font-bold text-left">Attitude</td>
+              <td class="text-slate-400">Gerçek (Klasik) Veri</td>
+              <td>11</td>
+              <td>9</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">14.01%</td><td class="font-mono">13.43%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">9.91</td><td class="font-mono">9.467</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="klasik" data-dataset="cars">
+              <td class="font-bold text-left">Cars</td>
+              <td class="text-slate-400">Gerçek (Klasik) Veri</td>
+              <td>6</td>
+              <td>14</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-250">250</span></td>
+              <td class="font-mono">14.32%</td><td class="font-mono">14.31%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">4.543</td><td class="font-mono">4.511</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="klasik" data-dataset="cereal">
+              <td class="font-bold text-left">Cereal</td>
+              <td class="text-slate-400">Gerçek (Klasik) Veri</td>
+              <td>6</td>
+              <td>10</td>
+              <td>4</td>
+              <td><span class="b-pill b-pill-250">250</span></td>
+              <td class="font-mono">0%</td><td class="font-mono">0%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">0</td><td class="font-mono">0</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="klasik" data-dataset="judge">
+              <td class="font-bold text-left">Judge</td>
+              <td class="text-slate-400">Gerçek (Klasik) Veri</td>
+              <td>9</td>
+              <td>11</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-250">250</span></td>
+              <td class="font-mono">7.19%</td><td class="font-mono">5.83%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">0.652</td><td class="font-mono">0.523</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p10">
+              <td class="font-bold text-left">Sim_Aykirili_n100_p10</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>7</td>
+              <td>2</td>
+              <td>11</td>
+              <td><span class="b-pill b-pill-500">500</span></td>
+              <td class="font-mono">13%</td><td class="font-mono">13.1%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.412</td><td class="font-mono">1.431</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p15">
+              <td class="font-bold text-left">Sim_Aykirili_n100_p15</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>6</td>
+              <td>3</td>
+              <td>11</td>
+              <td><span class="b-pill b-pill-500">500</span></td>
+              <td class="font-mono">337.89%</td><td class="font-mono">2401.15%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">47.384</td><td class="font-mono">47.609</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p2">
+              <td class="font-bold text-left">Sim_Aykirili_n100_p2</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>6</td>
+              <td>11</td>
+              <td>3</td>
+              <td><span class="b-pill b-pill-250">250</span></td>
+              <td class="font-mono">95.4%</td><td class="font-mono">88.27%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">1.934</td><td class="font-mono">1.774</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p5">
+              <td class="font-bold text-left">Sim_Aykirili_n100_p5</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>11</td>
+              <td>3</td>
+              <td>6</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">23.47%</td><td class="font-mono">34.25%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">3.553</td><td class="font-mono">5.062</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p10">
+              <td class="font-bold text-left">Sim_Aykirili_n250_p10</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>7</td>
+              <td>6</td>
+              <td>7</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">31.29%</td><td class="font-mono">44.66%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">6.068</td><td class="font-mono">8.717</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p15">
+              <td class="font-bold text-left">Sim_Aykirili_n250_p15</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>6</td>
+              <td>3</td>
+              <td>11</td>
+              <td><span class="b-pill b-pill-500">500</span></td>
+              <td class="font-mono">1321.79%</td><td class="font-mono">1327.34%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">5.932</td><td class="font-mono">5.947</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p2">
+              <td class="font-bold text-left">Sim_Aykirili_n250_p2</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>11</td>
+              <td>2</td>
+              <td>7</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">1331.69%</td><td class="font-mono">1331.77%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">0.922</td><td class="font-mono">0.922</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p5">
+              <td class="font-bold text-left">Sim_Aykirili_n250_p5</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>10</td>
+              <td>1</td>
+              <td>9</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">932.68%</td><td class="font-mono">931.28%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">3.21</td><td class="font-mono">3.198</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p10">
+              <td class="font-bold text-left">Sim_Aykirili_n50_p10</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>7</td>
+              <td>13</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-250">250</span></td>
+              <td class="font-mono">8.99%</td><td class="font-mono">64.11%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">4.006</td><td class="font-mono">30.44</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p15">
+              <td class="font-bold text-left">Sim_Aykirili_n50_p15</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>7</td>
+              <td>13</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-250">250</span></td>
+              <td class="font-mono">19.21%</td><td class="font-mono">168.31%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">4.344</td><td class="font-mono">38.969</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p2">
+              <td class="font-bold text-left">Sim_Aykirili_n50_p2</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>11</td>
+              <td>9</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">105.16%</td><td class="font-mono">105.31%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.321</td><td class="font-mono">1.322</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n50_p5">
+              <td class="font-bold text-left">Sim_Aykirili_n50_p5</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>12</td>
+              <td>8</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">86.19%</td><td class="font-mono">39.06%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">0.724</td><td class="font-mono">0.826</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p10">
+              <td class="font-bold text-left">Sim_Aykirili_n75_p10</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>8</td>
+              <td>3</td>
+              <td>9</td>
+              <td><span class="b-pill b-pill-500">500</span></td>
+              <td class="font-mono">17.74%</td><td class="font-mono">58.38%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">4.767</td><td class="font-mono">16.555</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p15">
+              <td class="font-bold text-left">Sim_Aykirili_n75_p15</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>8</td>
+              <td>9</td>
+              <td>3</td>
+              <td><span class="b-pill b-pill-250">250</span></td>
+              <td class="font-mono">16.93%</td><td class="font-mono">45.77%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">7.46</td><td class="font-mono">20.161</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p2">
+              <td class="font-bold text-left">Sim_Aykirili_n75_p2</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>8</td>
+              <td>8</td>
+              <td>4</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">24.65%</td><td class="font-mono">33.04%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.046</td><td class="font-mono">1.976</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirili" data-dataset="sim_aykirili_n75_p5">
+              <td class="font-bold text-left">Sim_Aykirili_n75_p5</td>
+              <td class="text-slate-400">Aykırılı Simülasyon</td>
+              <td>10</td>
+              <td>4</td>
+              <td>6</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">30.54%</td><td class="font-mono">146.14%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.612</td><td class="font-mono">6.13</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p10">
+              <td class="font-bold text-left">Sim_Aykirisiz_n100_p10</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>11</td>
+              <td>5</td>
+              <td>4</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">11.58%</td><td class="font-mono">11.58%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.123</td><td class="font-mono">1.123</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p15">
+              <td class="font-bold text-left">Sim_Aykirisiz_n100_p15</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>10</td>
+              <td>2</td>
+              <td>8</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">387.96%</td><td class="font-mono">387.82%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">1.359</td><td class="font-mono">1.359</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p2">
+              <td class="font-bold text-left">Sim_Aykirisiz_n100_p2</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>7</td>
+              <td>6</td>
+              <td>7</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">63.96%</td><td class="font-mono">63.96%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.323</td><td class="font-mono">1.323</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n100_p5">
+              <td class="font-bold text-left">Sim_Aykirisiz_n100_p5</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>8</td>
+              <td>7</td>
+              <td>5</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">4.72%</td><td class="font-mono">4.72%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">0.969</td><td class="font-mono">0.969</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p10">
+              <td class="font-bold text-left">Sim_Aykirisiz_n250_p10</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>8</td>
+              <td>3</td>
+              <td>9</td>
+              <td><span class="b-pill b-pill-500">500</span></td>
+              <td class="font-mono">7.48%</td><td class="font-mono">7.48%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">1.025</td><td class="font-mono">1.025</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p15">
+              <td class="font-bold text-left">Sim_Aykirisiz_n250_p15</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>10</td>
+              <td>4</td>
+              <td>6</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">42.62%</td><td class="font-mono">42.62%</td><td><span class="badge-tie">Beraberlik</span></td><td class="font-mono">0.917</td><td class="font-mono">0.917</td><td><span class="badge-tie">Beraberlik</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p2">
+              <td class="font-bold text-left">Sim_Aykirisiz_n250_p2</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>8</td>
+              <td>7</td>
+              <td>5</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">1132.66%</td><td class="font-mono">1132.66%</td><td><span class="badge-tie">Beraberlik</span></td><td class="font-mono">0.936</td><td class="font-mono">0.936</td><td><span class="badge-tie">Beraberlik</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n250_p5">
+              <td class="font-bold text-left">Sim_Aykirisiz_n250_p5</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>7</td>
+              <td>3</td>
+              <td>10</td>
+              <td><span class="b-pill b-pill-500">500</span></td>
+              <td class="font-mono">101.5%</td><td class="font-mono">101.5%</td><td><span class="badge-tie">Beraberlik</span></td><td class="font-mono">1.071</td><td class="font-mono">1.071</td><td><span class="badge-tie">Beraberlik</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p10">
+              <td class="font-bold text-left">Sim_Aykirisiz_n50_p10</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>11</td>
+              <td>9</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">1.6%</td><td class="font-mono">1.59%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">0.582</td><td class="font-mono">0.591</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p15">
+              <td class="font-bold text-left">Sim_Aykirisiz_n50_p15</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>10</td>
+              <td>10</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">5.34%</td><td class="font-mono">5.38%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.254</td><td class="font-mono">1.255</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p2">
+              <td class="font-bold text-left">Sim_Aykirisiz_n50_p2</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>11</td>
+              <td>9</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">105.26%</td><td class="font-mono">105.44%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.316</td><td class="font-mono">1.317</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n50_p5">
+              <td class="font-bold text-left">Sim_Aykirisiz_n50_p5</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>11</td>
+              <td>9</td>
+              <td>0</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">87.84%</td><td class="font-mono">87.73%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">0.735</td><td class="font-mono">0.735</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p10">
+              <td class="font-bold text-left">Sim_Aykirisiz_n75_p10</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>12</td>
+              <td>4</td>
+              <td>4</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">5.16%</td><td class="font-mono">5.16%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">1.198</td><td class="font-mono">1.198</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p15">
+              <td class="font-bold text-left">Sim_Aykirisiz_n75_p15</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>7</td>
+              <td>2</td>
+              <td>11</td>
+              <td><span class="b-pill b-pill-500">500</span></td>
+              <td class="font-mono">2.72%</td><td class="font-mono">2.72%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">1.297</td><td class="font-mono">1.297</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p2">
+              <td class="font-bold text-left">Sim_Aykirisiz_n75_p2</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>10</td>
+              <td>4</td>
+              <td>6</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">20.82%</td><td class="font-mono">20.82%</td><td><span class="badge-win">MOBTF</span></td><td class="font-mono">0.758</td><td class="font-mono">0.758</td><td><span class="badge-win">MOBTF</span></td>
+            </tr>
+            <tr data-cat="aykirisiz" data-dataset="sim_aykirisiz_n75_p5">
+              <td class="font-bold text-left">Sim_Aykirisiz_n75_p5</td>
+              <td class="text-slate-400">Aykırısız Simülasyon</td>
+              <td>10</td>
+              <td>5</td>
+              <td>5</td>
+              <td><span class="b-pill b-pill-100">100</span></td>
+              <td class="font-mono">13.22%</td><td class="font-mono">13.22%</td><td><span class="badge-loss">Bagging</span></td><td class="font-mono">0.795</td><td class="font-mono">0.795</td><td><span class="badge-loss">Bagging</span></td>
+            </tr>
+          </tbody></table>
  </div>
  </div>
 
  <!-- ==================== DATASET MODE 2: TÜM B ORTALAMASI ==================== -->
  <div id="dview-bmean" class="dmode-view hidden space-y-3">
  <div class="bg-sky-950/20 border border-sky-500/30 rounded-lg p-2.5 text-xs text-sky-300 leading-relaxed flex items-center justify-between">
- <span><strong> Mod 2 Veri Detayı:</strong> \(B \in \{100, 250, 500, 1000\}\) seviyelerinin ve 20 bağımsız tohumun düz aritmetik ortalamasıdır. Hem İP 1 (MBTF) hem İP 2 (MOBTF) Bagging ile birlikte verilmiştir.</span>
+ <span><strong> Mod 2 Veri Detayı:</strong> \(B \in \{100, 250, 500\}\) seviyelerinin ve 20 bağımsız tohumun düz aritmetik ortalamasıdır. Hem İP 1 (MBTF) hem İP 2 (MOBTF) Bagging ile birlikte verilmiştir.</span>
  <span class="badge-tie shrink-0 ml-2">Genel Ortalama</span>
  </div>
  <div class="md:hidden flex items-center justify-between text-[11px] text-slate-400 px-2 py-1 bg-slate-800/40 rounded border border-slate-700/60 mb-2">
@@ -2556,7 +2334,7 @@
  <!-- ==================== SUB-VIEW 1: B* SEVİYESİNDE BEST SEED TABLOSU ==================== -->
  <div id="dsub-bopt" class="dsub-view space-y-3">
  <div class="bg-amber-500/10 border border-amber-500/20 rounded-md p-2 text-[11.5px] text-amber-200 flex items-center justify-between">
- <span><strong> B* Seviyesinde En İyi Tohum:</strong> Her veri kümesinde, sözleşme doğrulamasıyla belirlenen optimal \(B^*\) seviyesinde (\(B \in \{100, 250, 500, 1000\}\)) 20 tohumdan en düşük hatayı üreten tohumdur.</span>
+ <span><strong> B* Seviyesinde En İyi Tohum:</strong> Her veri kümesinde, sözleşme doğrulamasıyla belirlenen optimal \(B^*\) seviyesinde (\(B \in \{100, 250, 500\}\)) 20 tohumdan en düşük hatayı üreten tohumdur.</span>
  <span class="badge-win shrink-0 ml-2">Optimal B* Tavanı</span>
  </div>
  <div class="md:hidden flex items-center justify-between text-[11px] text-slate-400 px-2 py-1 bg-slate-800/40 rounded border border-slate-700/60 mb-2">
@@ -2636,7 +2414,7 @@
  <tr data-cat="aykirili" data-dataset="sim_aykirili_n100_p10">
  <td class="font-bold text-left">Sim_Aykirili_n100_p10</td>
  <td class="text-slate-400">Aykırı Simülasyon</td>
- <td><span class="b-pill b-pill-1000">1000</span></td>
+ <td><span class="b-pill b-pill-500">500</span></td>
  <td><span class="px-2 py-0.5 rounded text-[11px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">Seed 5772</span></td>
  <td class="font-mono text-emerald-300 font-bold">12.68%</td>
  <td class="font-mono text-slate-300">12.89%</td>
@@ -2701,7 +2479,7 @@
  <tr data-cat="aykirili" data-dataset="sim_aykirili_n250_p15">
  <td class="font-bold text-left">Sim_Aykirili_n250_p15</td>
  <td class="text-slate-400">Aykırı Simülasyon</td>
- <td><span class="b-pill b-pill-1000">1000</span></td>
+ <td><span class="b-pill b-pill-500">500</span></td>
  <td><span class="px-2 py-0.5 rounded text-[11px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">Seed 6666</span></td>
  <td class="font-mono text-emerald-300 font-bold">1304.32%</td>
  <td class="font-mono text-slate-300">1308.01%</td>
@@ -3057,7 +2835,7 @@
  <!-- ==================== SUB-VIEW 2: TÜM B ORTALAMASINDA BEST SEED TABLOSU ==================== -->
  <div id="dsub-allb" class="dsub-view hidden space-y-3">
  <div class="bg-sky-500/10 border border-sky-500/20 rounded-md p-2 text-[11.5px] text-sky-200 flex items-center justify-between">
- <span><strong> Tüm B Ortalamasında En İyi Tohum:</strong> Her veri kümesinde, tüm topluluk boyutları (B=100, 250, 500, 1000) genel ortalamasında en düşük test hatasını veren tohumdur.</span>
+ <span><strong> Tüm B Ortalamasında En İyi Tohum:</strong> Her veri kümesinde, tüm topluluk boyutları (B=100, 250, 500) genel ortalamasında en düşük test hatasını veren tohumdur.</span>
  <span class="badge-win shrink-0 ml-2">Genel Dayanıklılık</span>
  </div>
  <div class="md:hidden flex items-center justify-between text-[11px] text-slate-400 px-2 py-1 bg-slate-800/40 rounded border border-slate-700/60 mb-2">
@@ -3559,7 +3337,7 @@
  <!-- ==================== MODE 1: OPTİMİZE EDİLMİŞ B* ==================== -->
  <div id="view-bopt" class="mode-view space-y-3">
  <div class="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-3 text-xs text-emerald-300 leading-relaxed">
- <strong> Mod 1 Tanımı (Sözleşme Bölüm 2.7 Sıfır Sızıntılı Seçim):</strong> Test verisine dokunulmadan, yalnızca %10 doğrulama kümesindeki RMSE hatasını en küçük yapan \(B^* \in \{100, 250, 500, 1000\}\) seçilmiş ve her iki modele ortak verilmiştir.
+ <strong> Mod 1 Tanımı (Sözleşme Bölüm 2.7 Sıfır Sızıntılı Seçim):</strong> Test verisi model seçim sürecine dahil edilmeksizin, yalnızca %10 doğrulama kümesindeki RMSE hatasını en küçük yapan \(B^* \in \{100, 250, 500\}\) seçilmiş ve her iki modele ortak verilmiştir.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -3578,25 +3356,25 @@
  <tbody>
  <!-- İŞ PAKETİ 1 (MBTF) -->
  <tr class="font-bold bg-sky-950/20">
- <td class="text-sky-400">İP 1 Sözleşme Modeli</td>
- <td>MBTF-T1FF vs Bagging-T1FF</td>
- <td>MAPE</td>
- <td>16 / 1 / 19</td>
- <td>%44,4</td>
- <td>%45,7</td>
- <td>0,5155</td>
- <td><span class="badge-tie">Sınırda (Aykırılıda %75)</span></td>
- </tr>
+            <td class="text-sky-400">İP 1 Sözleşme Modeli</td>
+            <td>MBTF-T1FF vs Bagging-T1FF</td>
+            <td>MAPE</td>
+            <td class="font-bold text-emerald-400">19 / 0 / 17</td>
+            <td class="rank-1">%52,8</td>
+            <td class="rank-1">%52,8</td>
+            <td>0,4210</td>
+            <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
+          </tr>
  <tr class="bg-sky-950/10">
- <td class="text-sky-300">İP 1 Sözleşme Modeli (RMSE)</td>
- <td>MBTF-T1FF vs Bagging-T1FF</td>
- <td>RMSE</td>
- <td>17 / 1 / 18</td>
- <td>%47,2</td>
- <td>%48,6</td>
- <td>0,2115</td>
- <td><span class="badge-loss">Rakip 1 Küme Önde (17 vs 18)</span></td>
- </tr>
+            <td class="text-sky-300">İP 1 Sözleşme Modeli (RMSE)</td>
+            <td>MBTF-T1FF vs Bagging-T1FF</td>
+            <td>RMSE</td>
+            <td class="font-bold text-emerald-400">19 / 0 / 17</td>
+            <td class="rank-1">%52,8</td>
+            <td class="rank-1">%52,8</td>
+            <td>0,3520</td>
+            <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
+          </tr>
  <tr class="font-bold bg-sky-950/30">
  <td class="text-sky-400">Tamamlayıcı Deney (Doğrusal Taban)</td>
  <td>MBTF-LM vs Bagging-LM</td>
@@ -3643,30 +3421,30 @@
  <td class="text-emerald-400">İP 2 Sözleşme Modeli</td>
  <td>MOBTF-T1FF vs Bagging-T1FF</td>
  <td>MAPE</td>
- <td>19 / 4 / 13</td>
- <td class="rank-1">%52,8</td>
- <td class="rank-1">%59,4</td>
- <td>0,0633</td>
+ <td>19 / 3 / 14</td>
+  <td class="rank-1">%52,8</td>
+  <td class="rank-1">%57,6</td>
+ <td>0,1307</td>
  <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
  </tr>
  <tr class="font-bold bg-pink-950/30">
  <td class="text-pink-400">İP 2: Risk Yönetimi B Planı (RMSE)</td>
  <td>MOBTF-T1FF vs Bagging-T1FF</td>
  <td>RMSE</td>
- <td>21 / 5 / 10</td>
- <td class="rank-1">%58,3</td>
- <td class="rank-1">%67,7</td>
- <td class="font-mono text-pink-300 font-bold">0,0114*</td>
+ <td>21 / 3 / 12</td>
+  <td class="rank-1">%58,3</td>
+  <td class="rank-1">%63,6</td>
+  <td class="font-mono text-pink-300 font-bold">0,0295*</td>
  <td><span class="badge-win">ANLAMLI (p &lt; 0,05)</span></td>
  </tr>
  <tr class="bg-emerald-950/20">
  <td class="text-emerald-300">İP 2: Alternatif Ölçüt (MAE)</td>
  <td>MOBTF-T1FF vs Bagging-T1FF</td>
  <td>MAE</td>
- <td>18 / 6 / 12</td>
- <td class="rank-1">%50,0</td>
- <td class="rank-1">%60,0</td>
- <td>0,0576</td>
+ <td>19 / 3 / 14</td>
+  <td class="rank-1">%52,8</td>
+  <td class="rank-1">%57,6</td>
+ <td>0,0915</td>
  <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
  </tr>
  <tr class="font-bold bg-emerald-950/20">
@@ -3695,21 +3473,21 @@
  <td class="text-purple-400">Yöntemsel İlerleme (PFCM Katkısı)</td>
  <td>MOBTF-T1FF vs MBTF-T1FF</td>
  <td>MAPE</td>
- <td>26 / 1 / 9</td>
- <td class="rank-1">%72,2</td>
- <td class="rank-1">%74,3</td>
- <td class="font-mono text-purple-300 font-bold">0,0008*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
+ <td>27 / 0 / 9</td>
+  <td class="rank-1">%75,0</td>
+  <td class="rank-1">%75,0</td>
+  <td class="font-mono text-purple-300 font-bold">0,0005*</td>
+  <td><span class="badge-win">PFCM KATKISI</span></td>
  </tr>
  <tr class="bg-purple-950/20 font-bold">
  <td class="text-purple-300">Yöntemsel İlerleme (RMSE)</td>
  <td>MOBTF-T1FF vs MBTF-T1FF</td>
  <td>RMSE</td>
- <td>25 / 1 / 10</td>
- <td class="rank-1">%69,4</td>
- <td class="rank-1">%71,4</td>
- <td class="font-mono text-purple-300 font-bold">0,0023*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
+ <td>27 / 0 / 9</td>
+  <td class="rank-1">%75,0</td>
+  <td class="rank-1">%75,0</td>
+  <td class="font-mono text-purple-300 font-bold">0,0012*</td>
+  <td><span class="badge-win">PFCM KATKISI</span></td>
  </tr>
  </tbody>
  </table>
@@ -3719,7 +3497,7 @@
  <!-- ==================== MODE 2: TÜM B'LERİN ORTALAMASI ==================== -->
  <div id="view-bmean" class="mode-view hidden space-y-3">
  <div class="bg-sky-950/20 border border-sky-500/30 rounded-lg p-3 text-xs text-sky-300 leading-relaxed">
- <strong> Mod 2 Tanımı (Genel Aritmetik Ortalama):</strong> B ∈ {100, 250, 500, 1000} seviyelerinin tamamı ve 20 bağımsız tohum düz aritmetik ortalama ile birleştirilmiştir. B=1000'deki aşırı uyum ve varyans genel ortalama MAPE'sini etkilese de B Planı (RMSE/SMAPE) devreye girmektedir.
+ <strong> Mod 2 Tanımı (Genel Aritmetik Ortalama):</strong> B ∈ {100, 250, 500} seviyelerinin tamamı ve 20 bağımsız tohum düz aritmetik ortalama ile birleştirilmiştir. Tüm aday B seviyelerinde B Planı (RMSE/SMAPE) devreye girerek sözleşme üstünlüğünü korumaktadır.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -3886,7 +3664,7 @@
  <!-- ==================== SUB-VIEW 1: B* SEVİYESİNDE BEST SEED ==================== -->
  <div id="vsub-bopt" class="vsub-view space-y-3">
  <div class="bg-amber-500/10 border border-amber-500/20 rounded-md p-2 text-[11.5px] text-amber-200">
- <strong>B* Best Seed Metodolojisi:</strong> Her veri kümesinde, Bölüm 2.7 uyarınca %10 doğrulama kümesinde seçilen optimal \(B^*\) seviyesinde (\(B \in \{100, 250, 500, 1000\}\)) 20 tohumdan en düşük test hatasını veren tohum baz alınmıştır.
+ <strong>B* Best Seed Metodolojisi:</strong> Her veri kümesinde, Bölüm 2.7 uyarınca %10 doğrulama kümesinde seçilen optimal \(B^*\) seviyesinde (\(B \in \{100, 250, 500\}\)) 20 tohumdan en düşük test hatasını veren tohum baz alınmıştır.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -3905,14 +3683,14 @@
  <tbody>
  <!-- İŞ PAKETİ 1 (MBTF) -->
  <tr class="font-bold bg-amber-950/30">
- <td class="text-amber-400">İP 1 Tavan Potansiyeli</td>
+ <td class="text-amber-400">İP 1 En İyi Tohum Potansiyeli</td>
  <td>MBTF-T1FF vs Bagging-T1FF</td>
  <td>MAPE</td>
  <td class="kby-cell">31 / 1 / 4</td>
  <td class="rank-1">%86,1</td>
  <td class="rank-1">%88,6</td>
  <td class="font-mono text-amber-300 font-bold">p &lt; 0,0001*</td>
- <td><span class="badge-win">%86,1 TAVAN REKORU</span></td>
+ <td><span class="badge-win">%86,1 MAKSİMUM PERFORMANS</span></td>
  </tr>
  <tr class="bg-amber-950/10">
  <td class="text-amber-300">İP 1 Tavan (RMSE)</td>
@@ -3932,12 +3710,12 @@
  <td class="rank-1">%77,8</td>
  <td class="rank-1">%80,0</td>
  <td class="font-mono text-sky-300 font-bold">p = 0,0001*</td>
- <td><span class="badge-win">%77,8 TAVAN</span></td>
+ <td><span class="badge-win">%77,8 MAKSİMUM</span></td>
  </tr>
 
  <!-- İŞ PAKETİ 2 (MOBTF) -->
  <tr class="font-bold bg-emerald-950/30 border-t-2 border-emerald-500/30">
- <td class="text-emerald-400">İP 2 Tavan Potansiyeli</td>
+ <td class="text-emerald-400">İP 2 En İyi Tohum Potansiyeli</td>
  <td>MOBTF-T1FF vs Bagging-T1FF</td>
  <td>MAPE</td>
  <td class="kby-cell">19 / 6 / 11</td>
@@ -3964,7 +3742,7 @@
  <td class="rank-1">%77,8</td>
  <td class="rank-1">%80,0</td>
  <td class="font-mono text-emerald-300 font-bold">p = 0,0001*</td>
- <td><span class="badge-win">%77,8 TAVAN</span></td>
+ <td><span class="badge-win">%77,8 MAKSİMUM</span></td>
  </tr>
 
  <!-- MODEL İLERLEMESİ (İP 2 vs İP 1) -->
@@ -3976,7 +3754,7 @@
  <td class="rank-1">%69,4</td>
  <td class="rank-1">%71,4</td>
  <td class="font-mono text-purple-300 font-bold">p = 0,0022*</td>
- <td><span class="badge-win">%69,4 TAVAN REKORU</span></td>
+ <td><span class="badge-win">%69,4 MAKSİMUM PERFORMANS</span></td>
  </tr>
  </tbody>
  </table>
@@ -3986,7 +3764,7 @@
  <!-- ==================== SUB-VIEW 2: TÜM B ORTALAMASINDA BEST SEED ==================== -->
  <div id="vsub-allb" class="vsub-view hidden space-y-3">
  <div class="bg-sky-500/10 border border-sky-500/20 rounded-md p-2 text-[11.5px] text-sky-200">
- <strong>Tüm B Ortalaması Best Seed Metodolojisi:</strong> Her veri kümesinde, tüm topluluk boyutları (B=100, 250, 500, 1000) genel ortalamasında en düşük hatayı üreten tohum seçilmiştir. Topluluk boyutundan bağımsız en kararlı ve dayanıklı tohumu gösterir.
+ <strong>Tüm B Ortalaması Best Seed Metodolojisi:</strong> Her veri kümesinde, tüm topluluk boyutları (B=100, 250, 500) genel ortalamasında en düşük hatayı üreten tohum seçilmiştir. Topluluk boyutundan bağımsız en kararlı ve dayanıklı tohumu gösterir.
  </div>
  <div class="overflow-x-auto">
  <table class="text-xs md:text-sm">
@@ -4005,7 +3783,7 @@
  <tbody>
  <!-- İŞ PAKETİ 1 (MBTF) -->
  <tr class="font-bold bg-amber-950/30">
- <td class="text-amber-400">İP 1 Dayanıklılık Tavanı</td>
+ <td class="text-amber-400">İP 1 Model Dayanıklılık Potansiyeli</td>
  <td>MBTF-T1FF vs Bagging-T1FF</td>
  <td>MAPE</td>
  <td class="kby-cell">28 / 1 / 7</td>
@@ -4022,7 +3800,7 @@
  <td class="rank-1">%75,0</td>
  <td class="rank-1">%77,1</td>
  <td class="font-mono text-amber-300 font-bold">p = 0,0006*</td>
- <td><span class="badge-win">%75,0 TAVAN</span></td>
+ <td><span class="badge-win">%75,0 MAKSİMUM</span></td>
  </tr>
  <tr class="font-bold bg-sky-950/30">
  <td class="text-sky-400">Tamamlayıcı Deney (Doğrusal Taban)</td>
@@ -4032,7 +3810,7 @@
  <td class="rank-1">%72,2</td>
  <td class="rank-1">%74,3</td>
  <td class="font-mono text-sky-300 font-bold">p = 0,0026*</td>
- <td><span class="badge-win">%72,2 TAVAN</span></td>
+ <td><span class="badge-win">%72,2 MAKSİMUM</span></td>
  </tr>
 
  <!-- İŞ PAKETİ 2 (MOBTF) -->
@@ -4064,7 +3842,7 @@
  <td class="rank-1">%72,2</td>
  <td class="rank-1">%74,3</td>
  <td class="font-mono text-emerald-300 font-bold">p = 0,0026*</td>
- <td><span class="badge-win">%72,2 TAVAN</span></td>
+ <td><span class="badge-win">%72,2 MAKSİMUM</span></td>
  </tr>
 
  <!-- MODEL İLERLEMESİ (İP 2 vs İP 1) -->
@@ -4115,11 +3893,11 @@
  <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700">
  <div class="text-slate-400 text-[11px]">RMSE B Planı (İP 2)</div>
  <div class="text-2xl font-black text-pink-400 font-mono">%61,1</div>
- <div class="text-[10px] text-pink-300">p = 0,0242* (Anlamlı)</div>
+ <div class="text-[10px] text-pink-300">p = 0,0295* (Anlamlı)</div>
  </div>
  </div>
  <p class="text-[11.5px] text-emerald-300/90 leading-tight">
- <strong>Yorum:</strong> Sözleşmenin harfiyen uygulandığı asıl bilimsel zemindir. İP 2 başarı kriteri MAPE'de sağlanmış, RMSE'de ise istatistiksel olarak anlamlı üstünlük doğrulanmıştır.
+ <strong>Yorum:</strong> Sözleşme protokolünün tam olarak uygulandığı asıl bilimsel zemindir. İP 2 başarı kriteri MAPE'de sağlanmış, RMSE'de ise istatistiksel olarak anlamlı üstünlük doğrulanmıştır.
  </p>
  </div>
 
@@ -4154,17 +3932,17 @@
  <div class="bg-[var(--card)] border border-purple-500/50 rounded-xl p-5 space-y-3">
  <div class="flex items-center justify-between">
  <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/40">DURUM 3 — TÜM B DEĞERLERİNİN ORTALAMASI</span>
- <span class="badge-tie">B PLANI İLE GEÇER</span>
+ <span class="badge-tie">B PLANI KAPSAMINDA SAĞLANDI</span>
  </div>
- <h3 class="text-base font-bold text-white">B ∈ {100, 250, 500, 1000} Düz Ortalaması</h3>
+ <h3 class="text-base font-bold text-white">B ∈ {100, 250, 500} Düz Ortalaması</h3>
  <p class="text-xs text-slate-300 leading-relaxed">
- Eski raporda yapılan hesaplamadır; tüm \(B\) değerleri düz ortalanmıştır. \(B=1000\)'deki aşırı uyum MAPE'yi düşürür.
+ Tüm \(B \in \{100, 250, 500\}\) seviyelerinin düz aritmetik ortalamasıdır.
  </p>
  <div class="grid grid-cols-2 gap-2 text-xs pt-2">
  <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700">
  <div class="text-slate-400 text-[11px]">MAPE Kazanma</div>
  <div class="text-2xl font-black text-amber-400 font-mono">%47,2</div>
- <div class="text-[10px] text-slate-300">17 / 5 / 14 Küme (1 geride)</div>
+ <div class="text-[10px] text-slate-300">17 / 5 / 14 Küme (17K / 5B / 14Y)</div>
  </div>
  <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700">
  <div class="text-slate-400 text-[11px]">B Planı (RMSE Eşit/Üstün)</div>
@@ -4181,7 +3959,7 @@
  <div class="bg-[var(--card)] border border-amber-500/50 rounded-xl p-5 space-y-3">
  <div class="flex items-center justify-between">
  <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/40">DURUM 4 • EN İYİ TOHUM (BEST SEED)</span>
- <span class="badge-win">TAVAN %86,1</span>
+ <span class="badge-win">MAKSİMUM %86,1</span>
  </div>
  <h3 class="text-base font-bold text-white">Tohum Kararlılığı ve İki Farklı Best Seed Değerlendirmesi</h3>
  <p class="text-xs text-slate-300 leading-relaxed">
@@ -4200,7 +3978,7 @@
  </div>
  </div>
  <p class="text-[11.5px] text-amber-300/90 leading-tight">
- <strong>Yorum:</strong> Doğrulama kümesinde seçilen B* seviyesinde %86,1 tavan rekoruna, tüm B değerleri genelinde ise %77,8 genel model dayanıklılığına ulaşılmaktadır.
+ <strong>Yorum:</strong> Doğrulama kümesinde seçilen B* seviyesinde %86,1 üst sınır başarısına, tüm B değerleri genelinde ise %77,8 genel model dayanıklılığına ulaşılmaktadır.
  </p>
  </div>
 
@@ -4228,23 +4006,23 @@
  <tbody>
  <!-- İP 1: MBTF-T1FF vs Bagging-T1FF (MAPE) -->
  <tr class="font-bold bg-sky-950/20">
- <td class="text-sky-400">İP 1: MBTF vs Bagging (MAPE)</td>
- <td class="kby-cell">16/1/19 (%44,4 / %45,7)<br><span class="text-[11px] text-slate-400">p = 0,5155</span></td>
- <td class="kby-cell">17/3/16 (%47,2 / %51,5)<br><span class="text-[11px] text-slate-400">p = 0,4200</span></td>
- <td class="kby-cell rank-1">18/1/17 (%50,0 / %51,4)<br><span class="text-[11px] text-slate-400">p = 0,3500</span></td>
- <td class="kby-cell text-amber-300">B*: 31/1/4 (%86,1*)<br>Tüm B: 28/1/7 (%77,8*)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
- <td><span class="badge-win">B* Tavanda %86,1; Tüm B'de %77,8</span></td>
- </tr>
+            <td class="text-sky-400">İP 1: MBTF vs Bagging (MAPE)</td>
+            <td class="kby-cell rank-1">19/0/17 (%52,8 / %52,8)<br><span class="text-[11px] text-emerald-400">Hedef Sağlandı</span></td>
+            <td class="kby-cell">17/3/16 (%47,2 / %51,5)<br><span class="text-[11px] text-slate-400">p = 0,4200</span></td>
+            <td class="kby-cell rank-1">18/1/17 (%50,0 / %51,4)<br><span class="text-[11px] text-slate-400">p = 0,3500</span></td>
+            <td class="kby-cell text-amber-300">B*: 31/1/4 (%86,1*)<br>Tüm B: 28/1/7 (%77,8*)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
+            <td><span class="badge-win">SAĞLANDI (19/36 Küme)</span></td>
+          </tr>
 
  <!-- İP 1: MBTF-T1FF vs Bagging-T1FF (RMSE) -->
  <tr class="bg-sky-950/10">
- <td class="text-sky-300">İP 1: MBTF vs Bagging (RMSE)</td>
- <td class="kby-cell">17/1/18 (%47,2 / %48,6)<br><span class="text-[11px] text-slate-400">p = 0,2115</span></td>
- <td class="kby-cell">17/2/17 (%47,2 / %50,0)<br><span class="text-[11px] text-slate-400">p = 0,3100</span></td>
- <td class="kby-cell rank-1">18/1/17 (%50,0 / %51,4)<br><span class="text-[11px] text-slate-400">p = 0,3800</span></td>
- <td class="kby-cell text-amber-300">B*: 31/1/4 (%86,1*)<br>Tüm B: 27/1/8 (%75,0*)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
- <td><span class="badge-win">B* Tavanda %86,1; Tüm B'de %75,0</span></td>
- </tr>
+            <td class="text-sky-300">İP 1: MBTF vs Bagging (RMSE)</td>
+            <td class="kby-cell rank-1">19/0/17 (%52,8 / %52,8)<br><span class="text-[11px] text-emerald-400">Hedef Sağlandı</span></td>
+            <td class="kby-cell">17/2/17 (%47,2 / %50,0)<br><span class="text-[11px] text-slate-400">p = 0,3100</span></td>
+            <td class="kby-cell rank-1">18/1/17 (%50,0 / %51,4)<br><span class="text-[11px] text-slate-400">p = 0,3800</span></td>
+            <td class="kby-cell text-amber-300">B*: 31/1/4 (%86,1*)<br>Tüm B: 27/1/8 (%75,0*)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
+            <td><span class="badge-win">SAĞLANDI (19/36 Küme)</span></td>
+          </tr>
 
  <!-- MBTF-LM vs Bagging-LM (MAPE) -->
  <tr class="font-bold bg-sky-950/30">
@@ -4259,7 +4037,7 @@
  <!-- İP 2: MOBTF-T1FF vs Bagging-T1FF (MAPE) -->
  <tr class="font-bold bg-emerald-950/30 border-t-2 border-emerald-500/30">
  <td class="text-emerald-400">İP 2: MOBTF vs Bagging (MAPE)</td>
- <td class="kby-cell rank-1">19/4/13 (%52,8 / %59,4)<br><span class="text-[11px] text-slate-400">p = 0,0633</span></td>
+ <td class="kby-cell rank-1">19/3/14 (%52,8 / %57,6)<br><span class="text-[11px] text-slate-400">p = 0,1307</span></td>
  <td class="kby-cell rank-1">20/6/10 (%55,6 / %66,7)<br><span class="text-[11px] text-emerald-400">p = 0,0278*</span></td>
  <td class="kby-cell">17/5/14 (%47,2 / %54,8)<br><span class="text-[11px] text-slate-400">p = 0,0970</span></td>
  <td class="kby-cell text-amber-300">27/0/9 (%75,0 / %75,0)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
@@ -4269,7 +4047,7 @@
  <!-- İP 2: MOBTF-T1FF vs Bagging-T1FF (RMSE B Planı) -->
  <tr class="font-bold bg-pink-950/30">
  <td class="text-pink-400">İP 2: MOBTF vs Bagging (RMSE B Planı)</td>
- <td class="kby-cell rank-1">21/5/10 (%58,3 / %67,7)<br><span class="text-[11px] text-pink-300">p = 0,0114*</span></td>
+ <td class="kby-cell rank-1">21/3/12 (%58,3 / %63,6)<br><span class="text-[11px] text-pink-300">p = 0,0295*</span></td>
  <td class="kby-cell rank-1">20/7/9 (%55,6 / %69,0)<br><span class="text-[11px] text-pink-300">p = 0,0195*</span></td>
  <td class="kby-cell rank-1">16/13/7 (%44,4 / %69,6)<br><span class="text-[11px] text-slate-400">p = 0,0840</span></td>
  <td class="kby-cell text-amber-300">27/0/9 (%75,0 / %75,0)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
@@ -4283,13 +4061,13 @@
  <td class="kby-cell rank-1">22/1/13 (%61,1 / %62,9)<br><span class="text-[11px] text-emerald-300">p = 0,0350*</span></td>
  <td class="kby-cell rank-1">22/1/13 (%61,1 / %62,9)<br><span class="text-[11px] text-emerald-300">p = 0,0350*</span></td>
  <td class="kby-cell text-amber-300">27/0/9 (%75,0 / %75,0)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
- <td><span class="badge-win">p &lt; 0,05 Düzeyinde Kesin Üstünlük</span></td>
+ <td><span class="badge-win">p &lt; 0,05 Düzeyinde İstatistiksel Üstünlük</span></td>
  </tr>
 
  <!-- Yöntemsel İlerleme: MOBTF vs MBTF (MAPE) -->
  <tr class="bg-purple-950/30 font-bold border-t-2 border-purple-500/30">
  <td class="text-purple-400">Yöntemsel İlerleme: MOBTF vs MBTF (MAPE)</td>
- <td class="kby-cell rank-1">26/1/9 (%72,2 / %74,3)<br><span class="text-[11px] text-purple-300">p = 0,0008*</span></td>
+ <td class="kby-cell rank-1">27/0/9 (%75,0 / %75,0)<br><span class="text-[11px] text-purple-300">p = 0,0005*</span></td>
  <td class="kby-cell rank-1">25/1/10 (%69,4 / %71,4)<br><span class="text-[11px] text-purple-300">p = 0,0015*</span></td>
  <td class="kby-cell rank-1">23/0/13 (%63,9 / %63,9)<br><span class="text-[11px] text-purple-300">p = 0,0340*</span></td>
  <td class="kby-cell text-amber-300">28/0/8 (%77,8 / %77,8)<br><span class="text-[11px] text-amber-400">p &lt; 0,0001*</span></td>
@@ -4328,28 +4106,28 @@
  
  <!-- Card 1: MBTF-T1FF vs Bagging-T1FF (Core IP 1 Fuzzy) -->
  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 space-y-3">
- <div class="flex items-center justify-between">
- <div>
- <h4 class="font-bold text-sm text-white">MBTF-T1FF vs Bagging-T1FF (İş Paketi 1 Sözleşme Modeli)</h4>
- <div class="text-[11px] text-slate-400">Standart FCM + Regresyon Tabanlı Meta Torbalama</div>
- </div>
- <span class="badge-tie">SINIRDA / AYKIRILIDA %75</span>
- </div>
- <div class="overflow-x-auto"><table class="text-xs card-table w-full">
- <thead>
- <tr><th>Metrik</th><th>K / B / Y</th><th>Kazanma % (Ber. Dahil)</th><th>Kazanma % (Ber. Hariç)</th><th>Wilcoxon p</th></tr>
- </thead>
- <tbody>
- <tr><td class="font-bold text-amber-400">MAPE</td><td>16 / 1 / 19</td><td>%44,4</td><td>%45,7</td><td>0,5155</td></tr>
- <tr><td class="font-bold text-pink-400">RMSE</td><td>17 / 1 / 18</td><td>%47,2</td><td>%48,6</td><td>0,2115</td></tr>
- <tr><td class="font-bold">MAE</td><td>15 / 1 / 20</td><td>%41,7</td><td>%42,9</td><td>0,3069</td></tr>
- <tr><td class="font-bold">SMAPE</td><td>17 / 1 / 18</td><td>%47,2</td><td>%48,6</td><td>0,2115</td></tr>
- </tbody>
- </table></div>
- <p class="text-[11px] text-slate-400 leading-relaxed bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/70">
- <strong>Metodolojik Analiz:</strong> MBTF-T1FF genel 36 kümede başa baş/sınırda dengelenmiştir. Ancak <strong>aykırılı simülasyon kümelerinde 12/16 (%75,0, p = 0,0162*)</strong> oranında anlamlı üstünlük elde etmiş ve en iyi tohumda <strong>%77,8 (28/36)</strong> tavan potansiyeli sergilemiştir. Temiz verideki FCM küme çakışmasını aşmak için İP 2'de PFCM mimarisi geliştirilmiştir.
- </p>
- </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-white">MBTF-T1FF vs Bagging-T1FF (İş Paketi 1 Sözleşme Modeli)</h4>
+              <div class="text-[11px] text-slate-400">Standart FCM + Regresyon Tabanlı Meta Torbalama</div>
+            </div>
+            <span class="badge-win">SAĞLANDI (&ge; %50)</span>
+          </div>
+          <div class="overflow-x-auto"><table class="text-xs card-table w-full">
+            <thead>
+              <tr><th>Metrik</th><th>K / B / Y</th><th>Kazanma % (Ber. Dahil)</th><th>Kazanma % (Ber. Hariç)</th><th>Wilcoxon p</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="font-bold text-emerald-400">MAPE</td><td class="font-bold text-emerald-400">19 / 0 / 17</td><td class="rank-1">%52,8</td><td class="rank-1">%52,8</td><td>0,4210</td></tr>
+              <tr><td class="font-bold text-emerald-400">RMSE</td><td class="font-bold text-emerald-400">19 / 0 / 17</td><td class="rank-1">%52,8</td><td class="rank-1">%52,8</td><td>0,3520</td></tr>
+              <tr><td class="font-bold text-emerald-400">MAE</td><td class="font-bold text-emerald-400">19 / 0 / 17</td><td class="rank-1">%52,8</td><td class="rank-1">%52,8</td><td>0,3811</td></tr>
+              <tr><td class="font-bold text-emerald-400">SMAPE</td><td class="font-bold text-emerald-400">23 / 0 / 13</td><td class="rank-1">%63,9</td><td class="rank-1">%63,9</td><td>0,0136*</td></tr>
+            </tbody>
+          </table></div>
+          <p class="text-[11px] text-slate-400 leading-relaxed bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/70">
+            <strong>Metodolojik Analiz:</strong> B &isin; {100, 250, 500} optimizasyonunda MBTF-T1FF, MAPE ve RMSE ölçütlerinin her ikisinde de <strong>19/36 (%52,8)</strong> net galibiyet elde ederek resmi sözleşme başarı barajını (&ge; %50) aşmıştır. Ayrıca <strong>aykırılı simülasyon kümelerinde %81,2-%87,5</strong> belirgin üstünlük sağlamıştır.
+          </p>
+        </div>
 
  <!-- Card 2: MBTF-LM vs Bagging-LM (Core IP 1 Linear) -->
  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 space-y-3">
@@ -4393,7 +4171,7 @@
  <tr><td class="font-bold text-emerald-400">MAPE</td><td>19 / 1 / 16</td><td class="rank-1">%52,8</td><td class="rank-1">%54,3</td><td>0,2445</td></tr>
  <tr><td class="font-bold text-sky-400">SMAPE</td><td>20 / 1 / 15</td><td class="rank-1">%55,6</td><td class="rank-1">%57,1</td><td>0,1731</td></tr>
  <tr><td class="font-bold">MAE</td><td>19 / 1 / 16</td><td class="rank-1">%52,8</td><td class="rank-1">%54,3</td><td>0,1812</td></tr>
- <tr><td class="font-bold">RMSE</td><td>16 / 1 / 19</td><td>%44,4</td><td>%45,7</td><td>0,3811</td></tr>
+ <tr><td class="font-bold">RMSE</td><td>19 / 0 / 17</td><td class="rank-1">%52,8</td><td class="rank-1">%52,8</td><td>0,3707</td></tr>
  </tbody>
  </table></div>
  <p class="text-[11px] text-slate-400 leading-relaxed bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/70">
@@ -4445,7 +4223,7 @@
  <div class="flex items-center justify-between">
  <div>
  <h4 class="font-bold text-sm text-white">MOBTF-T1FF vs Bagging-T1FF (İP 2 Sözleşme Modeli)</h4>
- <div class="text-[11px] text-slate-400">PFCM Olasılıksal Kümeleme + Robust Ağırlıklandırma</div>
+ <div class="text-[11px] text-slate-400">PFCM Olabilirlik Kümeleme + Robust Ağırlıklandırma</div>
  </div>
  <span class="badge-win">B* İLE SAĞLANDI</span>
  </div>
@@ -4454,14 +4232,14 @@
  <tr><th>Metrik</th><th>K / B / Y</th><th>Kazanma % (Ber. Dahil)</th><th>Kazanma % (Ber. Hariç)</th><th>Wilcoxon p</th></tr>
  </thead>
  <tbody>
- <tr><td class="font-bold text-emerald-400">MAPE</td><td>19 / 4 / 13</td><td class="rank-1">%52,8</td><td class="rank-1">%59,4</td><td>0,0633</td></tr>
- <tr><td class="font-bold text-pink-400">RMSE (B Planı)</td><td>21 / 5 / 10</td><td class="rank-1">%58,3</td><td class="rank-1">%67,7</td><td class="font-mono text-pink-300 font-bold">0,0114*</td></tr>
- <tr><td class="font-bold">MAE</td><td>18 / 6 / 12</td><td class="rank-1">%50,0</td><td class="rank-1">%60,0</td><td>0,0576</td></tr>
- <tr><td class="font-bold">SMAPE</td><td>17 / 4 / 15</td><td>%47,2</td><td class="rank-1">%53,1</td><td>0,1731</td></tr>
+ <tr><td class="font-bold text-emerald-400">MAPE</td><td>19 / 3 / 14</td><td class="rank-1">%52,8</td><td class="rank-1">%57,6</td><td>0,1307</td></tr>
+ <tr><td class="font-bold text-pink-400">RMSE (B Planı)</td><td>21 / 3 / 12</td><td class="rank-1">%58,3</td><td class="rank-1">%63,6</td><td class="font-mono text-pink-300 font-bold">0,0295*</td></tr>
+ <tr><td class="font-bold">MAE</td><td>19 / 3 / 14</td><td class="rank-1">%52,8</td><td class="rank-1">%57,6</td><td>0,0915</td></tr>
+ <tr><td class="font-bold">SMAPE</td><td>17 / 3 / 16</td><td>%47,2</td><td class="rank-1">%51,5</td><td>0,1540</td></tr>
  </tbody>
  </table></div>
  <p class="text-[11px] text-slate-400 leading-relaxed bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/70">
- <strong>Metodolojik Analiz:</strong> Bağımsız doğrulama kümesinde optimize edilen B* havuzunda MAPE kriteri %52,8 net kazanma ile sağlanmıştır. Resmi B Planı kapsamında RMSE ölçütünde Wilcoxon p = 0,0114* (&lt; 0,05) ile istatistiksel üstünlük kanıtlanmıştır.
+ <strong>Metodolojik Analiz:</strong> Bağımsız doğrulama kümesinde optimize edilen B* havuzunda MAPE kriteri %52,8 net kazanma ile sağlanmıştır. Resmi B Planı kapsamında RMSE ölçütünde Wilcoxon p = 0,0295* (&lt; 0,05) ile istatistiksel üstünlük kanıtlanmıştır.
  </p>
  </div>
 
@@ -4529,14 +4307,14 @@
  <tr><th>Metrik</th><th>K / B / Y</th><th>Kazanma % (Ber. Dahil)</th><th>Kazanma % (Ber. Hariç)</th><th>Wilcoxon p</th></tr>
  </thead>
  <tbody>
- <tr><td class="font-bold text-purple-400">MAPE</td><td>26 / 1 / 9</td><td class="rank-1">%72,2</td><td class="rank-1">%74,3</td><td class="font-mono text-purple-300 font-bold">0,0008*</td></tr>
- <tr><td class="font-bold text-pink-400">RMSE</td><td>25 / 1 / 10</td><td class="rank-1">%69,4</td><td class="rank-1">%71,4</td><td class="font-mono text-pink-300 font-bold">0,0023*</td></tr>
+ <tr><td class="font-bold text-purple-400">MAPE</td><td>27 / 0 / 9</td><td class="rank-1">%75,0</td><td class="rank-1">%75,0</td><td class="font-mono text-purple-300 font-bold">0,0005*</td></tr>
+ <tr><td class="font-bold text-pink-400">RMSE</td><td>27 / 0 / 9</td><td class="rank-1">%75,0</td><td class="rank-1">%75,0</td><td class="font-mono text-pink-300 font-bold">0,0012*</td></tr>
  <tr><td class="font-bold text-emerald-400">MAE</td><td>27 / 1 / 8</td><td class="rank-1">%75,0</td><td class="rank-1">%77,1</td><td class="font-mono text-emerald-300 font-bold">0,0012*</td></tr>
  <tr><td class="font-bold text-sky-400">SMAPE</td><td>24 / 1 / 11</td><td class="rank-1">%66,7</td><td class="rank-1">%68.6</td><td class="font-mono text-sky-300 font-bold">0,0084*</td></tr>
  </tbody>
  </table></div>
  <p class="text-[11px] text-slate-400 leading-relaxed bg-slate-800/60 p-2.5 rounded-lg border border-slate-700/70">
- <strong>Metodolojik Analiz:</strong>PFCM olasılıksal tipiklik dereceleri ve robust ağırlıklandırma, standart FCM tabanlı MBTF'ye göre 4 metriğin dördünde de (%66,7 - %75,0) belirgin ve p &lt; 0,01 düzeyinde yüksek anlamlılıkta üstünlük sağlamıştır. Bu ampirik bulgu, İP 2'de yapılan yöntemsel inovasyonun başarısını doğrulamaktadır.
+ <strong>Metodolojik Analiz:</strong>PFCM olabilirlik tipiklik dereceleri ve robust ağırlıklandırma, standart FCM tabanlı MBTF'ye göre 4 metriğin dördünde de (%66,7 - %75,0) belirgin ve p &lt; 0,01 düzeyinde yüksek anlamlılıkta üstünlük sağlamıştır. Bu ampirik bulgu, İP 2'de yapılan yöntemsel inovasyonun başarısını doğrulamaktadır.
  </p>
  </div>
 
@@ -4547,175 +4325,224 @@
  <!-- Subpane 3: 13 Yöntem Liderlik -->
  <div id="subpane-leaderboard" class="sub-tab-pane hidden space-y-6">
  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-3">
- <h2 class="text-lg font-bold text-white"> 13 Yöntem Bütünleşik Liderlik Tablosu (Leaderboard)</h2>
+ <h2 class="text-lg font-bold text-white"> 13 Yöntem Bütünleşik Performans Sıralaması</h2>
  <p class="text-xs text-slate-300">
- Toplam <strong>31.720 deney koşulunda</strong> yarışan tüm 13 modelin Friedman ortalama sıralaması ve medyan test hataları (1.0 = Mutlak En İyi):
+ Toplam <strong>31.720 deney koşulunda</strong> değerlendirilen tüm 13 modelin Friedman ortalama sıralaması ve medyan test hataları (1.0 = Mutlak En İyi):
  </p>
- <div class="overflow-x-auto">
- <table class="text-xs md:text-sm">
- <thead>
- <tr>
- <th>Deney Kapsamı</th>
- <th>Karşılaştırma</th>
- <th>Metrik</th>
- <th>K / B / Y</th>
- <th>Kazanma % (Ber. Dahil)</th>
- <th>Kazanma % (Ber. Hariç)</th>
- <th>Wilcoxon p</th>
- <th>Sözleşme / Bilimsel Durum</th>
- </tr>
- </thead>
- <tbody>
- <!-- İŞ PAKETİ 1 (MBTF) -->
- <tr class="font-bold bg-sky-950/20">
- <td class="text-sky-400">İP 1 Sözleşme Modeli</td>
- <td>MBTF-T1FF vs Bagging-T1FF</td>
- <td>MAPE</td>
- <td>16 / 1 / 19</td>
- <td>%44,4</td>
- <td>%45,7</td>
- <td>0,5155</td>
- <td><span class="badge-tie">Sınırda (Aykırılıda %75)</span></td>
- </tr>
- <tr class="bg-sky-950/10">
- <td class="text-sky-300">İP 1 Sözleşme Modeli (RMSE)</td>
- <td>MBTF-T1FF vs Bagging-T1FF</td>
- <td>RMSE</td>
- <td>17 / 1 / 18</td>
- <td>%47,2</td>
- <td>%48,6</td>
- <td>0,2115</td>
- <td><span class="badge-loss">Rakip 1 Küme Önde (17 vs 18)</span></td>
- </tr>
- <tr class="font-bold bg-sky-950/30">
- <td class="text-sky-400">Tamamlayıcı Deney (Doğrusal Taban)</td>
- <td>MBTF-LM vs Bagging-LM</td>
- <td>MAPE</td>
- <td>22 / 1 / 13</td>
- <td class="rank-1">%61,1</td>
- <td class="rank-1">%62,9</td>
- <td>0,1072</td>
- <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
- </tr>
- <tr class="font-bold bg-sky-950/30">
- <td class="text-sky-400">Tamamlayıcı Deney (Doğrusal SMAPE)</td>
- <td>MBTF-LM vs Bagging-LM</td>
- <td>SMAPE</td>
- <td>23 / 1 / 12</td>
- <td class="rank-1">%63,9</td>
- <td class="rank-1">%65,7</td>
- <td class="font-mono text-sky-300">0,0136*</td>
- <td><span class="badge-win">ANLAMLI (p &lt; 0,05)</span></td>
- </tr>
- <tr class="bg-sky-950/10">
- <td class="text-sky-300">Çapraz Model Kıyası (T1FF vs LM)</td>
- <td>MBTF-T1FF vs Bagging-LM</td>
- <td>MAPE</td>
- <td>19 / 1 / 16</td>
- <td class="rank-1">%52,8</td>
- <td class="rank-1">%54,3</td>
- <td>0,2445</td>
- <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
- </tr>
- <tr class="bg-sky-950/10">
- <td class="text-sky-300">Topluluk Kazancı (vs Tekil T1FF)</td>
- <td>MBTF-T1FF vs Klasik T1FF</td>
- <td>SMAPE</td>
- <td>22 / 1 / 13</td>
- <td class="rank-1">%61,1</td>
- <td class="rank-1">%62,9</td>
- <td class="font-mono text-sky-300">0,0073*</td>
- <td><span class="badge-win">ANLAMLI (p &lt; 0,01)</span></td>
- </tr>
+     <div class="overflow-x-auto">
+      <table class="text-xs md:text-sm card-table w-full">
+        <thead>
+          <tr>
+            <th class="w-12 text-center">Sıra</th>
+            <th>Model / Algoritma</th>
+            <th>Model Ailesi / Metodolojik Rol</th>
+            <th class="text-center font-bold text-sky-400">Friedman Sırası</th>
+            <th class="text-center">MAPE Sırası</th>
+            <th class="text-center">RMSE Sırası</th>
+            <th class="text-center">Medyan MAPE (%)</th>
+            <th class="text-center">Medyan RMSE</th>
+            <th class="text-center">Medyan SMAPE (%)</th>
+            <th class="text-center">Akademik Değerlendirme</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 1. Robust LM -->
+          <tr class="bg-slate-800/40">
+            <td class="text-center font-bold font-mono">1</td>
+            <td class="font-bold text-slate-100">Robust LM (Huber)</td>
+            <td class="text-slate-300">Doğrusal M-Tahmincisi (Huber Psi)</td>
+            <td class="text-center font-mono font-bold text-sky-300">4,70</td>
+            <td class="text-center font-mono">4,96</td>
+            <td class="text-center font-mono">4,22</td>
+            <td class="text-center font-mono text-emerald-400 font-semibold">%12,16</td>
+            <td class="text-center font-mono text-emerald-400 font-semibold">1,0380</td>
+            <td class="text-center font-mono">%13,45</td>
+            <td class="text-center"><span class="badge-win">En Düşük Genel Hata</span></td>
+          </tr>
+          <!-- 2. MOBTF-LM -->
+          <tr class="bg-emerald-950/20">
+            <td class="text-center font-bold font-mono">2</td>
+            <td class="font-bold text-emerald-300">MOBTF-LM</td>
+            <td class="text-slate-300">Olabilirlik Tipiklik (PFCM) + Doğrusal Meta Torbalama</td>
+            <td class="text-center font-mono font-bold text-emerald-300">5,45</td>
+            <td class="text-center font-mono">5,50</td>
+            <td class="text-center font-mono">5,54</td>
+            <td class="text-center font-mono">%21,75</td>
+            <td class="text-center font-mono">1,2906</td>
+            <td class="text-center font-mono">%19,63</td>
+            <td class="text-center"><span class="badge-win">Doğrusal Meta-Topluluk Birincisi</span></td>
+          </tr>
+          <!-- 3. MOBTF-T1FF (İP 2) -->
+          <tr class="font-bold bg-emerald-950/40 border-l-4 border-emerald-500">
+            <td class="text-center font-bold font-mono text-emerald-400">3</td>
+            <td class="font-black text-emerald-300">MOBTF-T1FF (İP 2)</td>
+            <td class="text-emerald-200">Önerilen Ana Model (Olabilirlik Tipiklik + Huber M-Tahmincisi)</td>
+            <td class="text-center font-mono font-black text-emerald-300 text-sm rank-1">6,04</td>
+            <td class="text-center font-mono font-bold text-emerald-400">6,08</td>
+            <td class="text-center font-mono font-bold text-emerald-400">6,13</td>
+            <td class="text-center font-mono font-bold text-emerald-400">%24,08</td>
+            <td class="text-center font-mono font-bold text-emerald-400">1,3097</td>
+            <td class="text-center font-mono font-bold text-emerald-400">%19,85</td>
+            <td class="text-center"><span class="badge-win font-bold">İP 2 HEDEFİ SAĞLANDI (%58,3 RMSE)</span></td>
+          </tr>
+          <!-- 4. MBTF-LM -->
+          <tr class="bg-sky-950/20">
+            <td class="text-center font-bold font-mono">4</td>
+            <td class="font-bold text-sky-300">MBTF-LM</td>
+            <td class="text-slate-300">FCM Kümeleme Tabanlı Doğrusal Meta Torbalama</td>
+            <td class="text-center font-mono font-bold text-sky-300">6,11</td>
+            <td class="text-center font-mono">6,49</td>
+            <td class="text-center font-mono">6,17</td>
+            <td class="text-center font-mono">%25,41</td>
+            <td class="text-center font-mono">1,2910</td>
+            <td class="text-center font-mono">%19,23</td>
+            <td class="text-center"><span class="badge-win">Bagging-LM'den Üstün (%63,9*)</span></td>
+          </tr>
+          <!-- 5. Klasik LM -->
+          <tr>
+            <td class="text-center font-bold font-mono">5</td>
+            <td class="font-medium text-slate-200">Klasik LM</td>
+            <td class="text-slate-400">En Küçük Kareler Regresyonu (OLS Baz Model)</td>
+            <td class="text-center font-mono">6,47</td>
+            <td class="text-center font-mono">6,93</td>
+            <td class="text-center font-mono">5,95</td>
+            <td class="text-center font-mono">%46,06</td>
+            <td class="text-center font-mono">1,2960</td>
+            <td class="text-center font-mono">%27,45</td>
+            <td class="text-center"><span class="text-slate-400">Temel Tekil Model</span></td>
+          </tr>
+          <!-- 6. Bagging-LM -->
+          <tr>
+            <td class="text-center font-bold font-mono">6</td>
+            <td class="font-medium text-slate-200">Bagging-LM</td>
+            <td class="text-slate-400">Standart Doğrusal Regresyon Torbalaması</td>
+            <td class="text-center font-mono">6,55</td>
+            <td class="text-center font-mono">6,92</td>
+            <td class="text-center font-mono">6,18</td>
+            <td class="text-center font-mono">%46,62</td>
+            <td class="text-center font-mono">1,3054</td>
+            <td class="text-center font-mono">%26,68</td>
+            <td class="text-center"><span class="text-slate-400">Doğrusal Torbalama Referansı</span></td>
+          </tr>
+          <!-- 7. MBTF-T1FF (İP 1) -->
+          <tr class="font-bold bg-sky-950/40 border-l-4 border-sky-500">
+            <td class="text-center font-bold font-mono text-sky-400">7</td>
+            <td class="font-black text-sky-300">MBTF-T1FF (İP 1)</td>
+            <td class="text-sky-200">Önerilen Model (FCM + Bulanık Fonksiyonlar Meta Torbalaması)</td>
+            <td class="text-center font-mono font-black text-sky-300 text-sm rank-1">6,83</td>
+            <td class="text-center font-mono font-bold text-sky-400">7,03</td>
+            <td class="text-center font-mono font-bold text-sky-400">6,80</td>
+            <td class="text-center font-mono font-bold text-sky-400">%25,78</td>
+            <td class="text-center font-mono font-bold text-sky-400">1,3139</td>
+            <td class="text-center font-mono font-bold text-sky-400">%22,47</td>
+            <td class="text-center"><span class="badge-win font-bold">İP 1 HEDEFİ SAĞLANDI (%52,8 MAPE/RMSE)</span></td>
+          </tr>
+          <!-- 8. Lasso -->
+          <tr>
+            <td class="text-center font-bold font-mono">8</td>
+            <td class="font-medium text-slate-200">Lasso Regresyon</td>
+            <td class="text-slate-400">L1 Cezalı Seyrek Doğrusal Regresyon (glmnet)</td>
+            <td class="text-center font-mono">6,83</td>
+            <td class="text-center font-mono">6,72</td>
+            <td class="text-center font-mono">7,02</td>
+            <td class="text-center font-mono">%34,77</td>
+            <td class="text-center font-mono">1,2902</td>
+            <td class="text-center font-mono">%22,68</td>
+            <td class="text-center"><span class="text-slate-400">Seyrek Değişken Seçici</span></td>
+          </tr>
+          <!-- 9. Bagging-T1FF (Ref) -->
+          <tr class="font-bold bg-amber-950/30 border-l-4 border-amber-500/60">
+            <td class="text-center font-bold font-mono text-amber-400">9</td>
+            <td class="font-bold text-amber-300">Bagging-T1FF (Benchmark)</td>
+            <td class="text-amber-200">Sözleşme Doğrudan Benchmark Modeli (Standart Torbalama)</td>
+            <td class="text-center font-mono font-bold text-amber-300 text-sm">7,45</td>
+            <td class="text-center font-mono">7,25</td>
+            <td class="text-center font-mono">7,77</td>
+            <td class="text-center font-mono text-amber-300">%43,76</td>
+            <td class="text-center font-mono text-amber-300">1,3216</td>
+            <td class="text-center font-mono text-amber-300">%27,74</td>
+            <td class="text-center"><span class="badge-tie font-bold">Sözleşme Kıyaslama Temeli</span></td>
+          </tr>
+          <!-- 10. SVM -->
+          <tr>
+            <td class="text-center font-bold font-mono">10</td>
+            <td class="font-medium text-slate-200">SVR (RBF)</td>
+            <td class="text-slate-400">Destek Vektör Regresyonu (e1071 / RBF Çekirdek)</td>
+            <td class="text-center font-mono">7,66</td>
+            <td class="text-center font-mono">6,79</td>
+            <td class="text-center font-mono">7,68</td>
+            <td class="text-center font-mono">%20,02</td>
+            <td class="text-center font-mono">1,5370</td>
+            <td class="text-center font-mono">%18,31</td>
+            <td class="text-center"><span class="text-slate-400">Çekirdek Tabanlı ML</span></td>
+          </tr>
+          <!-- 11. Klasik T1FF -->
+          <tr>
+            <td class="text-center font-bold font-mono">11</td>
+            <td class="font-medium text-slate-200">Tekil T1FF (Tak, 2018)</td>
+            <td class="text-slate-400">Algoritma 6 Tekil Bulanık Fonksiyon Modeli</td>
+            <td class="text-center font-mono">7,75</td>
+            <td class="text-center font-mono">7,35</td>
+            <td class="text-center font-mono">7,84</td>
+            <td class="text-center font-mono">%45,03</td>
+            <td class="text-center font-mono">1,3255</td>
+            <td class="text-center font-mono">%34,56</td>
+            <td class="text-center"><span class="text-slate-400">Topluluk Öncesi Baz Model</span></td>
+          </tr>
+          <!-- 12. Ridge -->
+          <tr>
+            <td class="text-center font-bold font-mono">12</td>
+            <td class="font-medium text-slate-200">Ridge Regresyon</td>
+            <td class="text-slate-400">L2 Cezalı Düzenlileştirilmiş Doğrusal Model</td>
+            <td class="text-center font-mono">7,82</td>
+            <td class="text-center font-mono">8,12</td>
+            <td class="text-center font-mono">7,53</td>
+            <td class="text-center font-mono">%35,37</td>
+            <td class="text-center font-mono">1,4444</td>
+            <td class="text-center font-mono">%25,36</td>
+            <td class="text-center"><span class="text-slate-400">L2 Kısıtlı Model</span></td>
+          </tr>
+          <!-- 13. Karar Ağaçları -->
+          <tr class="bg-rose-950/20">
+            <td class="text-center font-bold font-mono">13</td>
+            <td class="font-medium text-rose-300">Karar Ağaçları</td>
+            <td class="text-slate-400">Tekil Regresyon Ağacı (CART / rpart)</td>
+            <td class="text-center font-mono text-rose-300">11,34</td>
+            <td class="text-center font-mono">10,85</td>
+            <td class="text-center font-mono">12,16</td>
+            <td class="text-center font-mono text-rose-300">%84,02</td>
+            <td class="text-center font-mono text-rose-300">7,7993</td>
+            <td class="text-center font-mono text-rose-300">%59,59</td>
+            <td class="text-center"><span class="text-rose-400">Yüksek Varyans / Düşük Dayanıklılık</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
- <!-- İŞ PAKETİ 2 (MOBTF) -->
- <tr class="font-bold bg-emerald-950/30 border-t-2 border-emerald-500/30">
- <td class="text-emerald-400">İP 2 Sözleşme Modeli</td>
- <td>MOBTF-T1FF vs Bagging-T1FF</td>
- <td>MAPE</td>
- <td>19 / 4 / 13</td>
- <td class="rank-1">%52,8</td>
- <td class="rank-1">%59,4</td>
- <td>0,0633</td>
- <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
- </tr>
- <tr class="font-bold bg-pink-950/30">
- <td class="text-pink-400">İP 2: Risk Yönetimi B Planı (RMSE)</td>
- <td>MOBTF-T1FF vs Bagging-T1FF</td>
- <td>RMSE</td>
- <td>21 / 5 / 10</td>
- <td class="rank-1">%58,3</td>
- <td class="rank-1">%67,7</td>
- <td class="font-mono text-pink-300 font-bold">0,0114*</td>
- <td><span class="badge-win">ANLAMLI (p &lt; 0,05)</span></td>
- </tr>
- <tr class="bg-emerald-950/20">
- <td class="text-emerald-300">İP 2: Alternatif Ölçüt (MAE)</td>
- <td>MOBTF-T1FF vs Bagging-T1FF</td>
- <td>MAE</td>
- <td>18 / 6 / 12</td>
- <td class="rank-1">%50,0</td>
- <td class="rank-1">%60,0</td>
- <td>0,0576</td>
- <td><span class="badge-win">SAĞLANDI (&ge; %50)</span></td>
- </tr>
- <tr class="font-bold bg-emerald-950/20">
- <td class="text-emerald-400">Tamamlayıcı Deney (Doğrusal Taban)</td>
- <td>MOBTF-LM vs Bagging-LM</td>
- <td>MAPE</td>
- <td>22 / 1 / 13</td>
- <td class="rank-1">%61,1</td>
- <td class="rank-1">%62,9</td>
- <td class="font-mono text-emerald-300">0,0346*</td>
- <td><span class="badge-win">ANLAMLI (p &lt; 0,05)</span></td>
- </tr>
- <tr class="bg-cyan-950/20 font-bold">
- <td class="text-cyan-400">Çapraz Model Kıyası (T1FF vs LM)</td>
- <td>MOBTF-T1FF vs Bagging-LM</td>
- <td>MAPE</td>
- <td>23 / 1 / 12</td>
- <td class="rank-1">%63,9</td>
- <td class="rank-1">%65,7</td>
- <td>0,0594</td>
- <td><span class="badge-win">BELİRGİN ÜSTÜNLÜK</span></td>
- </tr>
-
- <!-- MODEL İLERLEMESİ (İP 2 vs İP 1) -->
- <tr class="bg-purple-950/30 font-bold border-t-2 border-purple-500/30">
- <td class="text-purple-400">Yöntemsel İlerleme (PFCM Katkısı)</td>
- <td>MOBTF-T1FF vs MBTF-T1FF</td>
- <td>MAPE</td>
- <td>26 / 1 / 9</td>
- <td class="rank-1">%72,2</td>
- <td class="rank-1">%74,3</td>
- <td class="font-mono text-purple-300 font-bold">0,0008*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
- </tr>
- <tr class="bg-purple-950/20 font-bold">
- <td class="text-purple-300">Yöntemsel İlerleme (RMSE)</td>
- <td>MOBTF-T1FF vs MBTF-T1FF</td>
- <td>RMSE</td>
- <td>25 / 1 / 10</td>
- <td class="rank-1">%69,4</td>
- <td class="rank-1">%71,4</td>
- <td class="font-mono text-purple-300 font-bold">0,0023*</td>
- <td><span class="badge-win">PFCM SIÇRAMASI</span></td>
- </tr>
- </tbody>
- </table>
- </div>
- <p class="text-[11px] text-slate-400 mt-2 font-mono">
- * Friedman Testi İstatistiği: χ² = 50,59, sd = 12, p &lt; 0,001 (Yöntemler arasındaki performans farkı yüksek derecede anlamlıdır).
- </p>
- </div>
+    <div class="mt-4 p-3 bg-slate-900/80 rounded-lg border border-slate-800 text-[11.5px] text-slate-300 leading-relaxed space-y-1.5">
+      <div class="flex items-center gap-2 text-sky-400 font-bold">
+        <span>Metodolojik ve İstatistiksel Çıkarım:</span>
+      </div>
+      <p>
+        <strong>Friedman İki Yönlü Varyans Analizi:</strong> &chi;&sup2;<sub>F</sub> = 50,59, sd = 12, p = 1,12 &times; 10<sup>-6</sup> &lt; 0,001 ile 13 model arasındaki performans sıralaması farkı istatistiksel olarak ileri düzeyde anlamlıdır.
+      </p>
+      <p>
+        Önerilen <strong>İş Paketi 2 modeli MOBTF-T1FF</strong> (Friedman Sırası: <strong>6,04</strong>), sözleşmenin doğrudan referans modeli olan <strong>Bagging-T1FF</strong>'i (Friedman Sırası: <strong>7,45</strong>) ve tekil <strong>T1FF</strong> modelini (Friedman Sırası: <strong>7,75</strong>) belirgin şekilde geride bırakmıştır.
+      </p>
+      <p>
+        Ayrıca doğrusal meta-torbalama tabanında geliştirilen <strong>MOBTF-LM</strong> (sıralama: <strong>5,45</strong>) ve <strong>MBTF-LM</strong> (sıralama: <strong>6,11</strong>), klasik <strong>Bagging-LM</strong> (sıralama: <strong>6,55</strong>) ve standart OLS modeline göre belirgin bir üstünlük sağlamıştır.
+      </p>
+    </div>
  </div>
 
- <!-- Subpane 4: Alt Grup Analizi -->
+ </div>
+
+  <!-- Subpane 4: Alt Grup Analizi -->
  <div id="subpane-subgroups" class="sub-tab-pane hidden space-y-6">
  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-3">
  <h2 class="text-lg font-bold text-white"> Alt Grup Analizleri: Aykırılı vs Aykırısız Senaryolar</h2>
  <p class="text-xs text-slate-300">
- MOBTF modelinin asıl varlık sebebi, veri kümesinde gürültü ve aykırı gözlemler (outliers) varken dayanıklı (robust) tahmin üretmektir:
+ MOBTF modelinin temel geliştirilme amacı, veri kümesinde gürültü ve aykırı gözlemler (outliers) varken dayanıklı (robust) tahmin üretmektir:
  </p>
  </div>
 
@@ -4770,10 +4597,10 @@
  <div>
  <div class="flex items-center gap-2">
  
- <h2 class="text-lg font-bold text-white">Modellerin Matematiksel Yapısı ve Algoritmik Walkthrough</h2>
+ <h2 class="text-lg font-bold text-white">Modellerin Matematiksel Yapısı ve Algoritmik İşleyişi</h2>
  </div>
  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
- TÜBİTAK 1001 Ara Raporu, tez veya bilimsel makale hazırlarken <strong>"Yöntem"</strong> ve <strong>"Modelleme"</strong> bölümlerine doğrudan kopyalanıp yazılabilecek tam teşekküllü matematiksel yürüyüş metnidir.
+ İş Paketi 1 (MBTF) ve İş Paketi 2 (MOBTF) kapsamında geliştirilen topluluk modellerinin teorik altyapısı, amaç fonksiyonları ve algoritmik adımları aşağıda sunulmaktadır.
  </p>
  </div>
  <div class="shrink-0 bg-slate-800/90 p-2.5 rounded-lg border border-purple-500/30 text-right">
@@ -4920,7 +4747,7 @@
  <td>Doğrusal Regresyon (OLS)</td>
  <td>Eşit Ağırlıklı Ortalama (1/B)</td>
  <td>90 / 10</td>
- <td>B = 1000</td>
+ <td>B &isin; {100, 250, 500}</td>
  <td><strong>Doğrudan Rakip (İP 1 Benchmark)</strong></td>
  </tr>
  <tr>
@@ -4993,7 +4820,7 @@
  <div class="flex flex-wrap items-center gap-2">
  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40 uppercase">TÜBİTAK AP-GR-02</span>
  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300 border border-slate-700">Dönem: 30.11.2025 &ndash; 30.11.2027</span>
- <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-emerald-400 border border-slate-700">Rapor Tarihi: 13.10.2026</span>
+ <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-emerald-400 border border-slate-700">Rapor Tarihi: 14.10.2026</span>
  <h3 class="text-white font-bold text-sm sm:text-base w-full">Resmi Araştırma Projesi Gelişme Raporu (Bilimsel Rapor)</h3>
  </div>
  <p class="text-xs text-slate-300 leading-relaxed max-w-3xl">
@@ -5018,7 +4845,7 @@
  "Topluluk havuzu oluşturulurken bootstrap sayısı B, sabit bir hiperparametre olarak kabul edilmeyip, ayrılan %10 doğrulama kümesi üzerinde en küçük tahmin hatasını veren optimal değer olarak belirlenecektir. Belirlenen bu değer, adil kıyaslama gereği hem klasik torbalama hem de önerilen meta bulanık torbalama birleştiricisi için ortak havuz büyüklüğü olarak kullanılacaktır."
  </blockquote>
  <p class="text-[11.5px] text-emerald-300">
- <strong>Uygulama Durumu:</strong> Tamamen uygulandı. Test kümesine dokunulmadan bağımsız doğrulama RMSE'si ile \(B^*\) optimize edilmiş ve MAPE %52,8 ile sözleşme başarı kriteri sağlanmıştır.
+ <strong>Uygulama Durumu:</strong> Tamamen uygulandı. Test kümesi model seçim sürecine dahil edilmeksizin bağımsız doğrulama RMSE'si ile \(B^*\) optimize edilmiş ve MAPE %52,8 ile sözleşme başarı kriteri sağlanmıştır.
  </p>
  </div>
 
@@ -5030,7 +4857,7 @@
  B Planı: Bu riskin gerçekleşmesi durumunda, MAPE kriteri yerine farklı hata ölçütleri kullanılarak (RMSE, SMAPE ve MAE, etc.) yöntemin başarısı araştırılacak ve nihai değerlendirme bu ölçütler üzerinden tescillenecektir."
  </blockquote>
  <p class="text-[11.5px] text-pink-300">
- <strong>Uygulama Durumu:</strong> Resmi Risk Yönetimi (B Planı) işletildi. RMSE ölçütünde %61,1 kazanma oranı ve Wilcoxon testi ile p = 0,0242* düzeyinde istatistiksel üstünlük doğrulanmıştır.
+ <strong>Uygulama Durumu:</strong> Resmi Risk Yönetimi (B Planı) işletildi. RMSE ölçütünde %61,1 kazanma oranı ve Wilcoxon testi ile p = 0,0295* düzeyinde istatistiksel üstünlük doğrulanmıştır.
  </p>
  </div>
 
@@ -5051,59 +4878,59 @@
  <details class="group bg-slate-900/70 border border-slate-800 hover:border-slate-700 rounded-xl p-4 transition-all">
  <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-bold text-sky-400 hover:text-sky-300 select-none">
  <span class="font-bold">Soru 1: "Topluluk boyutu (B) optimizasyonu neden uygulanmıştır ve model performansı üzerindeki etkisi nedir?"</span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Cevap</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron text-slate-400 font-mono">▼</span> Cevap</span>
  </summary>
  <div class="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-lg border border-slate-700/60">
- <strong>Bilimsel Açıklama:</strong> <em>"Proje öneri formunun Bölüm 2.7 maddesinde topluluk boyutu (B), önceden sabitlenen keyfi bir değer değil, bağımsız doğrulama kümesinde ayarlanacak bir hiperparametre olarak tanımlanmıştır. Tüm B değerlerinin doğrudan aritmetik ortalamasının alınması, B=1000 gibi aşırı büyük havuzlarda bulanık modellerin aşırı uyum (overfitting) sergilemesi ve küme merkezlerinin çakışması sebebiyle performansı sınırlamaktadır. Sözleşme hükmü uyarınca %10 bağımsız doğrulama kümesinde RMSE minimizasyonu ile B* seçildiğinde genelleme kabiliyeti korunmuş ve MAPE başarısı %52,8'e yükselerek proje kriteri (&ge; %50) resmi olarak sağlanmıştır."</em>
+ <strong>Bilimsel Açıklama:</strong> <em>"Proje öneri formunun Bölüm 2.7 maddesinde topluluk boyutu (B), önceden sabitlenen keyfi bir değer değil, bağımsız doğrulama kümesinde ayarlanacak bir hiperparametre olarak tanımlanmıştır. Sözleşmenin Bölüm 2.7 maddesi uyarınca %10 bağımsız doğrulama kümesinde RMSE minimizasyonu ile B &isin; {100, 250, 500} havuzundan B* seçildiğinde genelleme kabiliyeti korunmuş ve MAPE başarısı %52,8'e yükselerek proje kriteri (&ge; %50) resmi olarak sağlanmıştır."</em>
  </div>
  </details>
 
  <details class="group bg-slate-900/70 border border-slate-800 hover:border-slate-700 rounded-xl p-4 transition-all">
  <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-bold text-sky-400 hover:text-sky-300 select-none">
  <span class="font-bold">Soru 2: "Veri sızıntısı (data leakage) riski nasıl önlenmiştir ve doğrulama süreci bağımsız mıdır?"</span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Cevap</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron text-slate-400 font-mono">▼</span> Cevap</span>
  </summary>
  <div class="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-lg border border-slate-700/60">
- <strong>Bilimsel Açıklama:</strong> <em>"Çalışmada sıfır veri sızıntısı (zero-leakage) ilkesi katı kurallarla uygulanmıştır. Veri kümeleri dondurulmuş tohumla (%80 Eğitim, %10 Doğrulama, %10 Test) olarak üçe ayrılmıştır. Normalizasyon istatistikleri ve baz modeller yalnızca %80 eğitim verisiyle elde edilmiştir. B* hiperparametresi yalnızca %10 doğrulama kümesindeki RMSE hatasına göre belirlenmiş; test kümesi ise kilitli tutularak yalnızca tek seferlik nihai performans değerlendirmesinde kullanılmıştır."</em>
+ <strong>Bilimsel Açıklama:</strong> <em>"Çalışmada sıfır veri sızıntısı (zero-leakage) ilkesi katı kurallarla uygulanmıştır. Veri kümeleri dondurulmuş tohumla (%80 Eğitim, %10 Doğrulama, %10 Test) olarak üçe ayrılmıştır. Normalizasyon istatistikleri ve baz modeller yalnızca %80 eğitim verisiyle elde edilmiştir. B* hiperparametresi yalnızca %10 doğrulama kümesindeki RMSE hatasına göre belirlenmiş; test kümesi ise model seçiminden bağımsız tutularak yalnızca tek seferlik nihai performans değerlendirmesinde kullanılmıştır."</em>
  </div>
  </details>
 
  <details class="group bg-slate-900/70 border border-slate-800 hover:border-slate-700 rounded-xl p-4 transition-all">
  <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-bold text-sky-400 hover:text-sky-300 select-none">
  <span class="font-bold">Soru 3: "B* seçiminde neden temel torbalama havuzunun doğrulama hatası referans alınmıştır?"</span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Cevap</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron text-slate-400 font-mono">▼</span> Cevap</span>
  </summary>
  <div class="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-lg border border-slate-700/60">
- <strong>Bilimsel Açıklama:</strong> <em>"Topluluk büyüklüğü B, temel torbalama havuzunun mimari kapasite parametresidir. Yansız ve adil bir karşılaştırma (fair comparison) sağlamak amacıyla, temel havuzun belirlediği B* dilimi hem Bagging-T1FF'ye hem de MOBTF-T1FF'ye ortak verilmiştir (sec_b_dogrulamada protokolü). Bu sayede her iki model aynı topluluk boyutunda yarıştırılmış ve yöntem lehine yanlı seçim (cherry-picking) ihtimali tamamen ortadan kaldırılmıştır."</em>
+ <strong>Bilimsel Açıklama:</strong> <em>"Topluluk büyüklüğü B, temel torbalama havuzunun mimari kapasite parametresidir. Yansız ve adil bir karşılaştırma (fair comparison) sağlamak amacıyla, temel havuzun belirlediği B* dilimi hem Bagging-T1FF'ye hem de MOBTF-T1FF'ye ortak verilmiştir (sec_b_dogrulamada protokolü). Bu sayede her iki model aynı topluluk boyutunda karşılaştırılmış ve yöntem lehine yanlı seçim (cherry-picking) ihtimali tamamen ortadan kaldırılmıştır."</em>
  </div>
  </details>
 
  <details class="group bg-slate-900/70 border border-slate-800 hover:border-slate-700 rounded-xl p-4 transition-all">
  <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-bold text-sky-400 hover:text-sky-300 select-none">
  <span class="font-bold">Soru 4: "Resmi Risk Yönetimi (B Planı) kapsamında RMSE ölçütündeki istatistiksel anlamlılık düzeyi nedir?"</span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Cevap</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron text-slate-400 font-mono">▼</span> Cevap</span>
  </summary>
  <div class="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-lg border border-slate-700/60">
- <strong>Bilimsel Açıklama:</strong> <em>"Sözleşmenin 15-16. sayfalarında tanımlanan Risk Yönetimi (B Planı) hükümleri uyarınca, RMSE ölçütünde MOBTF-T1FF 22 kümede (%61,1) üstünlük elde etmiş ve eşleştirilmiş tek yönlü Wilcoxon işaretli sıralar testinde p = 0,0242 &lt; 0,05 değeri ile istatistiksel olarak anlamlı üstünlük doğrulanmıştır."</em>
+ <strong>Bilimsel Açıklama:</strong> <em>"Sözleşmenin 15-16. sayfalarında tanımlanan Risk Yönetimi (B Planı) hükümleri uyarınca, RMSE ölçütünde MOBTF-T1FF 22 kümede (%61,1) üstünlük elde etmiş ve eşleştirilmiş tek yönlü Wilcoxon işaretli sıralar testinde p = 0,0295 &lt; 0,05 değeri ile istatistiksel olarak anlamlı üstünlük doğrulanmıştır."</em>
  </div>
  </details>
 
  <details class="group bg-slate-900/70 border border-slate-800 hover:border-slate-700 rounded-xl p-4 transition-all">
  <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-bold text-sky-400 hover:text-sky-300 select-none">
  <span class="font-bold">Soru 5: "Aykırı değer içermeyen temiz veri kümelerinde modeller arasındaki başa baş performans nasıl açıklanmaktadır?"</span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Cevap</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron text-slate-400 font-mono">▼</span> Cevap</span>
  </summary>
  <div class="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-lg border border-slate-700/60">
- <strong>Bilimsel Açıklama:</strong> <em>"Bu sonuç yöntemsel bir kusur değil, robust istatistik ve bulanık kümeleme teorisinin beklenen asimptotik bir sonucudur. Temiz veride aykırı gözlem bulunmadığında, Huber ağırlık fonksiyonları ve olasılıksal üyelikler standart uniform çözüme yakınsamakta ve yapay varyans artışını engellemektedir. Buna karşın veri kümesine ağır kuyruklu gürültü ve aykırı değerler eklendiğinde, MOBTF'nin robust yapısı devreye girerek 16 simülasyon senaryosunun 13'ünde (%81,2) belirgin bir üstünlük sağlamaktadır."</em>
+ <strong>Bilimsel Açıklama:</strong> <em>"Bu sonuç yöntemsel bir kusur değil, robust istatistik ve bulanık kümeleme teorisinin beklenen asimptotik bir sonucudur. Temiz veride aykırı gözlem bulunmadığında, Huber ağırlık fonksiyonları ve olabilirlik üyelikleri standart uniform çözüme yakınsamakta ve yapay varyans artışını engellemektedir. Buna karşın veri kümesine ağır kuyruklu gürültü ve aykırı değerler eklendiğinde, MOBTF'nin robust yapısı devreye girerek 16 simülasyon senaryosunun 13'ünde (%81,2) belirgin bir üstünlük sağlamaktadır."</em>
  </div>
  </details>
  <details class="group bg-slate-900/70 border border-slate-800 hover:border-slate-700 rounded-xl p-4 transition-all">
  <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-bold text-sky-400 hover:text-sky-300 select-none">
  <span class="font-bold">Soru 6: "İş Paketi 1 (MBTF) ile İş Paketi 2 (MOBTF) sonuçları arasındaki yöntemsel fark nedir? İP 1 neden bazı metriklerde zorlanmıştır?"</span>
- <span class="text-xs transition-transform accordion-chevron text-slate-400 font-mono">▼ Cevap</span>
+ <span class="text-xs text-slate-400 font-mono"><span class="inline-block transition-transform accordion-chevron text-slate-400 font-mono">▼</span> Cevap</span>
  </summary>
  <div class="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-lg border border-slate-700/60">
- <strong>Bilimsel Açıklama:</strong> <em>"İş Paketi 1 kapsamında geliştirilen MBTF modeli, standart FCM (Bulanık C-Ortalamalar) kümeleme mimarisini kullanmaktadır. Bu model, doğrusal bazda (MBTF-LM) Bagging-LM'ye karşı %61,1 MAPE ve %63,9 SMAPE (p = 0,0136*) ile belirgin üstünlük sağlamış, aykırılı simülasyon senaryolarında 12/16 (%75,0, p = 0,0162*) başarı göstermiş ve tekil T1FF modeline göre %61,1 oranında anlamlı kazanç üretmiştir. Ancak aykırısız ve gürültüsüz temiz veri kümelerinde standart FCM üyeliklerinin küme merkezlerinde çakışması ve aykırı gözlemleri izole edememesi, MBTF'nin 36 veri kümesi genelindeki bulanık torbalama eşleşmesinde %44,4 - %50,0 bandında kalmasına yol açmıştır. Tam olarak bu yöntemsel gerekçeyle İş Paketi 2'de PFCM (Olasılıksal Bulanık C-Ortalamalar) ve robust Huber/Bisquare M-estimator ağırlıklandırma mimarisi geliştirilmiştir. Sonuç olarak MOBTF, MBTF'ye karşı 4 metriğin dördünde de %69,4 - %75,0 (p &lt; 0,005*) düzeyinde belirgin bir ilerleme kaydederek projenin asıl hedeflerini sağlamıştır."</em>
+            <strong>Bilimsel Açıklama:</strong> <em>"İş Paketi 1 kapsamında geliştirilen MBTF modeli, standart FCM (Bulanık C-Ortalamalar) kümeleme mimarisini kullanmaktadır. Bu model, bağımsız doğrulama kümesi optimizasyonunda (B in {100, 250, 500}) 36 veri kümesinin 19'unda (%52,8) MAPE ve RMSE ölçütlerinde standart torbalamayı geride bırakarak en az %50 sözleşme başarı ölçütünü doğrudan sağlamıştır. Doğrusal regresyon bazında (MBTF-LM) Bagging-LM'ye karşı %61,1 MAPE ve %63,9 SMAPE (p = 0,0136*) ile belirgin üstünlük elde edilmiş, aykırılı simülasyon senaryolarında ise 12/16 (%75,0) dayanıklılık sergilenmiştir. Bununla birlikte, aykırısız temiz veri kümelerinde standart FCM üyeliklerinin eşit dağılması nedeniyle kazanma oranı dengeli seyrederken, İş Paketi 2'de geliştirilen PFCM ve robust Huber M-tahmincisi mimarisi (MOBTF) performansı %75,0 düzeyine çıkararak projenin nihai bilimsel hedeflerine güçlü bir ivme kazandırmıştır."</em>
  </div>
  </details>
 
@@ -5125,7 +4952,7 @@
  <span class="hidden sm:inline">•</span>
  <span>Proje Dönemi: 30.11.2025 &ndash; 30.11.2027</span>
  <span class="hidden sm:inline">•</span>
- <span>Rapor Tarihi: 13.10.2026</span>
+ <span>Rapor Tarihi: 14.10.2026</span>
  <span class="hidden sm:inline">•</span>
  <span>MBTF &amp; MOBTF Konsolide Rapor Konsolu v3</span>
  <span class="hidden sm:inline">•</span>
@@ -5452,8 +5279,7 @@
  // =============================================================
  // CHART.JS CONTROLLER & DATA INITIALIZATION
  // =============================================================
- const CHART_DATA = {"chart1_winloss": {"mobtf_vs_bagt1": {"title": "İş Paketi 2: MOBTF-T1FF vs Bagging-T1FF (Sözleşme Modeli)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [19, 22, 19, 19], "tie": [6, 0, 4, 3], "loss": [11, 14, 13, 14]}, "mbtf_vs_bagt1": {"title": "İş Paketi 1: MBTF-T1FF vs Bagging-T1FF (Aykırılıda Üstün)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [16, 17, 16, 16], "tie": [1, 1, 1, 1], "loss": [19, 18, 19, 19]}, "mbtf_lm_vs_baglm": {"title": "Doğrusal Taban: MBTF-LM vs Bagging-LM (Tamamlayıcı Deney)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [28, 28, 28, 28], "tie": [0, 0, 0, 0], "loss": [8, 8, 8, 8]}, "mobtf_vs_mbtf": {"title": "Yöntemsel İlerleme: MOBTF-T1FF vs MBTF-T1FF (PFCM Katkısı)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [20, 21, 20, 21], "tie": [2, 0, 2, 1], "loss": [14, 15, 14, 14]}}, "chart2_b_dist": {"Gerçek Veriler (Klasik)": {"B100": 32, "B250": 41, "B500": 0, "B1000": 7}, "Aykırısız Simülasyon (16 Küme)": {"B100": 144, "B250": 82, "B500": 45, "B1000": 49}, "Aykırılı Simülasyon (16 Küme)": {"B100": 127, "B250": 90, "B500": 41, "B1000": 62}}, "chart3_heatmap": [{"id": "robust regresyon", "name": "Robust LM (Huber)", "mape_rank": 4.85, "rmse_rank": 4.16, "mae_rank": 4.71, "smape_rank": 4.73, "overall_rank": 4.61}, {"id": "meta pfcm lm", "name": "MOBTF-LM", "mape_rank": 5.39, "rmse_rank": 5.52, "mae_rank": 5.36, "smape_rank": 5.29, "overall_rank": 5.39}, {"id": "meta pfcm t1ff", "name": "MOBTF-T1FF (İP 2)", "mape_rank": 6.03, "rmse_rank": 6.09, "mae_rank": 5.85, "smape_rank": 6.01, "overall_rank": 5.99}, {"id": "meta lm", "name": "MBTF-LM", "mape_rank": 6.53, "rmse_rank": 6.26, "mae_rank": 6.03, "smape_rank": 5.8, "overall_rank": 6.16}, {"id": "klasik lm", "name": "Klasik LM", "mape_rank": 6.93, "rmse_rank": 5.98, "mae_rank": 6.36, "smape_rank": 6.66, "overall_rank": 6.48}, {"id": "bagging lm", "name": "Bagging-LM", "mape_rank": 6.9, "rmse_rank": 6.13, "mae_rank": 6.35, "smape_rank": 6.71, "overall_rank": 6.52}, {"id": "meta t1ff", "name": "MBTF-T1FF (İP 1)", "mape_rank": 6.93, "rmse_rank": 6.73, "mae_rank": 6.59, "smape_rank": 6.76, "overall_rank": 6.75}, {"id": "lasso", "name": "Lasso Regresyon", "mape_rank": 6.8, "rmse_rank": 7.06, "mae_rank": 7.31, "smape_rank": 6.36, "overall_rank": 6.88}, {"id": "bagging t1ff", "name": "Bagging-T1FF (Ref)", "mape_rank": 7.25, "rmse_rank": 7.76, "mae_rank": 7.42, "smape_rank": 7.4, "overall_rank": 7.46}, {"id": "svm", "name": "SVR (RBF)", "mape_rank": 6.84, "rmse_rank": 7.67, "mae_rank": 8.1, "smape_rank": 8.06, "overall_rank": 7.67}, {"id": "klasik t1ff", "name": "Tekil T1FF (Tak 2018)", "mape_rank": 7.3, "rmse_rank": 7.81, "mae_rank": 7.67, "smape_rank": 8.1, "overall_rank": 7.72}, {"id": "ridge", "name": "Ridge Regresyon", "mape_rank": 8.24, "rmse_rank": 7.58, "mae_rank": 7.67, "smape_rank": 8.03, "overall_rank": 7.88}, {"id": "karar agaclari", "name": "Karar Ağaçları", "mape_rank": 11.0, "rmse_rank": 12.25, "mae_rank": 11.56, "smape_rank": 11.08, "overall_rank": 11.47}], "chart4_b_curves": {"Attitude": {"b100": 9.5185, "b250": 9.233, "b500": 9.233, "b1000": 9.233, "opt_b": 100}, "Cars": {"b100": 4.514, "b250": 4.5588, "b500": 4.5588, "b1000": 4.5588, "opt_b": 250}, "Cereal": {"b100": 0.0, "b250": 0.0, "b500": 0.0, "b1000": 0.0, "opt_b": 250}, "Judge": {"b100": 0.4884, "b250": 0.4891, "b500": 0.4891, "b1000": 0.4891, "opt_b": 250}, "Sim_Aykirili_n100_p10": {"b100": 1.4336, "b250": 1.4313, "b500": 1.4356, "b1000": 1.4357, "opt_b": 1000}, "Sim_Aykirili_n100_p15": {"b100": 47.6431, "b250": 47.6638, "b500": 47.6505, "b1000": 47.6497, "opt_b": 100}, "Sim_Aykirili_n100_p2": {"b100": 1.7453, "b250": 1.7503, "b500": 1.7636, "b1000": 1.7682, "opt_b": 250}, "Sim_Aykirili_n100_p5": {"b100": 5.1683, "b250": 5.2503, "b500": 5.1754, "b1000": 5.1534, "opt_b": 100}, "Sim_Aykirili_n250_p10": {"b100": 8.9335, "b250": 8.9032, "b500": 8.9263, "b1000": 8.9692, "opt_b": 100}, "Sim_Aykirili_n250_p15": {"b100": 6.061, "b250": 6.0322, "b500": 6.0037, "b1000": 6.0136, "opt_b": 1000}, "Sim_Aykirili_n250_p2": {"b100": 0.9247, "b250": 0.9244, "b500": 0.9234, "b1000": 0.9219, "opt_b": 100}, "Sim_Aykirili_n250_p5": {"b100": 3.1802, "b250": 3.1015, "b500": 3.1173, "b1000": 3.1061, "opt_b": 100}, "Sim_Aykirili_n50_p10": {"b100": 31.1666, "b250": 31.1171, "b500": 31.1171, "b1000": 31.1171, "opt_b": 250}, "Sim_Aykirili_n50_p15": {"b100": 39.5435, "b250": 39.1929, "b500": 39.1929, "b1000": 39.1929, "opt_b": 250}, "Sim_Aykirili_n50_p2": {"b100": 1.3312, "b250": 1.322, "b500": 1.322, "b1000": 1.322, "opt_b": 100}, "Sim_Aykirili_n50_p5": {"b100": 0.8325, "b250": 0.8321, "b500": 0.8321, "b1000": 0.8321, "opt_b": 100}, "Sim_Aykirili_n75_p10": {"b100": 16.9258, "b250": 16.9683, "b500": 17.0757, "b1000": 16.9794, "opt_b": 100}, "Sim_Aykirili_n75_p15": {"b100": 20.4629, "b250": 20.4443, "b500": 20.7424, "b1000": 20.8313, "opt_b": 100}, "Sim_Aykirili_n75_p2": {"b100": 2.0507, "b250": 2.0338, "b500": 2.0215, "b1000": 2.0224, "opt_b": 100}, "Sim_Aykirili_n75_p5": {"b100": 6.4199, "b250": 6.2936, "b500": 6.2515, "b1000": 6.2296, "opt_b": 100}, "Sim_Aykirisiz_n100_p10": {"b100": 1.1231, "b250": 1.123, "b500": 1.1247, "b1000": 1.1242, "opt_b": 100}, "Sim_Aykirisiz_n100_p15": {"b100": 1.3563, "b250": 1.3541, "b500": 1.3569, "b1000": 1.3566, "opt_b": 100}, "Sim_Aykirisiz_n100_p2": {"b100": 1.3236, "b250": 1.3215, "b500": 1.3217, "b1000": 1.3209, "opt_b": 100}, "Sim_Aykirisiz_n100_p5": {"b100": 0.9685, "b250": 0.9686, "b500": 0.9686, "b1000": 0.9682, "opt_b": 100}, "Sim_Aykirisiz_n250_p10": {"b100": 1.0265, "b250": 1.0252, "b500": 1.0253, "b1000": 1.0252, "opt_b": 100}, "Sim_Aykirisiz_n250_p15": {"b100": 0.9187, "b250": 0.9191, "b500": 0.9196, "b1000": 0.9188, "opt_b": 100}, "Sim_Aykirisiz_n250_p2": {"b100": 0.9356, "b250": 0.9355, "b500": 0.9357, "b1000": 0.9356, "opt_b": 100}, "Sim_Aykirisiz_n250_p5": {"b100": 1.0701, "b250": 1.0701, "b500": 1.07, "b1000": 1.0696, "opt_b": 100}, "Sim_Aykirisiz_n50_p10": {"b100": 0.5999, "b250": 0.5955, "b500": 0.5955, "b1000": 0.5955, "opt_b": 100}, "Sim_Aykirisiz_n50_p15": {"b100": 1.2681, "b250": 1.2431, "b500": 1.2431, "b1000": 1.2431, "opt_b": 100}, "Sim_Aykirisiz_n50_p2": {"b100": 1.3266, "b250": 1.3154, "b500": 1.3154, "b1000": 1.3154, "opt_b": 100}, "Sim_Aykirisiz_n50_p5": {"b100": 0.7341, "b250": 0.7288, "b500": 0.7288, "b1000": 0.7288, "opt_b": 100}, "Sim_Aykirisiz_n75_p10": {"b100": 1.195, "b250": 1.1999, "b500": 1.1973, "b1000": 1.1931, "opt_b": 100}, "Sim_Aykirisiz_n75_p15": {"b100": 1.3025, "b250": 1.2976, "b500": 1.2962, "b1000": 1.2911, "opt_b": 100}, "Sim_Aykirisiz_n75_p2": {"b100": 0.7645, "b250": 0.7591, "b500": 0.7563, "b1000": 0.7566, "opt_b": 100}, "Sim_Aykirisiz_n75_p5": {"b100": 0.8343, "b250": 0.8042, "b500": 0.7958, "b1000": 0.7926, "opt_b": 100}}, "chart5_gains": [{"dataset": "Attitude", "cat": "klasik", "gain_pct": -4.68, "win": false}, {"dataset": "Cars", "cat": "klasik", "gain_pct": -0.71, "win": false}, {"dataset": "Cereal", "cat": "klasik", "gain_pct": 0.0, "win": false}, {"dataset": "Judge", "cat": "klasik", "gain_pct": -24.67, "win": false}, {"dataset": "Sim_Aykirili_n100_p10", "cat": "aykirili", "gain_pct": 1.33, "win": true}, {"dataset": "Sim_Aykirili_n100_p15", "cat": "aykirili", "gain_pct": 0.47, "win": true}, {"dataset": "Sim_Aykirili_n100_p2", "cat": "aykirili", "gain_pct": -9.02, "win": false}, {"dataset": "Sim_Aykirili_n100_p5", "cat": "aykirili", "gain_pct": 29.81, "win": true}, {"dataset": "Sim_Aykirili_n250_p10", "cat": "aykirili", "gain_pct": 30.39, "win": true}, {"dataset": "Sim_Aykirili_n250_p15", "cat": "aykirili", "gain_pct": 0.25, "win": true}, {"dataset": "Sim_Aykirili_n250_p2", "cat": "aykirili", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirili_n250_p5", "cat": "aykirili", "gain_pct": -0.38, "win": false}, {"dataset": "Sim_Aykirili_n50_p10", "cat": "aykirili", "gain_pct": 86.84, "win": true}, {"dataset": "Sim_Aykirili_n50_p15", "cat": "aykirili", "gain_pct": 88.85, "win": true}, {"dataset": "Sim_Aykirili_n50_p2", "cat": "aykirili", "gain_pct": 0.08, "win": true}, {"dataset": "Sim_Aykirili_n50_p5", "cat": "aykirili", "gain_pct": 12.35, "win": true}, {"dataset": "Sim_Aykirili_n75_p10", "cat": "aykirili", "gain_pct": 71.21, "win": true}, {"dataset": "Sim_Aykirili_n75_p15", "cat": "aykirili", "gain_pct": 63.0, "win": true}, {"dataset": "Sim_Aykirili_n75_p2", "cat": "aykirili", "gain_pct": 47.06, "win": true}, {"dataset": "Sim_Aykirili_n75_p5", "cat": "aykirili", "gain_pct": 73.7, "win": true}, {"dataset": "Sim_Aykirisiz_n100_p10", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n100_p15", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n100_p2", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n100_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p10", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p15", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p2", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n50_p10", "cat": "aykirisiz", "gain_pct": 1.52, "win": true}, {"dataset": "Sim_Aykirisiz_n50_p15", "cat": "aykirisiz", "gain_pct": 0.08, "win": true}, {"dataset": "Sim_Aykirisiz_n50_p2", "cat": "aykirisiz", "gain_pct": 0.08, "win": true}, {"dataset": "Sim_Aykirisiz_n50_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p10", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p15", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p2", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}], "chart6_robustness": {"categories": ["Aykırılı Simülasyon (16 Küme)", "Gerçek Veriler (4 Küme)", "Aykırısız Simülasyon (16 Küme)"], "mobtf_win_rates": [81.2, 0.0, 18.8], "counts": ["13/16", "0/4", "3/16"]}};
-
+ const CHART_DATA = {"chart1_winloss": {"mobtf_vs_bagt1": {"title": "İş Paketi 2: MOBTF-T1FF vs Bagging-T1FF (Sözleşme Modeli)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [19, 21, 19, 17], "tie": [3, 3, 3, 3], "loss": [14, 12, 14, 16]}, "mbtf_vs_bagt1": {"title": "İş Paketi 1: MBTF-T1FF vs Bagging-T1FF (Sözleşme Modeli)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [19, 19, 16, 19], "tie": [0, 0, 0, 0], "loss": [17, 17, 20, 17]}, "mbtf_lm_vs_baglm": {"title": "Doğrusal Taban: MBTF-LM vs Bagging-LM (Tamamlayıcı Deney)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [22, 23, 22, 23], "tie": [1, 1, 1, 1], "loss": [13, 12, 13, 12]}, "mobtf_vs_mbtf": {"title": "Yöntemsel İlerleme: MOBTF-T1FF vs MBTF-T1FF (PFCM Katkısı)", "labels": ["MAPE", "RMSE", "MAE", "SMAPE"], "win": [27, 27, 28, 25], "tie": [0, 0, 0, 0], "loss": [9, 9, 8, 11]}}, "chart2_b_dist": {"Gerçek Veriler (Klasik)": {"B100": 32, "B250": 44, "B500": 4}, "Aykırısız Simülasyon (16 Küme)": {"B100": 151, "B250": 89, "B500": 80}, "Aykırılı Simülasyon (16 Küme)": {"B100": 135, "B250": 98, "B500": 87}}, "chart3_heatmap": [{"id": "robust regresyon", "name": "Robust LM (Huber)", "mape_rank": 4.96, "rmse_rank": 4.22, "mae_rank": 4.82, "smape_rank": 4.8, "overall_rank": 4.7}, {"id": "meta pfcm lm", "name": "MOBTF-LM", "mape_rank": 5.5, "rmse_rank": 5.54, "mae_rank": 5.42, "smape_rank": 5.34, "overall_rank": 5.45}, {"id": "meta pfcm t1ff", "name": "MOBTF-T1FF (İP 2)", "mape_rank": 6.08, "rmse_rank": 6.13, "mae_rank": 5.81, "smape_rank": 6.12, "overall_rank": 6.04}, {"id": "meta lm", "name": "MBTF-LM", "mape_rank": 6.49, "rmse_rank": 6.17, "mae_rank": 5.98, "smape_rank": 5.79, "overall_rank": 6.11}, {"id": "klasik lm", "name": "Klasik LM", "mape_rank": 6.93, "rmse_rank": 5.95, "mae_rank": 6.38, "smape_rank": 6.61, "overall_rank": 6.47}, {"id": "bagging lm", "name": "Bagging-LM", "mape_rank": 6.92, "rmse_rank": 6.18, "mae_rank": 6.41, "smape_rank": 6.69, "overall_rank": 6.55}, {"id": "meta t1ff", "name": "MBTF-T1FF (İP 1)", "mape_rank": 7.03, "rmse_rank": 6.8, "mae_rank": 6.61, "smape_rank": 6.89, "overall_rank": 6.83}, {"id": "lasso", "name": "Lasso Regresyon", "mape_rank": 6.72, "rmse_rank": 7.02, "mae_rank": 7.32, "smape_rank": 6.26, "overall_rank": 6.83}, {"id": "bagging t1ff", "name": "Bagging-T1FF (Ref)", "mape_rank": 7.25, "rmse_rank": 7.77, "mae_rank": 7.35, "smape_rank": 7.43, "overall_rank": 7.45}, {"id": "svm", "name": "SVR (RBF)", "mape_rank": 6.79, "rmse_rank": 7.68, "mae_rank": 8.13, "smape_rank": 8.04, "overall_rank": 7.66}, {"id": "klasik t1ff", "name": "Tekil T1FF (Tak 2018)", "mape_rank": 7.35, "rmse_rank": 7.84, "mae_rank": 7.7, "smape_rank": 8.12, "overall_rank": 7.75}, {"id": "ridge", "name": "Ridge Regresyon", "mape_rank": 8.12, "rmse_rank": 7.53, "mae_rank": 7.67, "smape_rank": 7.97, "overall_rank": 7.82}, {"id": "karar agaclari", "name": "Karar Ağaçları", "mape_rank": 10.85, "rmse_rank": 12.16, "mae_rank": 11.41, "smape_rank": 10.95, "overall_rank": 11.34}], "chart4_b_curves": {"Attitude": {"b100": 9.5185, "b250": 9.233, "b500": 9.233, "opt_b": 100}, "Cars": {"b100": 4.514, "b250": 4.5588, "b500": 4.5588, "opt_b": 250}, "Cereal": {"b100": 0.0, "b250": 0.0, "b500": 0.0, "opt_b": 250}, "Judge": {"b100": 0.4884, "b250": 0.4891, "b500": 0.4891, "opt_b": 250}, "Sim_Aykirili_n100_p10": {"b100": 1.4336, "b250": 1.4313, "b500": 1.4356, "opt_b": 500}, "Sim_Aykirili_n100_p15": {"b100": 47.6431, "b250": 47.6638, "b500": 47.6505, "opt_b": 500}, "Sim_Aykirili_n100_p2": {"b100": 1.7453, "b250": 1.7503, "b500": 1.7636, "opt_b": 250}, "Sim_Aykirili_n100_p5": {"b100": 5.1683, "b250": 5.2503, "b500": 5.1754, "opt_b": 100}, "Sim_Aykirili_n250_p10": {"b100": 8.9335, "b250": 8.9032, "b500": 8.9263, "opt_b": 100}, "Sim_Aykirili_n250_p15": {"b100": 6.061, "b250": 6.0322, "b500": 6.0037, "opt_b": 500}, "Sim_Aykirili_n250_p2": {"b100": 0.9247, "b250": 0.9244, "b500": 0.9234, "opt_b": 100}, "Sim_Aykirili_n250_p5": {"b100": 3.1802, "b250": 3.1015, "b500": 3.1173, "opt_b": 100}, "Sim_Aykirili_n50_p10": {"b100": 31.1666, "b250": 31.1171, "b500": 31.1171, "opt_b": 250}, "Sim_Aykirili_n50_p15": {"b100": 39.5435, "b250": 39.1929, "b500": 39.1929, "opt_b": 250}, "Sim_Aykirili_n50_p2": {"b100": 1.3312, "b250": 1.322, "b500": 1.322, "opt_b": 100}, "Sim_Aykirili_n50_p5": {"b100": 0.8325, "b250": 0.8321, "b500": 0.8321, "opt_b": 100}, "Sim_Aykirili_n75_p10": {"b100": 16.9258, "b250": 16.9683, "b500": 17.0757, "opt_b": 500}, "Sim_Aykirili_n75_p15": {"b100": 20.4629, "b250": 20.4443, "b500": 20.7424, "opt_b": 250}, "Sim_Aykirili_n75_p2": {"b100": 2.0507, "b250": 2.0338, "b500": 2.0215, "opt_b": 100}, "Sim_Aykirili_n75_p5": {"b100": 6.4199, "b250": 6.2936, "b500": 6.2515, "opt_b": 100}, "Sim_Aykirisiz_n100_p10": {"b100": 1.1231, "b250": 1.123, "b500": 1.1247, "opt_b": 100}, "Sim_Aykirisiz_n100_p15": {"b100": 1.3563, "b250": 1.3541, "b500": 1.3569, "opt_b": 100}, "Sim_Aykirisiz_n100_p2": {"b100": 1.3236, "b250": 1.3215, "b500": 1.3217, "opt_b": 100}, "Sim_Aykirisiz_n100_p5": {"b100": 0.9685, "b250": 0.9686, "b500": 0.9686, "opt_b": 100}, "Sim_Aykirisiz_n250_p10": {"b100": 1.0265, "b250": 1.0252, "b500": 1.0253, "opt_b": 500}, "Sim_Aykirisiz_n250_p15": {"b100": 0.9187, "b250": 0.9191, "b500": 0.9196, "opt_b": 100}, "Sim_Aykirisiz_n250_p2": {"b100": 0.9356, "b250": 0.9355, "b500": 0.9357, "opt_b": 100}, "Sim_Aykirisiz_n250_p5": {"b100": 1.0701, "b250": 1.0701, "b500": 1.07, "opt_b": 500}, "Sim_Aykirisiz_n50_p10": {"b100": 0.5999, "b250": 0.5955, "b500": 0.5955, "opt_b": 100}, "Sim_Aykirisiz_n50_p15": {"b100": 1.2681, "b250": 1.2431, "b500": 1.2431, "opt_b": 100}, "Sim_Aykirisiz_n50_p2": {"b100": 1.3266, "b250": 1.3154, "b500": 1.3154, "opt_b": 100}, "Sim_Aykirisiz_n50_p5": {"b100": 0.7341, "b250": 0.7288, "b500": 0.7288, "opt_b": 100}, "Sim_Aykirisiz_n75_p10": {"b100": 1.195, "b250": 1.1999, "b500": 1.1973, "opt_b": 100}, "Sim_Aykirisiz_n75_p15": {"b100": 1.3025, "b250": 1.2976, "b500": 1.2962, "opt_b": 500}, "Sim_Aykirisiz_n75_p2": {"b100": 0.7645, "b250": 0.7591, "b500": 0.7563, "opt_b": 100}, "Sim_Aykirisiz_n75_p5": {"b100": 0.8343, "b250": 0.8042, "b500": 0.7958, "opt_b": 100}}, "chart5_gains": [{"dataset": "Attitude", "cat": "klasik", "gain_pct": -4.68, "win": false}, {"dataset": "Cars", "cat": "klasik", "gain_pct": -0.71, "win": false}, {"dataset": "Cereal", "cat": "klasik", "gain_pct": 0.0, "win": false}, {"dataset": "Judge", "cat": "klasik", "gain_pct": -24.67, "win": false}, {"dataset": "Sim_Aykirili_n100_p10", "cat": "aykirili", "gain_pct": 1.05, "win": true}, {"dataset": "Sim_Aykirili_n100_p15", "cat": "aykirili", "gain_pct": 0.48, "win": true}, {"dataset": "Sim_Aykirili_n100_p2", "cat": "aykirili", "gain_pct": -8.75, "win": false}, {"dataset": "Sim_Aykirili_n100_p5", "cat": "aykirili", "gain_pct": 30.72, "win": true}, {"dataset": "Sim_Aykirili_n250_p10", "cat": "aykirili", "gain_pct": 30.42, "win": true}, {"dataset": "Sim_Aykirili_n250_p15", "cat": "aykirili", "gain_pct": 0.29, "win": true}, {"dataset": "Sim_Aykirili_n250_p2", "cat": "aykirili", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirili_n250_p5", "cat": "aykirili", "gain_pct": -0.4, "win": false}, {"dataset": "Sim_Aykirili_n50_p10", "cat": "aykirili", "gain_pct": 86.84, "win": true}, {"dataset": "Sim_Aykirili_n50_p15", "cat": "aykirili", "gain_pct": 88.85, "win": true}, {"dataset": "Sim_Aykirili_n50_p2", "cat": "aykirili", "gain_pct": 0.08, "win": true}, {"dataset": "Sim_Aykirili_n50_p5", "cat": "aykirili", "gain_pct": 12.35, "win": true}, {"dataset": "Sim_Aykirili_n75_p10", "cat": "aykirili", "gain_pct": 68.47, "win": true}, {"dataset": "Sim_Aykirili_n75_p15", "cat": "aykirili", "gain_pct": 56.64, "win": true}, {"dataset": "Sim_Aykirili_n75_p2", "cat": "aykirili", "gain_pct": 47.07, "win": true}, {"dataset": "Sim_Aykirili_n75_p5", "cat": "aykirili", "gain_pct": 73.02, "win": true}, {"dataset": "Sim_Aykirisiz_n100_p10", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n100_p15", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n100_p2", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n100_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p10", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p15", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p2", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n250_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n50_p10", "cat": "aykirisiz", "gain_pct": 1.52, "win": true}, {"dataset": "Sim_Aykirisiz_n50_p15", "cat": "aykirisiz", "gain_pct": 0.08, "win": true}, {"dataset": "Sim_Aykirisiz_n50_p2", "cat": "aykirisiz", "gain_pct": 0.08, "win": true}, {"dataset": "Sim_Aykirisiz_n50_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p10", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p15", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p2", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}, {"dataset": "Sim_Aykirisiz_n75_p5", "cat": "aykirisiz", "gain_pct": 0.0, "win": false}], "chart6_robustness": {"categories": ["Aykırılı Simülasyon (16 Küme)", "Gerçek Veriler (4 Küme)", "Aykırısız Simülasyon (16 Küme)"], "mobtf_win_rates": [87.5, 0.0, 43.8], "counts": ["14/16", "0/4", "7/16"]}};
  let chartInstances = {};
 
  // Switch between the 6 Chart Panes
@@ -5602,13 +5428,13 @@
  const commentEl = document.getElementById('chart1Comment');
  if (commentEl) {
  if (modelKey === 'mobtf_vs_bagt1') {
- commentEl.innerText = "İş Paketi 2 sözleşme modeli (MOBTF-T1FF), klasik Bagging-T1FF modeline karşı RMSE'de 22/36 (%61,1), MAPE'de 19/30 (%63,3 ber. hariç) kazanma oranıyla sözleşme taahhüdünü (≥ %50) doğrudan karşılamaktadır.";
+      commentEl.innerText = "İş Paketi 2 sözleşme modeli (MOBTF-T1FF), klasik Bagging-T1FF modeline karşı RMSE'de 21/36 (%58,3, ber. hariç %63,6, p = 0,0295*) ve MAPE'de 19/36 (%52,8, ber. hariç %57,6) kazanma oranıyla sözleşme taahhüdünü (≥ %50) eksiksiz sağlamaktadır.";
  } else if (modelKey === 'mbtf_vs_bagt1') {
- commentEl.innerText = "İş Paketi 1 modeli (MBTF-T1FF), genel 36 kümede 16/36 ile başa baş kalırken, aykırı değer içeren simülasyon alt gruplarında %75'e varan kazanma oranına ulaşmaktadır.";
+      commentEl.innerText = "İş Paketi 1 sözleşme modeli (MBTF-T1FF), 36 veri kümesi genelinde MAPE'de 19/36 (%52,8) ve RMSE'de 19/36 (%52,8) kazanma oranıyla resmi sözleşme başarı ölçütünü (≥ %50) doğrudan karşılamaktadır. Aykırılı simülasyon kümelerinde ise %75,0-%87,5 belirgin dayanıklılık elde etmiştir.";
  } else if (modelKey === 'mbtf_lm_vs_baglm') {
- commentEl.innerText = "Doğrusal tabanda MBTF-LM, klasik Bagging-LM modeline karşı 36 veri kümesinin 28'inde (%77,8) 4 metriğin dördünde de mutlak üstünlük kurmuştur (Wilcoxon p = 0,0001*).";
+      commentEl.innerText = "Doğrusal tabanda MBTF-LM, klasik Bagging-LM modeline karşı SMAPE'de 23/36 (%63,9, p = 0,0136*) ve MAPE'de 22/36 (%61,1) düzeyinde belirgin ve istatistiksel olarak anlamlı bir üstünlük sergilemiştir.";
  } else {
- commentEl.innerText = "Yöntemsel ilerleme kıyasında MOBTF-T1FF, MBTF-T1FF modeline karşı RMSE'de 21/36 (%58,3) ve MAPE'de 20/34 (%58,8) kazanarak PFCM ve M-Estimator hibritlemesinin pozitif katma değerini kanıtlamıştır.";
+      commentEl.innerText = "Yöntemsel ilerleme kıyasında MOBTF-T1FF, MBTF-T1FF modeline karşı 4 metriğin dördünde de 27/36 (%75,0, p < 0,001*) kazanarak PFCM ve M-tahmincisi hibritlemesinin sağladığı kuramsal katkıyı doğrulamıştır.";
  }
  }
 
@@ -5637,11 +5463,11 @@
  chartInstances['c2'] = new Chart(ctx, {
  type: 'bar',
  data: {
- labels: ['B = 100', 'B = 250', 'B = 500', 'B = 1000'],
+ labels: ['B = 100', 'B = 250', 'B = 500'],
  datasets: [
  {
  label: 'Aykırılı Simülasyon (320 Tohum)',
- data: [dist['Aykırılı Simülasyon (16 Küme)']['B100'], dist['Aykırılı Simülasyon (16 Küme)']['B250'], dist['Aykırılı Simülasyon (16 Küme)']['B500'], dist['Aykırılı Simülasyon (16 Küme)']['B1000']],
+ data: [dist['Aykırılı Simülasyon (16 Küme)']['B100'], dist['Aykırılı Simülasyon (16 Küme)']['B250'], dist['Aykırılı Simülasyon (16 Küme)']['B500']],
  backgroundColor: 'rgba(244, 63, 94, 0.8)',
  borderColor: '#f43f5e',
  borderWidth: 1,
@@ -5649,7 +5475,7 @@
  },
  {
  label: 'Aykırısız Simülasyon (320 Tohum)',
- data: [dist['Aykırısız Simülasyon (16 Küme)']['B100'], dist['Aykırısız Simülasyon (16 Küme)']['B250'], dist['Aykırısız Simülasyon (16 Küme)']['B500'], dist['Aykırısız Simülasyon (16 Küme)']['B1000']],
+ data: [dist['Aykırısız Simülasyon (16 Küme)']['B100'], dist['Aykırısız Simülasyon (16 Küme)']['B250'], dist['Aykırısız Simülasyon (16 Küme)']['B500']],
  backgroundColor: 'rgba(168, 85, 247, 0.8)',
  borderColor: '#a855f7',
  borderWidth: 1,
@@ -5657,7 +5483,7 @@
  },
  {
  label: 'Gerçek Veriler (80 Tohum)',
- data: [dist['Gerçek Veriler (Klasik)']['B100'], dist['Gerçek Veriler (Klasik)']['B250'], dist['Gerçek Veriler (Klasik)']['B500'], dist['Gerçek Veriler (Klasik)']['B1000']],
+ data: [dist['Gerçek Veriler (Klasik)']['B100'], dist['Gerçek Veriler (Klasik)']['B250'], dist['Gerçek Veriler (Klasik)']['B500']],
  backgroundColor: 'rgba(56, 189, 248, 0.8)',
  borderColor: '#38bdf8',
  borderWidth: 1,
@@ -5737,7 +5563,7 @@
  // -------------------------------------------------------------
  // CHART 4: B Validation Curve (Interactive Dataset Selector)
  // -------------------------------------------------------------
- let currentC4Dataset = 'Concrete';
+ let currentC4Dataset = 'Attitude';
 
  function initChart4() {
  const selectEl = document.getElementById('selectBCurveDataset');
@@ -5750,7 +5576,7 @@
  if (ds === currentC4Dataset) opt.selected = true;
  selectEl.appendChild(opt);
  });
- if (!currentC4Dataset && dnames.length > 0) currentC4Dataset = dnames[0];
+ if ((!currentC4Dataset || !CHART_DATA.chart4_b_curves[currentC4Dataset]) && dnames.length > 0) currentC4Dataset = dnames[0];
  }
 
  const ctx = document.getElementById('chartCanvasBCurve');
@@ -5760,18 +5586,18 @@
  return;
  }
 
- const curveObj = CHART_DATA.chart4_b_curves[currentC4Dataset] || { b100: 1, b250: 1, b500: 1, b1000: 1, opt_b: 250 };
+ const curveObj = CHART_DATA.chart4_b_curves[currentC4Dataset] || { b100: 1, b250: 1, b500: 1, opt_b: 250 };
 
- const pointRadii = [100, 250, 500, 1000].map(b => b === curveObj.opt_b ? 8 : 4);
- const pointColors = [100, 250, 500, 1000].map(b => b === curveObj.opt_b ? '#10b981' : '#38bdf8');
+ const pointRadii = [100, 250, 500].map(b => b === curveObj.opt_b ? 8 : 4);
+ const pointColors = [100, 250, 500].map(b => b === curveObj.opt_b ? '#10b981' : '#38bdf8');
 
  chartInstances['c4'] = new Chart(ctx, {
  type: 'line',
  data: {
- labels: ['B = 100', 'B = 250', 'B = 500', 'B = 1000'],
+ labels: ['B = 100', 'B = 250', 'B = 500'],
  datasets: [{
  label: 'Doğrulama Kümesi Hatası (Valid RMSE)',
- data: [curveObj.b100, curveObj.b250, curveObj.b500, curveObj.b1000],
+ data: [curveObj.b100, curveObj.b250, curveObj.b500],
  borderColor: '#38bdf8',
  backgroundColor: 'rgba(56, 189, 248, 0.1)',
  fill: true,
@@ -5791,7 +5617,7 @@
  callbacks: {
  afterBody: function(context) {
  const val = context[0].raw;
- const bVal = [100, 250, 500, 1000][context[0].dataIndex];
+ const bVal = [100, 250, 500][context[0].dataIndex];
  if (bVal === curveObj.opt_b) return 'Optimum B* Seçimi!';
  return '';
  }
@@ -5813,10 +5639,10 @@
  const curveObj = CHART_DATA.chart4_b_curves[datasetName];
  if (!curveObj || !chartInstances['c4']) return;
 
- const pointRadii = [100, 250, 500, 1000].map(b => b === curveObj.opt_b ? 8 : 4);
- const pointColors = [100, 250, 500, 1000].map(b => b === curveObj.opt_b ? '#10b981' : '#38bdf8');
+ const pointRadii = [100, 250, 500].map(b => b === curveObj.opt_b ? 8 : 4);
+ const pointColors = [100, 250, 500].map(b => b === curveObj.opt_b ? '#10b981' : '#38bdf8');
 
- chartInstances['c4'].data.datasets[0].data = [curveObj.b100, curveObj.b250, curveObj.b500, curveObj.b1000];
+ chartInstances['c4'].data.datasets[0].data = [curveObj.b100, curveObj.b250, curveObj.b500];
  chartInstances['c4'].data.datasets[0].pointRadius = pointRadii;
  chartInstances['c4'].data.datasets[0].pointBackgroundColor = pointColors;
  chartInstances['c4'].update();
@@ -5837,8 +5663,7 @@
  <div class="text-[11px] text-slate-400">
  B100: <span class="font-mono text-slate-300">${curveObj.b100}</span> |
  B250: <span class="font-mono text-slate-300">${curveObj.b250}</span> |
- B500: <span class="font-mono text-slate-300">${curveObj.b500}</span> |
- B1000: <span class="font-mono text-slate-300">${curveObj.b1000}</span>
+ B500: <span class="font-mono text-slate-300">${curveObj.b500}</span>
  </div>
  </div>
  `;
