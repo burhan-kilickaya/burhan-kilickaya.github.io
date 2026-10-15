@@ -110,11 +110,35 @@
     }
     .math-eq {
       text-align: center;
-      margin: 14px 0;
+      margin: 10px 0;
       overflow-x: auto;
       max-width: 100%;
-      padding: 6px 0;
+      padding: 4px 0;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
+    }
+    .math-eq:hover {
+      scrollbar-color: #cbd5e1 transparent;
+    }
+    .math-eq::-webkit-scrollbar {
+      height: 3px;
+    }
+    .math-eq::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 3px;
+    }
+    .math-eq:hover::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+    }
+    mjx-container[jax="CHTML"][display="true"] {
+      margin: 4px 0 !important;
+      max-width: 100% !important;
+    }
+    @media screen and (max-width: 768px) {
+      .math-eq {
+        font-size: 0.9em;
+      }
     }
     .form-box {
       border: 1.5px solid #0f172a;
@@ -283,23 +307,111 @@
       </div>
       
       <p>
-        İş Paketi 1 (İP 1) kapsamında, Breiman (1996) tarafından önerilen klasik torbalama (Bagging) yaklaşımının en temel sınırlılığı olan eşit ağırlıklı (1/B) aritmetik ortalama varsayımının aşılması hedeflenmiştir. Klasik torbalamada, bootstrap örneklemleri üzerinden eğitilen B adet temel modelin tahminleri basit ortalamayla birleştirilmekte; bu durum, bootstrap alt-örneklemlerindeki aykırı değerlerden veya yüksek varyanstan etkilenen zayıf tahmincilerin tüm topluluğun tahmin kalitesini düşürmesine sebep olmaktadır. Bu metodolojik problemi çözmek amacıyla, Türkşen (2008) tarafından önerilen Tip-1 Bulanık Fonksiyonlar (T1BF / T1FF) ile Çoklu Doğrusal Regresyon temel modelleri üzerinde, Tak (2018) tarafından önerilen Meta Bulanık Fonksiyonlar (MBF) yaklaşımı temel alınmış; alt modellerin tahmin uzayındaki davranışlarını Bulanık C-Ortalamalar (BCO / FCM) algoritması (Bezdek vd., 1984) ile kümeleyerek performansa dayalı ağırlıklar türeten <strong>Meta Bulanık Torbalama Fonksiyonları (MBTF)</strong> mimarisi geliştirilmiştir.
-      </p>
-
-      <p>
-        MBTF algoritmasında veri sızıntısının (data leakage) kesin olarak önlenmesi amacıyla üçlü veri ayrım protokolü uygulanmıştır. Toplam veri seti; eğitim (%80), bağımsız doğrulama (%10) ve test (%10) olmak üzere bölünmüştür. Eğitim seti üzerinde b = 1, ..., B adet Tip-1 Bulanık Fonksiyon modeli eğitilmiş; ardından dondurulmuş doğrulama seti ve test seti tahmin matrisleri üretilmiştir. Doğrulama matrisi üzerinde FCM uygulanarak modellerin kümelere aitlik üyelik dereceleri hesaplanmış ve kolon standardizasyonu ile her bir küme için ağırlık vektörleri türetilmiştir:
+        İş Paketi 1 (İP 1) kapsamında, Breiman (1996) tarafından önerilen klasik torbalama (Bagging) yaklaşımının en temel sınırlılığı olan eşit ağırlıklı (\(1/B\)) aritmetik ortalama varsayımının aşılması hedeflenmiştir. Klasik torbalamada, bootstrap örneklemleri üzerinden eğitilen \(B\) adet temel modelin tahminleri Denklem (1)'deki gibi basit aritmetik ortalamayla birleştirilmektedir:
       </p>
 
       <div class="math-eq">
-        \[ W \in \mathbb{R}^{B \times c}, \quad w_{bj} = \frac{u_{jb}}{\sum_{k=1}^B u_{jk}}, \quad j = 1, \dots, c \]
+        \[ \hat{y}_{\text{Bagging}}(x) = \frac{1}{B} \sum_{b=1}^{B} \hat{y}^{(b)}(x) \quad \text{(Denklem 1)} \]
       </div>
 
       <p>
-        Doğrulama kümesinde en düşük Kök Ortalama Kare Hatayı (RMSE) veren kural (j*) optimal meta-fonksiyon olarak belirlenmiş ve nihai test tahminleri test kümesinden tamamen bağımsız olarak elde edilen bu ağırlık vektörü ile elde edilmiştir. Bu sayede test kümesi yalnızca bağımsız değerlendirme amacıyla kullanılmış, hiperparametre veya model seçim sürecine dahil edilmemiştir.
+        Ancak bu eşit ağırlıklı yapı, bootstrap alt-örneklemlerindeki aykırı değerlerden veya yüksek varyanstan etkilenen zayıf tahmincilerin tüm topluluğun tahmin kalitesini düşürmesine sebep olmaktadır. Bu metodolojik problemi çözmek amacıyla, Türkşen (2008) tarafından önerilen Tip-1 Bulanık Fonksiyonlar (T1BF / T1FF) ile Çoklu Doğrusal Regresyon (LM) temel modelleri üzerinde, Tak (2018) tarafından önerilen Meta Bulanık Fonksiyonlar (MBF) yaklaşımı temel alınmış; alt modellerin tahmin uzayındaki davranışlarını Bulanık C-Ortalamalar (BCO / FCM) algoritması (Bezdek vd., 1984) ile kümeleyerek performansa dayalı dinamik ağırlıklar türeten <strong>Meta Bulanık Torbalama Fonksiyonları (MBTF)</strong> mimarisi geliştirilmiştir.
+      </p>
+
+      <p class="font-semibold text-slate-800 mt-2">
+        1. Bulanık C-Ortalamalar (BCO) Kümeleme Algoritması (Algoritma 2):
+      </p>
+      <p>
+        BCO algoritmasında, her bir gözlemin kümelere aitlik derecesi \(\mu_{ik}\) (\(\sum_{i=1}^c \mu_{ik} = 1\) kısıtı altında) ve küme merkezleri \(v_i\) iteratif olarak Denklem (2) ve Denklem (3) yardımıyla hesaplanmaktadır:
+      </p>
+
+      <div class="math-eq">
+        \[ \mu_{ik} = \left[ \sum_{j=1}^{c} \left( \frac{d(z_k, v_i)}{d(z_k, v_j)} \right)^{\frac{2}{m-1}} \right]^{-1}, \quad 1 \le i \le c, \quad 1 \le k \le n \quad \text{(Denklem 2)} \]
+      </div>
+      <div class="math-eq">
+        \[ v_i = \frac{\sum_{k=1}^{n} (\mu_{ik})^m z_k}{\sum_{k=1}^{n} (\mu_{ik})^m}, \quad i = 1, \dots, c \quad \text{(Denklem 3)} \]
+      </div>
+      <p class="text-xs text-slate-600">
+        Burada \(z_k\) veri matrisinin \(k\). gözlemini, \(v_i\) \(i\). küme merkezini, \(d(\cdot)\) Öklid uzaklık fonksiyonunu, \(c\) küme sayısını ve \(m > 1\) bulanıklık indeksini ifade etmektedir.
+      </p>
+
+      <p class="font-semibold text-slate-800 mt-2">
+        2. Tip-1 Bulanık Fonksiyonlar (T1BF / Algoritma 6, Türkşen, 2008):
+      </p>
+      <p>
+        T1BF yaklaşımında, açıklayıcı değişkenler ile BCO'dan elde edilen üyelik dereceleri ve bunların doğrusal olmayan fonksiyonları birleştirilerek her bir küme için genişletilmiş girdi matrisi \(X^{(i)}\) oluşturulmakta ve çok değişkenli doğrusal regresyon modelleri \(Y^{(i)} = X^{(i)}\beta^{(i)} + \epsilon^{(i)}\) çözülmektedir:
+      </p>
+
+      <div class="math-eq">
+        \[ X^{(i)} = \begin{bmatrix} \mu_{i1} & \mu_{i1}^2 & \ln(\mu_{i1}) & e^{\mu_{i1}} & x_{11} & \cdots & x_{p1} \\ \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\ \mu_{in} & \mu_{in}^2 & \ln(\mu_{in}) & e^{\mu_{in}} & x_{1n} & \cdots & x_{pn} \end{bmatrix}_{n \times (4+p)}, \quad 1 \le i \le c \]
+      </div>
+      <p>
+        Her bir küme regresyon modelinden elde edilen tahminlerin (\(\hat{y}_{ik}\)) üyelik dereceleriyle ağırlıklandırılması sonucu \(k\). gözlem için nihai T1BF tahmini Denklem (4) ile hesaplanmaktadır:
+      </p>
+      <div class="math-eq">
+        \[ \hat{y}_k = \frac{\sum_{i=1}^{c} \hat{y}_{ik} \mu_{ik}}{\sum_{i=1}^{c} \mu_{ik}}, \quad k = 1, \dots, n \quad \text{(Denklem 4)} \]
+      </div>
+      <p class="text-xs text-slate-600 leading-relaxed mb-3">
+        Burada \(p\) açıklayıcı değişken sayısını, \(n\) gözlem sayısını, \(\beta^{(i)}\) \(i\). bulanık kümeye ait doğrusal regresyon katsayı vektörünü, \(\epsilon^{(i)}\) hata terimi vektörünü ve \(\hat{y}_{ik}\) ise \(i\). küme modelinin \(k\). gözlem için ürettiği tahmini ifade etmektedir.
+      </p>
+
+      <p class="font-semibold text-slate-800 mt-2">
+        3. Meta Bulanık Fonksiyonlar (MBF / Algoritma 5, Tak, 2018) ve MBTF Entegrasyonu:
+      </p>
+      <p>
+        MBTF algoritmasında veri sızıntısının (data leakage) kesin olarak önlenmesi amacıyla üçlü veri ayrım protokolü uygulanmıştır. Toplam veri seti; eğitim (%80), bağımsız doğrulama (%10) ve test (%10) olmak üzere bölünmüştür. Eğitim seti üzerinde \(b = 1, \dots, B\) adet temel model eğitilmiş; ardından dondurulmuş doğrulama tahmin matrisi (\(\hat{Y}_{\text{doğrulama}} \in \mathbb{R}^{n_{\text{doğ}} \times B}\)) ve test tahmin matrisi (\(\hat{Y}_{\text{test}} \in \mathbb{R}^{n_{\text{test}} \times B}\)) üretilmiştir. Doğrulama matrisi üzerinde BCO uygulanarak modellerin kümelere aitlik üyelik dereceleri \(\mu_{ij}\) elde edilmiş ve Denklem (5) ile ağırlık matrisi \(W \in \mathbb{R}^{B \times c}\) türetilerek Denklem (6) ile \(c\) adet meta bulanık fonksiyon (\(\text{MFF}_i\)) tanımlanmıştır:
+      </p>
+
+      <div class="math-eq">
+        \[ w_{ij} = \frac{\mu_{ij}}{\sum_{k=1}^B \mu_{ik}}, \quad j = 1, \dots, B; \quad i = 1, \dots, c \quad \text{(Denklem 5)} \]
+      </div>
+      <div class="math-eq">
+        \[ \text{MFF}_i(\hat{Y}) = \sum_{j=1}^{B} w_{ij} \hat{Y}_j, \quad i = 1, \dots, c \quad \text{(Denklem 6)} \]
+      </div>
+      <p class="text-xs text-slate-600 leading-relaxed mb-3">
+        Burada \(n_{\text{doğ}}\) ve \(n_{\text{test}}\) sırasıyla doğrulama ve test veri kümelerindeki gözlem sayılarını, \(\hat{Y}_j\) ise \(j\). torbalama alt modelinin tahmin vektörünü (\(j = 1, \dots, B\)) temsil etmektedir.
       </p>
 
       <p>
-        İP 1 hedefleri doğrultusunda geliştirilen yöntem, 4'ü klasik gerçek veri seti ve 32'si farklı örneklem büyüklüğü (N = 50, 75, 100, 250), değişken sayısı (p = 2, 5, 10, 15) ve kirlilik düzeyi içeren simülasyon veri seti olmak üzere toplam <strong>36 veri kümesi</strong> üzerinde 20 bağımsız model tohumu ile değerlendirilmiştir.
+        Doğrulama kümesinde en düşük Kök Ortalama Kare Hatayı (RMSE) veren kural (\(i^*\)) optimal meta-fonksiyon (\(\text{MFF}_{\text{best}}\)) olarak belirlenmiş ve nihai test tahminleri test kümesinden tamamen bağımsız olarak elde edilen bu ağırlık vektörü ile \(F = \text{MFF}_{\text{best}}(\hat{Y}_{\text{test}}) = \hat{Y}_{\text{test}} w^*\) şeklinde hesaplanmıştır.
+      </p>
+
+      <p class="font-semibold text-slate-800 mt-2">
+        4. Simülasyon Veri Üretim Protokolü ve Başarı Ölçütleri (1001 Formu Bölüm 2.9 ve 2.10):
+      </p>
+      <p>
+        Proje öneri formundaki deneysel tasarıma birebir uygun olarak, yöntemlerin performansını farklı veri yapılarında test etmek üzere simülasyon ve gerçek veri setleri kullanılmıştır:
+      </p>
+      <ul class="list-disc pl-5 space-y-1 text-xs text-slate-700">
+        <li><strong>Aykırısız (Temiz) Veri Üretimi:</strong> \(n \times p\) boyutunda açıklayıcı değişkenler matrisi \(X\), her elemanı \([0, 10]\) aralığında Uniform dağılımdan üretilmiştir (\(X \sim U[0, 10]\)). Her bir değişkene karşılık gelen regresyon katsayıları \(\beta \in [-2, 2]\) aralığında rastgele belirlenmiştir. Bağımlı değişken \(y = X\beta + \epsilon\) biçiminde doğrusal kombinasyon üzerine sıfır ortalamalı Gauss gürültüsü (\(\epsilon \sim N(0, \sigma^2)\)) eklenerek türetilmiştir.</li>
+        <li><strong>Aykırı Değer Eklenmesi:</strong> Veri setindeki gözlemlerden rastgele %2'si seçilmiş; bu gözlemlerin \(y\) değerlerine, ortalaması \(y\)'nin ortalamasının 10 katı (\(10\bar{y}\)) ve standart sapması \(y\)'nin standart sapması (\(s_y\)) olan bir normal dağılımdan üretilmiş ek sapmalar eklenerek uç değerler oluşturulmuştur.</li>
+        <li><strong>Deneysel Boyutlar:</strong> Örneklem boyutları \(n \in \{50, 75, 100, 250\}\), değişken sayıları \(p \in \{2, 5, 10, 15\}\) ve gürültü/aykırı değer durumları çaprazlanarak 32 simülasyon veri kümesi oluşturulmuştur.</li>
+      </ul>
+      <p class="text-xs text-slate-700 mt-1">
+        Modellerin performans değerlendirmesinde Denklem (7), (8), (9) ve (10)'da tanımlanan dört temel regresyon başarı ölçütü kullanılmıştır (\(y_t\) gerçek değeri, \(\hat{y}_t\) tahmin değerini ve \(n\) test gözlem sayısını temsil etmektedir):
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 my-2 text-xs">
+        <div class="math-eq text-center p-2 bg-slate-50 border border-slate-200">
+          \[ \text{RMSE} = \sqrt{\frac{1}{n} \sum_{t=1}^{n} (y_t - \hat{y}_t)^2} \quad \text{(Denklem 7)} \]
+        </div>
+        <div class="math-eq text-center p-2 bg-slate-50 border border-slate-200">
+          \[ \text{MAE} = \frac{1}{n} \sum_{t=1}^{n} |y_t - \hat{y}_t| \quad \text{(Denklem 8)} \]
+        </div>
+        <div class="math-eq text-center p-2 bg-slate-50 border border-slate-200">
+          \[ \text{MAPE} = \frac{1}{n} \sum_{t=1}^{n} \left| \frac{y_t - \hat{y}_t}{y_t} \right| \times 100 \quad \text{(Denklem 9)} \]
+        </div>
+        <div class="math-eq text-center p-2 bg-slate-50 border border-slate-200">
+          \[ \text{SMAPE} = \frac{1}{n} \sum_{t=1}^{n} \frac{2|y_t - \hat{y}_t|}{|y_t| + |\hat{y}_t|} \times 100 \quad \text{(Denklem 10)} \]
+        </div>
+      </div>
+
+      <p>
+        İP 1 hedefleri doğrultusunda geliştirilen yöntem, 4'ü klasik gerçek veri seti (cereals, mtcars, attitude, USJudgeRatings) ve 32'si simülasyon olmak üzere toplam <strong>36 veri kümesi</strong> üzerinde 20 bağımsız model tohumu ile kapsamlı olarak test edilmiştir.
+      </p>
+
+      <p class="text-xs text-slate-700 leading-relaxed mb-3">
+        Gerçek dünya veri uygulamaları kapsamında, proje öneri formunun 2.10 bölümünde taahhüt edildiği üzere R programlama dili 'datasets' kütüphanesinden ve Kaggle açık erişim veri kaynağından temin edilen dört farklı gerçek veri kümesi kullanılmıştır: (1) <strong>Attitude</strong> (n = 30, p = 6; çalışanların genel memnuniyet puanlarının tahminlenmesi &ndash; R datasets), (2) <strong>Cars / mtcars</strong> (n = 32, p = 10; motorlu araçların yakıt tüketimi ve performans özelliklerinin modellenmesi &ndash; R datasets), (3) <strong>Judge / USJudgeRatings</strong> (n = 43, p = 11; ABD Yüksek Mahkemesi yargıçlarına ilişkin değerlendirme puanlarının modellenmesi &ndash; R datasets) ve (4) <strong>Cereal / cereals</strong> (n = 77, p = 15; kahvaltılık gevreklerin besin değerlerine göre derecelendirme tahminlemesi &ndash; Kaggle).
       </p>
 
       <div class="text-center font-bold text-xs my-2">
@@ -345,11 +457,11 @@
       </table>
 
       <p>
-        Sözleşme Bölüm 2.7 gereğince, topluluk büyüklüğü olan bootstrap sayısı B in {100, 250, 500} değerleri arasından bağımsız doğrulama kümesindeki tahmin hatasını minimize eden B* değeri seçilmiştir. Tablo 2'de 720 tohum genelinde belirlenen optimal B* dağılımı özetlenmiştir.
+        Sözleşme Bölüm 2.7 gereğince, topluluk büyüklüğü olan bootstrap sayısı B &isin; {100, 250, 500} değerleri arasından bağımsız doğrulama kümesindeki tahmin hatasını minimize eden B* değeri seçilmiştir. Tablo 2'de 720 tohum genelinde belirlenen optimal B* dağılımı özetlenmiştir.
       </p>
 
       <div class="text-center font-bold text-xs my-2">
-        Tablo 2: 720 Deney Tohumunda Doğrulama Kümesi Tarafından Belirlenen Optimal B* Dağılımı (B in {100, 250, 500})
+        Tablo 2: 720 Deney Tohumunda Doğrulama Kümesi Tarafından Belirlenen Optimal B* Dağılımı (B &isin; {100, 250, 500})
       </div>
       <table class="report-table text-xs text-center">
         <thead>
@@ -403,11 +515,11 @@
       </p>
 
       <p>
-        Tablo 3'te, İP 1 kapsamında önerilen MBTF-T1FF modeli ile sözleşme referans modeli olan standart Bagging-T1FF modelinin 36 veri kümesi genelindeki karşılaştırmalı performans metrikleri sunulmuştur.
+        Tablo 3'te, İP 1 kapsamında önerilen MBTF-T1BF modeli ile sözleşme referans modeli olan standart Bagging-T1BF modelinin 36 veri kümesi genelindeki karşılaştırmalı performans metrikleri sunulmuştur.
       </p>
 
       <div class="text-center font-bold text-xs my-2">
-        Tablo 3: İP 1 Kapsamında MBTF-T1FF ile Standart Bagging-T1FF Modelinin Karşılaştırmalı Test Sonuçları
+        Tablo 3: İP 1 Kapsamında MBTF-T1BF ile Standart Bagging-T1BF Modelinin Karşılaştırmalı Test Sonuçları (B &isin; {100, 250, 500})
       </div>
       <table class="report-table text-xs">
         <thead>
@@ -484,11 +596,11 @@
           <tr>
             <th>Örneklem Boyutu (N)</th>
             <th>Klasik LM</th>
-            <th>Tekil T1FF</th>
+            <th>Tekil T1BF</th>
             <th>Bagging-LM</th>
             <th>MBTF-LM</th>
-            <th>Bagging-T1FF</th>
-            <th>MBTF-T1FF</th>
+            <th>Bagging-T1BF</th>
+            <th>MBTF-T1BF</th>
           </tr>
         </thead>
         <tbody>
@@ -531,6 +643,10 @@
         </tbody>
       </table>
 
+      <p class="text-xs text-slate-700 leading-relaxed my-2">
+        Tablo 4, proje öneri formunun 2. bölümünde belirtilen ölçeklenebilirlik analizi kapsamında örneklem büyüklüğü (N) artışının birim model sürelerine etkisini göstermektedir (topluluk boyutu B bazındaki karşılaştırmalı süre analizi ise İP 2 kapsamında Tablo 7'de sunulmuştur).
+      </p>
+
       <div class="font-bold text-sm text-slate-900 mt-4 mb-2 border-b border-slate-300 pb-1">
         b) İP Sonuçlarının İlgili İP’nin Başarı Ölçütleri Göz Önüne Alınarak Gerçekleşme Durumu
       </div>
@@ -538,7 +654,7 @@
         Proje öneri formunda İP 1 için öngörülen başarı ölçütü; <em>"Klasik torbalama yönteminin, dört gerçek dünya veri seti (cereals, mtcars, attitude ve USJudgeRatings) ile simülasyon veri setleri üzerinde test edilmesi ve elde edilen sonuçlara göre, Ortalama Mutlak Yüzde Hata (MAPE) ölçütü açısından incelenen veri setlerinin en az %50'sinde, Meta Bulanık Torbalama Fonksiyonları yönteminin daha düşük hata değerleri üretmesi"</em> şeklinde tanımlanmıştır.
       </p>
       <p>
-        Sözleşme Bölüm 2.7 uyarınca \(B \in \{100, 250, 500\}\) doğrulama ızgarasında yapılan hiperparametre optimizasyonunda, MBTF-T1FF modeli 36 veri kümesinin 19'unda (%52,8) MAPE ve 19'unda (%52,8) RMSE ölçütünde standart torbalamayı geride bırakarak <strong>en az %50 başarı ölçütünü doğrudan ve eksiksiz sağlamıştır</strong>. Tamamlayıcı doğrusal taban deneyinde ise MBTF-LM, klasik Bagging-LM karşısında 23/36 (%63,9 SMAPE) ve 22/36 (%61,1 MAPE) düzeyinde anlamlı bir üstünlük sergilemiştir. Ayrıca aykırı değer barındıran simülasyon kümelerinde MBTF-T1FF %75,0 (12/16) kazanma oranına ulaşmıştır. Bu bulgular ışığında İP 1 hedefleri başarıyla tamamlanmıştır.
+        Sözleşme Bölüm 2.7 uyarınca \(B \in \{100, 250, 500\}\) doğrulama ızgarasında yapılan hiperparametre optimizasyonunda, MBTF-T1BF modeli 36 veri kümesinin 19'unda (%52,8) MAPE ve 19'unda (%52,8) RMSE ölçütünde standart torbalamayı geride bırakarak <strong>en az %50 başarı ölçütünü doğrudan ve eksiksiz sağlamıştır</strong>. Tamamlayıcı doğrusal taban deneyinde ise MBTF-LM, klasik Bagging-LM karşısında 23/36 (%63,9 SMAPE) ve 22/36 (%61,1 MAPE) düzeyinde anlamlı bir üstünlük sergilemiştir. Ayrıca aykırı değer barındıran simülasyon kümelerinde MBTF-T1BF %75,0 (12/16) kazanma oranına ulaşmıştır. Bu bulgular ışığında İP 1 hedefleri başarıyla tamamlanmıştır.
       </p>
     </div>
 
@@ -564,19 +680,57 @@
       </div>
 
       <p>
-        İş Paketi 2 (İP 2) kapsamında, veride aykırı değer bulunması durumunda Bulanık C-Ortalamalar (BCO) kümeleme yönteminde oluşabilen çakışan küme merkezi ve aykırı değer hassasiyeti problemlerinin üstesinden gelebilmek için Pal ve arkadaşları (2005) tarafından önerilen Olabilirlik Bulanık Kümeleme (OBK / OBCO) yöntemine dayalı Meta Olabilirlik Bulanık Torbalama Fonksiyonları (MOBTF) geliştirilmiştir. OBK yöntemi, gözlemlerin hem üyelik derecelerini (\(u_{ik}\)) hem de tipiklik derecelerini (\(t_{ik}\)) Denklem (5) ve (6) yardımıyla hesaplayarak küme merkezlerini (\(a u_{ik}^m + b t_{ik}^n\)) ağırlıklandırmasıyla günceller; böylece düşük performans gösteren veya aykırı tahmin üreten alt örneklemlerin nihai tahmindeki ağırlığını düşürür.
+        İş Paketi 2 (İP 2) kapsamında, veride aykırı değer bulunması durumunda Bulanık C-Ortalamalar (BCO) kümeleme yönteminde oluşabilen çakışan küme merkezi ve aykırı değer hassasiyeti problemlerinin üstesinden gelebilmek için Pal ve arkadaşları (2005) tarafından önerilen Olabilirlik Bulanık Kümeleme (OBK / PFCM) yöntemine dayalı <strong>Meta Olabilirlik Bulanık Torbalama Fonksiyonları (MOBTF)</strong> geliştirilmiştir.
+      </p>
+
+      <p>
+        OBK algoritması (Algoritma 3), klasik BCO'nun üyelik kısıtından kaynaklanan aykırı değer hassasiyetini gidermek amacıyla hem göreceli üyelik derecelerini (\(u_{ik}\)) hem de mutlak tipiklik derecelerini (\(t_{ik}\)) eşzamanlı olarak optimize eder. Gözlemlerin tipiklik ve üyelik dereceleri Denklem (11) ve Denklem (12) yardımıyla güncellenmektedir:
       </p>
 
       <div class="math-eq">
-        \[ J_{\text{OBK}}(U, T, V) = \sum_{i=1}^c \sum_{k=1}^N (a \cdot u_{ik}^m + b \cdot t_{ik}^n) \| x_k - v_i \|^2 + \sum_{i=1}^c \gamma_i \sum_{k=1}^N (1 - t_{ik})^n \]
+        \[ \begin{aligned}
+          t_{ik} &= \frac{1}{1 + \left( \frac{b}{\gamma_i} d_{ik}^2 \right)^{\frac{1}{\eta - 1}}} \qquad \text{(Denklem 11)} \\[8pt]
+          u_{ik} &= \left[ \sum_{j=1}^{c} \left( \frac{d_{ik}}{d_{jk}} \right)^{\frac{2}{m-1}} \right]^{-1}, \quad 1 \le i \le c, \quad 1 \le k \le n \qquad \text{(Denklem 12)}
+        \end{aligned} \]
       </div>
 
       <p>
-        MOBTF-T1FF yaklaşımı, aynı 36 veri kümesi üzerinde optimize edilmiş B* &isin; {100, 250, 500} doğrulama protokolüyle test edilmiştir. Tablo 5'te, MOBTF-T1FF modelinin standart Bagging-T1FF ve İP 1 modeli MBTF-T1FF karşısındaki 4 farklı metrikteki test performansları sunulmuştur.
+        Burada \(m > 1\) bulanıklık indeksini, \(\eta > 1\) tipiklik indeksini, \(d_{ik}^2 = \|x_k - v_i\|^2\) Öklid uzaklığının karesini ve \(\gamma_i > 0\) küme ceza (ölçek) parametresini temsil etmektedir. İterasyonlar boyunca yeni küme merkezleri (\(v_i\)), üyelik ve tipiklik katsayılarının birleşik ağırlığıyla Denklem (13) kullanılarak güncellenmektedir:
+      </p>
+
+      <div class="math-eq">
+        \[ v_i = \frac{\sum_{k=1}^{n} (a u_{ik}^m + b t_{ik}^\eta) x_k}{\sum_{k=1}^{n} (a u_{ik}^m + b t_{ik}^\eta)}, \quad 1 \le i \le c \quad \text{(Denklem 13)} \]
+      </div>
+
+      <p>
+        Burada \(a\) ve \(b\) parametreleri sırasıyla üyeliğin ve tipikliğin göreceli önem katsayılarıdır (\(a > 0, b > 0\)). OBK algoritmasının minimize ettiği genel amaç fonksiyonu Denklem (14)'te sunulmuştur:
+      </p>
+
+      <div class="math-eq">
+        \[ \begin{aligned}
+          J_{\text{OBK}}(U, T, V) &= \sum_{i=1}^c \sum_{k=1}^n (a u_{ik}^m + b t_{ik}^\eta) \| x_k - v_i \|^2 \\
+          &\quad + \sum_{i=1}^c \gamma_i \sum_{k=1}^n (1 - t_{ik})^\eta \qquad \text{(Denklem 14)}
+        \end{aligned} \]
+      </div>
+
+      <p>
+        MOBTF mimarisinde, bootstrap alt modellerinin doğrulama kümesindeki tahminleri OBK ile kümelendiğinde; hem üyelik (\(u_{ij}\)) hem de tipiklik (\(t_{ij}\)) matrisleri kullanılarak her bir alt modelin birleşik meta-ağırlıkları Denklem (15) ile hesaplanmaktadır:
+      </p>
+
+      <div class="math-eq">
+        \[ w_{ij} = \frac{a u_{ij}^m + b t_{ij}^\eta}{\sum_{k=1}^B (a u_{ik}^m + b t_{ik}^\eta)}, \quad j = 1, \dots, B; \quad i = 1, \dots, c \quad \text{(Denklem 15)} \]
+      </div>
+
+      <p>
+        Bu formülasyon sayesinde, aykırı veya kararsız tahmin üreten zayıf modellerin tipiklik derecesi (\(t_{ik} \to 0\)) sıfıra yaklaşmakta, dolayısıyla bu modellerin topluluk ağırlıkları otomatik olarak baskılanarak nihai modelin aykırı değerlere karşı üstün bir dayanıklılık kazanması sağlanmaktadır.
+      </p>
+
+      <p>
+        MOBTF-T1BF yaklaşımı, aynı 36 veri kümesi üzerinde optimize edilmiş \(B^* \in \{100, 250, 500\}\) doğrulama protokolüyle test edilmiştir. Tablo 5'te, MOBTF-T1BF modelinin standart Bagging-T1BF ve İP 1 modeli MBTF-T1BF karşısındaki 4 farklı metrikteki test performansları sunulmuştur.
       </p>
 
       <div class="text-center font-bold text-xs my-2">
-        Tablo 5: İP 2 Kapsamında MOBTF-T1FF Modelinin Karşılaştırmalı Test Performans Dağılımı (B in {100, 250, 500})
+        Tablo 5: İP 2 Kapsamında MOBTF-T1BF Modelinin Karşılaştırmalı Test Performans Dağılımı (B &isin; {100, 250, 500})
       </div>
       <table class="report-table text-xs">
         <thead>
@@ -594,7 +748,7 @@
         </thead>
         <tbody>
           <tr class="bg-slate-50 font-semibold">
-            <td class="text-left">MOBTF-T1FF vs Bagging-T1FF</td>
+            <td class="text-left">MOBTF-T1BF vs Bagging-T1BF</td>
             <td class="text-center">RMSE</td>
             <td class="text-center">21</td>
             <td class="text-center">3</td>
@@ -605,7 +759,7 @@
             <td class="text-left">İstatistiksel olarak anlamlı üstünlük (p &lt; 0,05)</td>
           </tr>
           <tr>
-            <td class="text-left">MOBTF-T1FF vs Bagging-T1FF</td>
+            <td class="text-left">MOBTF-T1BF vs Bagging-T1BF</td>
             <td class="text-center">MAPE</td>
             <td class="text-center">19</td>
             <td class="text-center">3</td>
@@ -616,7 +770,7 @@
             <td class="text-left">Sözleşme başarı ölçütü karşılandı (≥ %50)</td>
           </tr>
           <tr>
-            <td class="text-left">MOBTF-T1FF vs Bagging-T1FF</td>
+            <td class="text-left">MOBTF-T1BF vs Bagging-T1BF</td>
             <td class="text-center">MAE</td>
             <td class="text-center">19</td>
             <td class="text-center">3</td>
@@ -627,7 +781,7 @@
             <td class="text-left">Sözleşme başarı ölçütü karşılandı (≥ %50)</td>
           </tr>
           <tr class="bg-slate-100 font-semibold">
-            <td class="text-left">MOBTF-T1FF vs MBTF-T1FF (PFCM Katkısı)</td>
+            <td class="text-left">MOBTF-T1BF vs MBTF-T1BF (OBK Katkısı)</td>
             <td class="text-center">RMSE</td>
             <td class="text-center">27</td>
             <td class="text-center">0</td>
@@ -638,7 +792,7 @@
             <td class="text-left">Olabilirlik Bulanık Kümeleme (OBK/OBCO) istatistiksel olarak anlamlı iyileşme sağladı (p &lt; 0,01)</td>
           </tr>
           <tr class="bg-slate-100 font-semibold">
-            <td class="text-left">MOBTF-T1FF vs MBTF-T1FF (PFCM Katkısı)</td>
+            <td class="text-left">MOBTF-T1BF vs MBTF-T1BF (OBK Katkısı)</td>
             <td class="text-center">MAPE</td>
             <td class="text-center">27</td>
             <td class="text-center">0</td>
@@ -648,15 +802,26 @@
             <td class="text-center font-mono">0,0005*</td>
             <td class="text-left">Olabilirlik Bulanık Kümeleme (OBK/OBCO) istatistiksel olarak anlamlı iyileşme sağladı (p &lt; 0,001)</td>
           </tr>
+          <tr class="bg-emerald-50/70 font-semibold border-t border-slate-300">
+            <td class="text-left font-medium">Doğrusal Taban Deneyi (MOBTF-LM vs Bagging-LM)</td>
+            <td class="text-center">MAPE (SMAPE)</td>
+            <td class="text-center font-mono">22 (23)</td>
+            <td class="text-center font-mono">1 (1)</td>
+            <td class="text-center font-mono">13 (12)</td>
+            <td class="text-center font-mono text-emerald-800">%61,1 (%63,9)</td>
+            <td class="text-center font-mono text-emerald-800">%62,9 (%65,7)</td>
+            <td class="text-center font-mono">0,0346* (0,0248*)</td>
+            <td class="text-left font-normal">Doğrusal regresyon tabanında istatistiksel olarak anlamlı üstünlük (p &lt; 0,05)</td>
+          </tr>
         </tbody>
       </table>
 
       <p>
-        Tablo 6'da ise veri setlerinin gürültü yapısına göre MOBTF-T1FF modelinin ayrıştırılmış performans oranları gösterilmiştir.
+        Tablo 6'da ise veri setlerinin gürültü yapısına göre MOBTF-T1BF modelinin ayrıştırılmış performans oranları gösterilmiştir.
       </p>
 
       <div class="text-center font-bold text-xs my-2">
-        Tablo 6: Veri Gruplarına Göre MOBTF-T1FF Modelinin Bagging-T1FF Karşısındaki Kazanma Oranları
+        Tablo 6: Veri Gruplarına Göre MOBTF-T1BF Modelinin Bagging-T1BF Karşısındaki Kazanma Oranları
       </div>
       <table class="report-table text-xs text-center">
         <thead>
@@ -697,6 +862,44 @@
         </tbody>
       </table>
 
+      <div class="text-center font-bold text-xs my-2">
+        Tablo 7: İP 1 (MBTF) ve İP 2 (MOBTF) Modellerinin Topluluk Boyutuna (B) Göre Gerçek Hesaplama Süreleri Karşılaştırması
+      </div>
+      <table class="report-table text-xs text-center">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Ortalama Birim Süre</th>
+            <th>Medyan Süre</th>
+            <th>B = 100 Süresi</th>
+            <th>B = 250 Süresi</th>
+            <th>B = 500 Süresi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-medium text-left">MBTF-T1BF (İP 1)</td>
+            <td class="font-mono">5,10 sn</td>
+            <td class="font-mono">3,03 sn</td>
+            <td class="font-mono">1,18 sn</td>
+            <td class="font-mono">2,89 sn</td>
+            <td class="font-mono">6,28 sn</td>
+          </tr>
+          <tr class="bg-slate-50 font-semibold">
+            <td class="font-medium text-left">MOBTF-T1BF (İP 2)</td>
+            <td class="font-mono text-emerald-800">75,79 sn</td>
+            <td class="font-mono text-emerald-800">39,35 sn</td>
+            <td class="font-mono">16,81 sn</td>
+            <td class="font-mono">42,83 sn</td>
+            <td class="font-mono text-emerald-800">92,23 sn</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="text-xs text-slate-700 leading-relaxed mb-4">
+        Tablo 7 incelendiğinde, Olabilirlik Bulanık Kümeleme (OBK) algoritmasının hem üyelik (\(u_{ik}\)) hem de tipiklik (\(t_{ik}\)) matrislerini küme ceza parametreleriyle birlikte eşzamanlı optimize etmesi ve genişletilmiş hiperparametre ızgarasında çalışması nedeniyle, MOBTF (İP 2) modeli standart MBTF (İP 1) modeline kıyasla tekil koşumda ortalama ~15 kat daha fazla hesaplama süresi (75,79 sn vs 5,10 sn; büyük veri kümelerinde tekil koşumda 6,5 dakikaya kadar) gerektirmektedir. Nitekim tüm deneysel maratonda harcanan yaklaşık 110 saatlik toplam işlemci süresinin ~103 saati (%93'ü) İP 2 kapsamındaki MOBTF modelleri (MOBTF-T1BF ve MOBTF-LM) tarafından tüketilmiştir. Bu ampirik bulgu iki temel gerçeği ortaya koymaktadır: (1) Proje öneri formunun 2. bölümünde öngörülen ek kümeleme kaynaklı hesaplama maliyeti artışı deneysel olarak doğrulanmış olup, bu maliyet aykırı değer varlığında elde edilen %87,5'lik kazanma oranıyla dengelenmektedir; (2) \(B = 500\) seviyesinde model başına ortalama 92,23 saniyeye (1,5 dakika) ulaşan işlem yükü dikkate alındığında, doğrulama kümesinde \(B^*\) optimizasyonu yapılarak tohumların %76,3'ünde \(B = 100\) (16,81 sn) ve \(B = 250\) (42,83 sn) seviyelerinin seçilmesi yalnızca aşırı öğrenmeyi önlemekle kalmamış, aynı zamanda hesaplama süresinde %50 ila %80 oranında kritik bir zaman tasarrufu sağlamıştır.
+      </p>
+
       <div class="font-bold text-sm text-slate-900 mt-4 mb-2 border-b border-slate-300 pb-1">
         b) İP Sonuçlarının İlgili İP’nin Başarı Ölçütleri Göz Önüne Alınarak Gerçekleşme Durumu
       </div>
@@ -704,7 +907,7 @@
         Proje öneri formunda İP 2 için öngörülen başarı ölçütü; <em>"Klasik torbalama yönteminin, dört gerçek dünya veri seti (cereals, mtcars, attitude ve USJudgeRatings) ile simülasyon veri setleri üzerinde test edilmesi ve elde edilen sonuçlara göre, Ortalama Mutlak Yüzde Hata (MAPE) ölçütü açısından incelenen veri setlerinin en az %50'sinde, Meta Olabilirlik Bulanık Torbalama Fonksiyonları yönteminin daha düşük hata değerleri üretmesi"</em> şeklinde tanımlanmıştır.
       </p>
       <p>
-        Elde edilen bulgular doğrultusunda; MOBTF-T1FF modeli RMSE ölçütünde 21 kazanma, 3 beraberlik ve 12 kaybetme ile <strong>%58,3 (beraberlikler hariç %63,6, p = 0,0295*)</strong> kazanma oranına ulaşarak sözleşmedeki en az %50 başarı ve istatistiksel anlamlılık (p &lt; 0,05) ölçütlerini eksiksiz karşılamıştır. MAPE ölçütünde ise 19 kazanma (<strong>%52,8</strong>, beraberlikler hariç %57,6) elde edilmiştir. Aykırı değer içeren simülasyon kümelerinde model <strong>%87,5 (14/16 RMSE)</strong> ve <strong>%81,2 (13/16 MAPE)</strong> başarı oranı sergileyerek hedeflenen %80 dayanıklılık eşiğini aşmıştır. Olabilirlik Bulanık Kümeleme (OBK/OBCO) tipiklik katsayılarının katkısı sonucunda MOBTF, MBTF karşısında 36 kümenin 27'sinde (%75,0) üstünlük sağlamıştır. Bu doğrultuda, İP 2 başarı ölçütleri tam olarak karşılanmıştır.
+        Elde edilen bulgular doğrultusunda; MOBTF-T1BF modeli RMSE ölçütünde 21 kazanma, 3 beraberlik ve 12 kaybetme ile <strong>%58,3 (beraberlikler hariç %63,6, p = 0,0295*)</strong> kazanma oranına ulaşarak sözleşmedeki en az %50 başarı ve istatistiksel anlamlılık (p &lt; 0,05) ölçütlerini eksiksiz karşılamıştır. MAPE ölçütünde ise 19 kazanma (<strong>%52,8</strong>, beraberlikler hariç %57,6) elde edilmiştir. Aykırı değer içeren simülasyon kümelerinde model <strong>%87,5 (14/16 RMSE)</strong> ve <strong>%81,2 (13/16 MAPE)</strong> başarı oranı sergileyerek hedeflenen %80 dayanıklılık eşiğini aşmıştır. Olabilirlik Bulanık Kümeleme (OBK/OBCO) tipiklik katsayılarının katkısı sonucunda MOBTF, MBTF karşısında 36 kümenin 27'sinde (%75,0) üstünlük sağlamıştır. Proje öneri formunun 2.8 ve 2.9 bölümleri uyarınca yürütülen doğrusal regresyon tabanlı deneylerde de MOBTF-LM modeli, klasik Bagging-LM karşısında MAPE ölçütünde %61,1 (22/36, p = 0,0346*) ve SMAPE ölçütünde %63,9 (23/36, p = 0,0248*) kazanma oranına ulaşarak istatistiksel olarak anlamlı üstünlük sağlamıştır. Bu doğrultuda, İP 2 başarı ölçütleri tam olarak karşılanmıştır.
       </p>
 
       <!-- INTERACTIVE DASHBOARD CALLOUT (SCREEN ONLY) -->
@@ -858,31 +1061,51 @@
     <div class="subsection-title">
       EK 1-A: Algoritma 1 &ndash; Meta-Bulanık Torbalama Fonksiyonları (MBTF) Algoritmik Adımları
     </div>
-    <div class="border border-slate-400 p-4 bg-slate-50/50 text-xs font-mono space-y-1.5 leading-relaxed mb-6">
-      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 1: MBTF (İP 1 Mimarisi - 1001 Algoritma 2, 5 ve 7)</div>
-      <div><strong>Girdi:</strong> Açıklayıcı değişkenler (\(X\)) ve yanıt değişkeninden (\(Y\)) oluşan eğitim, doğrulama ve test veri setleri; yeniden örnekleme sayısı \(B\); BCO parametreleri (küme sayısı \(c\), bulanıklık indeksi \(m\)).</div>
-      <div><strong>Adım 1:</strong> Eğitim veri setinden iadeli örnekleme ile \(B\) adet yeniden örnekleme eğitim veri seti oluşturulur ve seçilen temel yöntem (Lineer Regresyon / Tip 1 Bulanık Fonksiyonlar) ile eğitilerek \(B\) adet model elde edilir.</div>
-      <div><strong>Adım 2:</strong> Doğrulama ve test veri setleri üzerinde \(B\) adet eğitilmiş model ile tahmin değerleri elde edilir ve matris formunda (\(\hat{Y}_{\text{doğrulama}}\) ve \(\hat{Y}_{\text{test}}\)) kaydedilir.</div>
-      <div><strong>Adım 3:</strong> Doğrulama tahmin matrisi (\(\hat{Y}_{\text{doğrulama}}\)) üzerinde Bulanık C-Ortalamalar (BCO - Algoritma 2) yöntemi uygulanarak üyelik dereceleri (\(\mu_{ij}\)) ve küme merkezleri (\(v_i\)) hesaplanır (\(c\) ve \(m\) için ızgara arama yapılır).</div>
-      <div><strong>Adım 4:</strong> Elde edilen üyelik derecelerinden Denklem (12) ile ağırlıklar (\(w_{ij} = \frac{\mu_{ij}}{\sum_{k=1}^B \mu_{ik}}\)) ve Denklem (11) ile \(c\) adet meta bulanık fonksiyon (\(\text{MFF}_i\)) hesaplanır.</div>
-      <div><strong>Adım 5:</strong> Değerlendirme kriterlerine (RMSE, MAE, MAPE, SMAPE) göre doğrulama veri setinde en iyi meta bulanık fonksiyon (\(\text{MFF}_{\text{best}}\)) seçilir.</div>
-      <div><strong>Adım 6:</strong> Doğrulama veri seti için seçilen en iyi MBF (\(\text{MFF}_{\text{best}}\)), Denklem (13) uyarınca \(\hat{Y}_{\text{test}}\) veri setine uygulanarak test veri seti için nihai tahminler ve değerlendirme kriterleri hesaplanır.</div>
-      <div><strong>Çıktı:</strong> Test veri seti nihai tahminleri ve performans değerlendirme ölçütleri.</div>
+    <div class="border border-slate-400 p-4 bg-slate-50/50 text-xs font-mono space-y-2 leading-relaxed mb-6">
+      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 1: MBTF (İP 1 Mimarisi &ndash; 1001 Algoritma 1, 2, 5, 6 ve 7)</div>
+      <div><strong>Girdi:</strong> Açıklayıcı değişkenler (\(X \in \mathbb{R}^{n \times p}\)) ve yanıt değişkeninden (\(Y \in \mathbb{R}^{n \times 1}\)) oluşan veri kümesi; yeniden örnekleme topluluk boyutu \(B \in \{100, 250, 500\}\); BCO parametreleri (küme sayısı \(c \in \{2, 3, 4, 5\}\), bulanıklık indeksi \(m \in \{1.5, 2.0\}\)); temel öğrenici (Lineer Regresyon veya Algoritma 6: T1BF).</div>
+      <div><strong>Adım 1 (Veri Ayrımı &amp; Bootstrap):</strong> Veri seti eğitim (\(D_{\text{train}}\), %80), bağımsız doğrulama (\(D_{\text{valid}}\), %10) ve test (\(D_{\text{test}}\), %10) olarak üçe ayrılır. Eğitim kümesinden iadeli rastgele örnekleme (bootstrap) ile \(B\) adet alt eğitim kümesi \(\{D_1^*, D_2^*, \dots, D_B^*\}\) oluşturulur.</div>
+      <div><strong>Adım 2 (Temel Model Eğitimi):</strong> Her bootstrap alt kümesi üzerinde seçilen temel yöntem (Lineer Regresyon veya T1BF) eğitilerek \(B\) adet bağımsız alt model \(\{f_1, f_2, \dots, f_B\}\) elde edilir. (T1BF temel modellerinde doğrulama kümesi kullanılarak en iyi \(c_{\text{base}}\) ve \(m_{\text{base}}\) hiperparametreleri ızgara aramayla belirlenir).</div>
+      <div><strong>Adım 3 (Tahmin Matrislerinin Oluşturulması):</strong> Dondurulmuş doğrulama ve test kümeleri üzerinde \(B\) adet model çalıştırılarak tahmin matrisleri matris formunda kaydedilir:
+        \[ \begin{aligned}
+          \hat{Y}_{\text{doğrulama}} &= \begin{bmatrix} \hat{y}_{1,1} & \cdots & \hat{y}_{1,B} \\ \vdots & \ddots & \vdots \\ \hat{y}_{n_{\text{doğ}},1} & \cdots & \hat{y}_{n_{\text{doğ}},B} \end{bmatrix} \in \mathbb{R}^{n_{\text{doğ}} \times B} \\[6pt]
+          \hat{Y}_{\text{test}} &= \begin{bmatrix} \hat{y}_{1,1} & \cdots & \hat{y}_{1,B} \\ \vdots & \ddots & \vdots \\ \hat{y}_{n_{\text{test}},1} & \cdots & \hat{y}_{n_{\text{test}},B} \end{bmatrix} \in \mathbb{R}^{n_{\text{test}} \times B}
+        \end{aligned} \]
+      </div>
+      <div><strong>Adım 4 (Doğrulama Kümesinde Bulanık Kümeleme):</strong> \(\hat{Y}_{\text{doğrulama}}^T \in \mathbb{R}^{B \times n_{\text{doğ}}}\) matrisi üzerinde Bulanık C-Ortalamalar (BCO / FCM - Algoritma 2) algoritması çalıştırılır. Modellerin \(c\) adet bulanık kümeye aitlik üyelik dereceleri \(\mu_{ij}\) (\(i=1,\dots,c; j=1,\dots,B\)) ve küme merkezleri \(v_i\) hesaplanır (\(c\) ve \(m\) parametreleri ızgara arama ile taranır).</div>
+      <div><strong>Adım 5 (Meta Ağırlıkların ve Meta Fonksiyonların Türetilmesi):</strong> Hesaplanan üyelik derecelerinden Denklem (5) ile kolon normalizasyonu yapılarak ağırlıklar \(w_{ij} = \frac{\mu_{ij}}{\sum_{k=1}^B \mu_{ik}}\) elde edilir ve Denklem (6) uyarınca \(c\) adet meta bulanık fonksiyon tanımlanır:
+        \[ \text{MFF}_i(\hat{Y}) = \sum_{j=1}^B w_{ij} \hat{Y}_j, \quad i = 1, \dots, c \]
+      </div>
+      <div><strong>Adım 6 (Optimal Model ve Topluluk Boyutu Seçimi):</strong> Doğrulama veri seti üzerinde hata kriterlerini (RMSE, MAE, MAPE, SMAPE) minimize eden en iyi meta bulanık fonksiyon (\(\text{MFF}_{\text{best}}\)) ve optimal topluluk boyutu (\(B^* \in \{100, 250, 500\}\)) belirlenir.</div>
+      <div><strong>Adım 7 (Bağımsız Test Tahmini ve Performans Kıyaslaması):</strong> Doğrulama kümesinden elde edilen optimal ağırlık vektörü \(w^*\) test tahmin matrisine doğrudan uygulanır:
+        \[ F = \text{MFF}_{\text{best}}(\hat{Y}_{\text{test}}) = \hat{Y}_{\text{test}} w^* \]
+        Nihai test tahminleri \(F\) ile gerçek \(Y_{\text{test}}\) karşılaştırılarak Denklem (7)-(10) hata ölçütleri hesaplanır.
+      </div>
+      <div><strong>Çıktı:</strong> Test veri seti nihai tahmin vektörü \(F\), optimal hiperparametreler \((c^*, m^*, B^*)\) ve performans metrikleri (RMSE, MAE, MAPE, SMAPE).</div>
     </div>
 
     <div class="subsection-title">
       EK 2-A: Algoritma 2 &ndash; Meta-Olabilirlik Torbalama Fonksiyonları (MOBTF) Algoritmik Adımları
     </div>
-    <div class="border border-slate-400 p-4 bg-slate-50/50 text-xs font-mono space-y-1.5 leading-relaxed mb-6">
-      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 2: MOBTF (İP 2 Mimarisi - 1001 Algoritma 3 ve 7)</div>
-      <div><strong>Girdi:</strong> Açıklayıcı değişkenler (\(X\)) ve yanıt değişkeninden (\(Y\)) oluşan eğitim, doğrulama ve test veri setleri; yeniden örnekleme sayısı \(B\); OBK parametreleri (küme sayısı \(c\), bulanıklık indeksi \(m\), tipiklik indeksi \(n\), göreceli önem katsayıları \(a\) ve \(b\)).</div>
-      <div><strong>Adım 1:</strong> Eğitim veri setinden iadeli örnekleme ile \(B\) adet yeniden örnekleme eğitim veri seti oluşturulur ve seçilen temel yöntem (Lineer Regresyon / Tip 1 Bulanık Fonksiyonlar) ile eğitilerek \(B\) adet model elde edilir.</div>
-      <div><strong>Adım 2:</strong> Doğrulama ve test veri setleri üzerinde \(B\) adet eğitilmiş model ile tahmin değerleri elde edilir ve matris formunda (\(\hat{Y}_{\text{doğrulama}}\) ve \(\hat{Y}_{\text{test}}\)) kaydedilir.</div>
-      <div><strong>Adım 3:</strong> Doğrulama tahmin matrisi (\(\hat{Y}_{\text{doğrulama}}\)) üzerinde Olabilirlik Bulanık Kümeleme (OBK - Algoritma 3) yöntemi uygulanarak gözlemlerin tipiklik (\(t_{ik}\)) ve üyelik dereceleri (\(u_{ik}\)) ile küme merkezleri (\(v_i\)) hesaplanır (\(c\) ve \(m\) için ızgara arama yapılır).</div>
-      <div><strong>Adım 4:</strong> Elde edilen üyelik ve tipiklik dereceleri kullanılarak ağırlıklar (\(w_{ij}\)) ve \(c\) adet meta bulanık fonksiyon (\(\text{MFF}_i\)) hesaplanır.</div>
-      <div><strong>Adım 5:</strong> Değerlendirme kriterlerine (RMSE, MAE, MAPE, SMAPE) göre doğrulama veri setinde en iyi meta bulanık fonksiyon (\(\text{MFF}_{\text{best}}\)) seçilir.</div>
-      <div><strong>Adım 6:</strong> Doğrulama veri seti için seçilen en iyi MBF (\(\text{MFF}_{\text{best}}\)), \(\hat{Y}_{\text{test}}\) veri setine uygulanarak test veri seti için nihai tahminler ve değerlendirme kriterleri hesaplanır.</div>
-      <div><strong>Çıktı:</strong> Test veri seti nihai tahminleri ve performans değerlendirme ölçütleri.</div>
+    <div class="border border-slate-400 p-4 bg-slate-50/50 text-xs font-mono space-y-2 leading-relaxed mb-6">
+      <div class="font-bold text-slate-900 font-sans mb-1 text-sm">Algoritma 2: MOBTF (İP 2 Mimarisi &ndash; 1001 Algoritma 1, 3, 5, 6 ve 7)</div>
+      <div><strong>Girdi:</strong> Açıklayıcı değişkenler (\(X \in \mathbb{R}^{n \times p}\)) ve yanıt değişkeninden (\(Y \in \mathbb{R}^{n \times 1}\)) oluşan veri kümesi; yeniden örnekleme topluluk boyutu \(B \in \{100, 250, 500\}\); OBK parametreleri (küme sayısı \(c \in \{2, 3, 4, 5\}\), bulanıklık indeksi \(m \in \{1.5, 2.0\}\), tipiklik indeksi \(\eta \in \{1.5, 2.0\}\), ceza parametreleri \(\gamma_i\), göreceli ağırlıklar \(a=1, b=1\)); temel öğrenici (Lineer Regresyon veya T1BF).</div>
+      <div><strong>Adım 1 (Veri Ayrımı &amp; Bootstrap):</strong> Veri seti eğitim (\(D_{\text{train}}\), %80), bağımsız doğrulama (\(D_{\text{valid}}\), %10) ve test (\(D_{\text{test}}\), %10) olarak üçe ayrılır. Eğitim kümesinden iadeli rastgele örnekleme (bootstrap) ile \(B\) adet alt eğitim kümesi \(\{D_1^*, D_2^*, \dots, D_B^*\}\) oluşturulur.</div>
+      <div><strong>Adım 2 (Temel Model Eğitimi):</strong> Her bootstrap alt kümesi üzerinde temel yöntem (Lineer Regresyon veya T1BF) bağımsız olarak eğitilerek \(B\) adet alt model \(\{f_1, f_2, \dots, f_B\}\) üretilir.</div>
+      <div><strong>Adım 3 (Tahmin Matrislerinin Elde Edilmesi):</strong> Doğrulama ve test veri setleri üzerinde \(B\) adet model çalıştırılarak tahmin matrisleri kaydedilir:
+        \[ \hat{Y}_{\text{doğrulama}} \in \mathbb{R}^{n_{\text{doğ}} \times B}, \quad \hat{Y}_{\text{test}} \in \mathbb{R}^{n_{\text{test}} \times B} \]
+      </div>
+      <div><strong>Adım 4 (Doğrulama Kümesinde Olabilirlik Bulanık Kümeleme):</strong> \(\hat{Y}_{\text{doğrulama}}^T \in \mathbb{R}^{B \times n_{\text{doğ}}}\) matrisi üzerinde Pal vd. (2005) tarafından önerilen Olabilirlik Bulanık Kümeleme (OBK - Algoritma 3) algoritması çalıştırılır. Denklem (11) ile tipiklik dereceleri (\(t_{ij}\)), Denklem (12) ile üyelik dereceleri (\(u_{ij}\)) ve Denklem (13) ile küme merkezleri (\(v_i\)) yakınsama sağlanana kadar güncellenir.</div>
+      <div><strong>Adım 5 (Dayanıklı Meta Ağırlıkların ve Meta Fonksiyonların Türetilmesi):</strong> Hem üyelik (\(u_{ij}\)) hem de tipiklik (\(t_{ij}\)) bilgilerini içeren hibrit ağırlık vektörleri türetilir:
+        \[ w_{ij} = \frac{a u_{ij}^m + b t_{ij}^\eta}{\sum_{k=1}^B (a u_{ik}^m + b t_{ik}^\eta)}, \quad j = 1, \dots, B, \quad i = 1, \dots, c \]
+        Bu ağırlıklar ile \(c\) adet meta olabilirlik bulanık fonksiyonu tanımlanır: \(\text{MFF}_i(\hat{Y}) = \sum_{j=1}^B w_{ij} \hat{Y}_j\). (Aykırı tahmin üreten alt modellerin tipiklik derecesi \(t \to 0\) olacağından, bu modellerin nihai ağırlığı otomatik olarak sıfırlanır).
+      </div>
+      <div><strong>Adım 6 (Optimal Model ve B* Seçimi):</strong> Doğrulama kümesi üzerinde hata kriterini minimize eden en iyi meta fonksiyon (\(\text{MFF}_{\text{best}}\)) ve en uygun \(B^*\) belirlenir.</div>
+      <div><strong>Adım 7 (Bağımsız Test Tahmini ve Dayanıklılık Doğrulaması):</strong> Doğrulama kümesinden elde edilen optimal ağırlık vektörü \(w^*\) test tahmin matrisine doğrudan uygulanır:
+        \[ F = \text{MFF}_{\text{best}}(\hat{Y}_{\text{test}}) = \hat{Y}_{\text{test}} w^* \]
+        Nihai test tahminleri \(F\) ile gerçek \(Y_{\text{test}}\) karşılaştırılarak Denklem (7)-(10) uyarınca RMSE, MAE, MAPE ve SMAPE metrikleri hesaplanır.
+      </div>
+      <div><strong>Çıktı:</strong> Aykırı değerlere karşı dayanıklı test tahmin vektörü \(F\), optimal hiperparametreler ve performans değerlendirme metrikleri.</div>
     </div>
 
     <div class="subsection-title">
@@ -1314,7 +1537,7 @@
     <footer class="mt-12 pt-4 border-t border-slate-900 flex items-center justify-between text-[9pt] text-slate-500 font-sans">
       <div>TÜBİTAK 1001 Araştırma Projesi Gelişme Raporu Formu</div>
       <div>Rapor Tarihi: 15/10/2026 • Form Kodu: AP-GR-02</div>
-      <div>Sayfa 1 / 1</div>
+      <div>1. Gelişme Raporu</div>
     </footer>
 
   </main>
